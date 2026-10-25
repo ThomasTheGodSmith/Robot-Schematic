@@ -1,0 +1,223 @@
+[
+  {
+    "id": "al6061_t6",
+    "name": "Aluminium 6061-T6",
+    "kind": "metal",
+    "density_kg_m3": 2700,
+    "yieldStrength_MPa": 276,
+    "ultimateStrength_MPa": 310,
+    "youngsModulus_GPa": 68.9,
+    "maxServiceTemp_C": 150,
+    "costPerKg_usd": 8,
+    "processes": [
+      "cnc",
+      "waterjet",
+      "sheet_metal"
+    ],
+    "color": "#b8bec6"
+  },
+  {
+    "id": "al7075_t6",
+    "name": "Aluminium 7075-T6",
+    "kind": "metal",
+    "density_kg_m3": 2810,
+    "yieldStrength_MPa": 503,
+    "ultimateStrength_MPa": 572,
+    "youngsModulus_GPa": 71.7,
+    "maxServiceTemp_C": 120,
+    "costPerKg_usd": 14,
+    "processes": [
+      "cnc"
+    ],
+    "color": "#aab1ba"
+  },
+  {
+    "id": "steel_1045",
+    "name": "Steel 1045 (normalised)",
+    "kind": "metal",
+    "density_kg_m3": 7850,
+    "yieldStrength_MPa": 450,
+    "ultimateStrength_MPa": 585,
+    "youngsModulus_GPa": 205,
+    "maxServiceTemp_C": 400,
+    "costPerKg_usd": 3,
+    "processes": [
+      "cnc"
+    ],
+    "color": "#8a8f96"
+  },
+  {
+    "id": "ss304",
+    "name": "Stainless steel 304",
+    "kind": "metal",
+    "density_kg_m3": 8000,
+    "yieldStrength_MPa": 215,
+    "ultimateStrength_MPa": 505,
+    "youngsModulus_GPa": 193,
+    "maxServiceTemp_C": 800,
+    "costPerKg_usd": 6,
+    "processes": [
+      "cnc",
+      "laser_cut",
+      "sheet_metal"
+    ],
+    "color": "#c7cbd1"
+  },
+  {
+    "id": "ti6al4v",
+    "name": "Titanium Ti-6Al-4V",
+    "kind": "metal",
+    "density_kg_m3": 4430,
+    "yieldStrength_MPa": 880,
+    "ultimateStrength_MPa": 950,
+    "youngsModulus_GPa": 113.8,
+    "maxServiceTemp_C": 400,
+    "costPerKg_usd": 60,
+    "processes": [
+      "cnc"
+    ],
+    "color": "#9a9590"
+  },
+  {
+    "id": "cfrp_plate",
+    "name": "Carbon fibre plate (quasi-isotropic)",
+    "kind": "composite",
+    "density_kg_m3": 1550,
+    "yieldStrength_MPa": 400,
+    "ultimateStrength_MPa": 600,
+    "youngsModulus_GPa": 50,
+    "maxServiceTemp_C": 120,
+    "costPerKg_usd": 90,
+    "processes": [
+      "waterjet",
+      "layup"
+    ],
+    "color": "#202326",
+    "notes": "Strength used as an allowable first-ply-failure value"
+  },
+  {
+    "id": "cfrp_tube",
+    "name": "Carbon fibre tube (roll-wrapped)",
+    "kind": "composite",
+    "density_kg_m3": 1550,
+    "yieldStrength_MPa": 500,
+    "ultimateStrength_MPa": 750,
+    "youngsModulus_GPa": 70,
+    "maxServiceTemp_C": 120,
+    "costPerKg_usd": 110,
+    "processes": [
+      "layup"
+    ],
+    "color": "#1b1d20"
+  },
+  {
+    "id": "pla",
+    "name": "PLA (FDM, 100% infill equivalent)",
+    "kind": "polymer",
+    "density_kg_m3": 1240,
+    "yieldStrength_MPa": 45,
+    "ultimateStrength_MPa": 50,
+    "youngsModulus_GPa": 3.5,
+    "maxServiceTemp_C": 50,
+    "costPerKg_usd": 25,
+    "processes": [
+      "3d_print"
+    ],
+    "color": "#e8e2d6",
+    "notes": "Printed-part strengths are ~70% of moulded values; layer adhesion lower still"
+  },
+  {
+    "id": "petg",
+    "name": "PETG (FDM)",
+    "kind": "polymer",
+    "density_kg_m3": 1270,
+    "yieldStrength_MPa": 40,
+    "ultimateStrength_MPa": 50,
+    "youngsModulus_GPa": 2.1,
+    "maxServiceTemp_C": 70,
+    "costPerKg_usd": 25,
+    "processes": [
+      "3d_print"
+    ],
+    "color": "#3a6ea5"
+  },
+  {
+    "id": "pa12_sls",
+    "name": "Nylon PA12 (SLS)",
+    "kind": "polymer",
+    "density_kg_m3": 1010,
+    "yieldStrength_MPa": 45,
+    "ultimateStrength_MPa": 48,
+    "youngsModulus_GPa": 1.7,
+    "maxServiceTemp_C": 90,
+    "costPerKg_usd": 80,
+    "processes": [
+      "3d_print"
+    ],
+    "color": "#ececec"
+  },
+  {
+    "id": "pa_cf",
+    "name": "Carbon-filled nylon (FDM)",
+    "kind": "composite",
+    "density_kg_m3": 1200,
+    "yieldStrength_MPa": 60,
+    "ultimateStrength_MPa": 70,
+    "youngsModulus_GPa": 6.0,
+    "maxServiceTemp_C": 110,
+    "costPerKg_usd": 70,
+    "processes": [
+      "3d_print"
+    ],
+    "color": "#2c2c2c"
+  },
+  {
+    "id": "abs",
+    "name": "ABS (injection moulded)",
+    "kind": "polymer",
+    "density_kg_m3": 1050,
+    "yieldStrength_MPa": 40,
+    "ultimateStrength_MPa": 44,
+    "youngsModulus_GPa": 2.3,
+    "maxServiceTemp_C": 85,
+    "costPerKg_usd": 4,
+    "processes": [
+      "molding",
+      "3d_print"
+    ],
+    "color": "#dcdcdc"
+  },
+  {
+    "id": "polycarbonate",
+    "name": "Polycarbonate sheet",
+    "kind": "polymer",
+    "density_kg_m3": 1200,
+    "yieldStrength_MPa": 62,
+    "ultimateStrength_MPa": 70,
+    "youngsModulus_GPa": 2.4,
+    "maxServiceTemp_C": 115,
+    "costPerKg_usd": 10,
+    "processes": [
+      "laser_cut",
+      "molding",
+      "sheet_metal"
+    ],
+    "color": "#cfe3f2"
+  },
+  {
+    "id": "tpu95a",
+    "name": "TPU 95A (FDM)",
+    "kind": "elastomer",
+    "density_kg_m3": 1210,
+    "yieldStrength_MPa": 8,
+    "ultimateStrength_MPa": 26,
+    "youngsModulus_GPa": 0.026,
+    "maxServiceTemp_C": 80,
+    "costPerKg_usd": 40,
+    "processes": [
+      "3d_print",
+      "molding"
+    ],
+    "color": "#222222"
+  }
+]

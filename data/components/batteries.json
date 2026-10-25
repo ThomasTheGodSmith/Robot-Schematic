@@ -1,0 +1,263 @@
+[
+  {
+    "id": "lipo_2s_1000",
+    "category": "battery",
+    "name": "LiPo 2S 1000 mAh 25C",
+    "realWorldEquivalent": "Gens Ace 2S 1000mAh",
+    "manufacturer": "Gens Ace",
+    "mass_kg": 0.058,
+    "cost_usd": 12,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.07,
+        0.035,
+        0.014
+      ]
+    },
+    "specs": {
+      "chemistry": "LiPo",
+      "cellsSeries": 2,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 7.4,
+      "maxVoltage_V": 8.4,
+      "minVoltage_V": 7.0,
+      "capacity_Ah": 1.0,
+      "maxContinuousDischarge_C": 25,
+      "peakDischarge_C": 50,
+      "internalResistance_ohm": 0.024
+    }
+  },
+  {
+    "id": "lipo_3s_2200",
+    "category": "battery",
+    "name": "LiPo 3S 2200 mAh 25C",
+    "realWorldEquivalent": "Turnigy 3S 2200mAh 25C",
+    "manufacturer": "Turnigy",
+    "mass_kg": 0.185,
+    "cost_usd": 22,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.105,
+        0.034,
+        0.025
+      ]
+    },
+    "specs": {
+      "chemistry": "LiPo",
+      "cellsSeries": 3,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 11.1,
+      "maxVoltage_V": 12.6,
+      "minVoltage_V": 10.5,
+      "capacity_Ah": 2.2,
+      "maxContinuousDischarge_C": 25,
+      "peakDischarge_C": 35,
+      "internalResistance_ohm": 0.03
+    }
+  },
+  {
+    "id": "lipo_4s_5000",
+    "category": "battery",
+    "name": "LiPo 4S 5000 mAh 50C",
+    "realWorldEquivalent": "CNHL 4S 5000mAh 50C",
+    "manufacturer": "CNHL",
+    "mass_kg": 0.55,
+    "cost_usd": 60,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.155,
+        0.048,
+        0.038
+      ]
+    },
+    "specs": {
+      "chemistry": "LiPo",
+      "cellsSeries": 4,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 14.8,
+      "maxVoltage_V": 16.8,
+      "minVoltage_V": 14.0,
+      "capacity_Ah": 5.0,
+      "maxContinuousDischarge_C": 50,
+      "peakDischarge_C": 100,
+      "internalResistance_ohm": 0.016
+    }
+  },
+  {
+    "id": "lipo_6s_5000",
+    "category": "battery",
+    "name": "LiPo 6S 5000 mAh 30C",
+    "realWorldEquivalent": "Tattu 6S 5000mAh 30C",
+    "manufacturer": "Tattu",
+    "mass_kg": 0.75,
+    "cost_usd": 95,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.16,
+        0.048,
+        0.05
+      ]
+    },
+    "specs": {
+      "chemistry": "LiPo",
+      "cellsSeries": 6,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 22.2,
+      "maxVoltage_V": 25.2,
+      "minVoltage_V": 21.0,
+      "capacity_Ah": 5.0,
+      "maxContinuousDischarge_C": 30,
+      "peakDischarge_C": 60,
+      "internalResistance_ohm": 0.03
+    }
+  },
+  {
+    "id": "liion_6s2p_p42a",
+    "category": "battery",
+    "name": "Li-ion 6S2P 21700 (P42A) 8.4 Ah",
+    "realWorldEquivalent": "Custom pack, Molicel P42A cells + BMS",
+    "manufacturer": "Molicel",
+    "mass_kg": 0.9,
+    "cost_usd": 140,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.15,
+        0.075,
+        0.05
+      ]
+    },
+    "specs": {
+      "chemistry": "Li-ion",
+      "cellsSeries": 6,
+      "cellsParallel": 2,
+      "nominalVoltage_V": 21.6,
+      "maxVoltage_V": 25.2,
+      "minVoltage_V": 18.0,
+      "capacity_Ah": 8.4,
+      "maxContinuousDischarge_C": 5.3,
+      "peakDischarge_C": 8.0,
+      "internalResistance_ohm": 0.048
+    }
+  },
+  {
+    "id": "liion_13s4p_48v",
+    "category": "battery",
+    "name": "Li-ion 13S4P 18650 48 V 13.6 Ah",
+    "realWorldEquivalent": "E-bike style pack (Samsung 35E) + BMS",
+    "manufacturer": "Samsung SDI",
+    "mass_kg": 3.1,
+    "cost_usd": 320,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.3,
+        0.09,
+        0.075
+      ]
+    },
+    "specs": {
+      "chemistry": "Li-ion",
+      "cellsSeries": 13,
+      "cellsParallel": 4,
+      "nominalVoltage_V": 46.8,
+      "maxVoltage_V": 54.6,
+      "minVoltage_V": 39.0,
+      "capacity_Ah": 13.6,
+      "maxContinuousDischarge_C": 2.2,
+      "peakDischarge_C": 3.3,
+      "internalResistance_ohm": 0.0975
+    }
+  },
+  {
+    "id": "lifepo4_4s_20",
+    "category": "battery",
+    "name": "LiFePO4 4S 20 Ah",
+    "realWorldEquivalent": "Eco-Worthy / Ampace 12.8V 20Ah",
+    "manufacturer": "generic",
+    "mass_kg": 2.4,
+    "cost_usd": 110,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.18,
+        0.077,
+        0.17
+      ]
+    },
+    "specs": {
+      "chemistry": "LiFePO4",
+      "cellsSeries": 4,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 12.8,
+      "maxVoltage_V": 14.6,
+      "minVoltage_V": 10.0,
+      "capacity_Ah": 20,
+      "maxContinuousDischarge_C": 1.0,
+      "peakDischarge_C": 2.0,
+      "internalResistance_ohm": 0.024
+    }
+  },
+  {
+    "id": "liion_2s1p_18650",
+    "category": "battery",
+    "name": "Li-ion 2S1P 18650 3.0 Ah",
+    "realWorldEquivalent": "2x Samsung 30Q + protection board",
+    "manufacturer": "Samsung SDI",
+    "mass_kg": 0.1,
+    "cost_usd": 15,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.07,
+        0.038,
+        0.019
+      ]
+    },
+    "specs": {
+      "chemistry": "Li-ion",
+      "cellsSeries": 2,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 7.2,
+      "maxVoltage_V": 8.4,
+      "minVoltage_V": 6.0,
+      "capacity_Ah": 3.0,
+      "maxContinuousDischarge_C": 5.0,
+      "peakDischarge_C": 6.6,
+      "internalResistance_ohm": 0.04
+    }
+  },
+  {
+    "id": "nimh_6s_3000",
+    "category": "battery",
+    "name": "NiMH 7.2 V 3000 mAh",
+    "realWorldEquivalent": "Tenergy 7.2V 3000mAh stick",
+    "manufacturer": "Tenergy",
+    "mass_kg": 0.38,
+    "cost_usd": 25,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.135,
+        0.048,
+        0.024
+      ]
+    },
+    "specs": {
+      "chemistry": "NiMH",
+      "cellsSeries": 6,
+      "cellsParallel": 1,
+      "nominalVoltage_V": 7.2,
+      "maxVoltage_V": 8.7,
+      "minVoltage_V": 6.0,
+      "capacity_Ah": 3.0,
+      "maxContinuousDischarge_C": 5.0,
+      "peakDischarge_C": 10,
+      "internalResistance_ohm": 0.048
+    }
+  }
+]

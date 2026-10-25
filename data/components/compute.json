@@ -1,0 +1,106 @@
+[
+  {
+    "id": "cpu_rpi5",
+    "category": "compute",
+    "name": "Single-board computer Raspberry Pi 5",
+    "realWorldEquivalent": "Raspberry Pi 5 (8 GB)",
+    "manufacturer": "Raspberry Pi",
+    "mass_kg": 0.05,
+    "cost_usd": 80,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.085,
+        0.056,
+        0.02
+      ]
+    },
+    "specs": {
+      "computeType": "sbc",
+      "voltageRange_V": [
+        5,
+        5.1
+      ],
+      "typicalPower_W": 5,
+      "peakPower_W": 12
+    }
+  },
+  {
+    "id": "cpu_jetson_orin_nano",
+    "category": "compute",
+    "name": "AI module Jetson Orin Nano + carrier",
+    "realWorldEquivalent": "NVIDIA Jetson Orin Nano 8GB Developer Kit",
+    "manufacturer": "NVIDIA",
+    "mass_kg": 0.18,
+    "cost_usd": 249,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.1,
+        0.079,
+        0.035
+      ]
+    },
+    "specs": {
+      "computeType": "gpu_module",
+      "voltageRange_V": [
+        9,
+        20
+      ],
+      "typicalPower_W": 10,
+      "peakPower_W": 25
+    }
+  },
+  {
+    "id": "mcu_teensy41",
+    "category": "compute",
+    "name": "Real-time MCU Teensy 4.1",
+    "realWorldEquivalent": "PJRC Teensy 4.1",
+    "manufacturer": "PJRC",
+    "mass_kg": 0.006,
+    "cost_usd": 32,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.061,
+        0.018,
+        0.006
+      ]
+    },
+    "specs": {
+      "computeType": "mcu",
+      "voltageRange_V": [
+        3.6,
+        5.5
+      ],
+      "typicalPower_W": 0.5,
+      "peakPower_W": 0.7
+    }
+  },
+  {
+    "id": "mcu_esp32s3",
+    "category": "compute",
+    "name": "MCU ESP32-S3 DevKit",
+    "realWorldEquivalent": "Espressif ESP32-S3-DevKitC-1",
+    "manufacturer": "Espressif",
+    "mass_kg": 0.008,
+    "cost_usd": 15,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.063,
+        0.026,
+        0.01
+      ]
+    },
+    "specs": {
+      "computeType": "mcu",
+      "voltageRange_V": [
+        4.5,
+        5.5
+      ],
+      "typicalPower_W": 0.4,
+      "peakPower_W": 1.2
+    }
+  }
+]

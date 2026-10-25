@@ -1,0 +1,1353 @@
+{
+  "title": "Robot Design Document",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "rootLink": {
+      "type": "string"
+    },
+    "rootFixed": {
+      "default": false,
+      "description": "True for robots bolted to the world (arms)",
+      "type": "boolean"
+    },
+    "links": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "subsystem": {
+            "type": "string",
+            "description": "Top-level grouping for the breakdown, e.g. 'Torso', 'Front-left leg', 'Power'"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "fabricated"
+                    },
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9_.-]+$"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "shape": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "box"
+                            },
+                            "size": {
+                              "minItems": 3,
+                              "maxItems": 3,
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              },
+                              "description": "Full extents x,y,z in metres"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "size"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "cylinder"
+                            },
+                            "radius": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "length": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "axis": {
+                              "default": "z",
+                              "type": "string",
+                              "enum": [
+                                "x",
+                                "y",
+                                "z"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "radius",
+                            "length"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "tube"
+                            },
+                            "outerRadius": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "innerRadius": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "length": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "axis": {
+                              "default": "z",
+                              "type": "string",
+                              "enum": [
+                                "x",
+                                "y",
+                                "z"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "outerRadius",
+                            "innerRadius",
+                            "length"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "rectTube"
+                            },
+                            "width": {
+                              "type": "number",
+                              "exclusiveMinimum": 0,
+                              "description": "Section extent across the first perpendicular axis"
+                            },
+                            "height": {
+                              "type": "number",
+                              "exclusiveMinimum": 0,
+                              "description": "Section extent across the second perpendicular axis"
+                            },
+                            "wall": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "length": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "axis": {
+                              "default": "z",
+                              "type": "string",
+                              "enum": [
+                                "x",
+                                "y",
+                                "z"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "width",
+                            "height",
+                            "wall",
+                            "length"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "sphere"
+                            },
+                            "radius": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "radius"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "capsule"
+                            },
+                            "radius": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            },
+                            "length": {
+                              "type": "number",
+                              "exclusiveMinimum": 0,
+                              "description": "Length of the cylindrical section, excluding the hemispherical caps"
+                            },
+                            "axis": {
+                              "default": "z",
+                              "type": "string",
+                              "enum": [
+                                "x",
+                                "y",
+                                "z"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "radius",
+                            "length"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "const": "shellBox"
+                            },
+                            "size": {
+                              "minItems": 3,
+                              "maxItems": 3,
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              },
+                              "description": "Outer extents in metres"
+                            },
+                            "wall": {
+                              "type": "number",
+                              "exclusiveMinimum": 0
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "size",
+                            "wall"
+                          ]
+                        }
+                      ]
+                    },
+                    "material": {
+                      "type": "string",
+                      "description": "Material id from the library"
+                    },
+                    "pose": {
+                      "default": {
+                        "xyz": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "rpy": [
+                          0,
+                          0,
+                          0
+                        ]
+                      },
+                      "type": "object",
+                      "properties": {
+                        "xyz": {
+                          "default": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "description": "Translation in metres, in the parent frame",
+                          "minItems": 3,
+                          "maxItems": 3,
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "rpy": {
+                          "default": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "description": "Fixed-axis roll/pitch/yaw in radians (rotation applied X then Y then Z, URDF convention)",
+                          "minItems": 3,
+                          "maxItems": 3,
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "description": "Rigid transform relative to the owning frame"
+                    },
+                    "role": {
+                      "default": "structure",
+                      "type": "string",
+                      "enum": [
+                        "structure",
+                        "shell",
+                        "cosmetic",
+                        "mount",
+                        "gear",
+                        "foot"
+                      ]
+                    },
+                    "process": {
+                      "description": "e.g. cnc, 3d_print, laser_cut",
+                      "type": "string"
+                    },
+                    "collide": {
+                      "default": true,
+                      "description": "Include in physics collision geometry",
+                      "type": "boolean"
+                    },
+                    "assembly": {
+                      "description": "Assembly name for the hierarchical breakdown, e.g. 'Knee joint'",
+                      "type": "string"
+                    },
+                    "emissive": {
+                      "description": "Glowing cosmetic element (LED diffuser etc.)",
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "id",
+                    "name",
+                    "shape",
+                    "material"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "component"
+                    },
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9_.-]+$"
+                    },
+                    "componentId": {
+                      "type": "string",
+                      "description": "Component id from the library"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "pose": {
+                      "default": {
+                        "xyz": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "rpy": [
+                          0,
+                          0,
+                          0
+                        ]
+                      },
+                      "type": "object",
+                      "properties": {
+                        "xyz": {
+                          "default": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "description": "Translation in metres, in the parent frame",
+                          "minItems": 3,
+                          "maxItems": 3,
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "rpy": {
+                          "default": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "description": "Fixed-axis roll/pitch/yaw in radians (rotation applied X then Y then Z, URDF convention)",
+                          "minItems": 3,
+                          "maxItems": 3,
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "description": "Rigid transform relative to the owning frame"
+                    },
+                    "collide": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "assembly": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "id",
+                    "componentId"
+                  ]
+                }
+              ]
+            }
+          },
+          "contact": {
+            "description": "Set on links that touch the ground (feet, wheels)",
+            "type": "object",
+            "properties": {
+              "point": {
+                "minItems": 3,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "description": "Contact point in link frame (e.g. foot sole centre)"
+              },
+              "radius": {
+                "default": 0.02,
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "friction": {
+                "default": 0.9,
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "point"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "subsystem",
+          "parts"
+        ]
+      }
+    },
+    "joints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "revolute",
+              "continuous",
+              "prismatic",
+              "fixed"
+            ]
+          },
+          "parent": {
+            "type": "string"
+          },
+          "child": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "object",
+            "properties": {
+              "xyz": {
+                "default": [
+                  0,
+                  0,
+                  0
+                ],
+                "description": "Translation in metres, in the parent frame",
+                "minItems": 3,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "rpy": {
+                "default": [
+                  0,
+                  0,
+                  0
+                ],
+                "description": "Fixed-axis roll/pitch/yaw in radians (rotation applied X then Y then Z, URDF convention)",
+                "minItems": 3,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "description": "Rigid transform relative to the owning frame"
+          },
+          "axis": {
+            "default": [
+              0,
+              0,
+              1
+            ],
+            "minItems": 3,
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "[x, y, z] vector in metres (or unitless for axes)"
+          },
+          "limits": {
+            "type": "object",
+            "properties": {
+              "lower": {
+                "type": "number"
+              },
+              "upper": {
+                "type": "number"
+              },
+              "velocity": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "Required max joint speed (rad/s or m/s)"
+              }
+            },
+            "required": [
+              "lower",
+              "upper",
+              "velocity"
+            ]
+          },
+          "damping": {
+            "default": 0.02,
+            "type": "number",
+            "minimum": 0
+          },
+          "friction": {
+            "default": 0.01,
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "parent",
+          "child",
+          "origin"
+        ]
+      }
+    },
+    "drivetrains": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "jointId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "motorPartId": {
+            "type": "string",
+            "description": "Component part id of a motor or servo"
+          },
+          "stages": {
+            "default": [],
+            "description": "Ordered from motor towards the joint output",
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "gearbox"
+                    },
+                    "partId": {
+                      "type": "string",
+                      "description": "Component part (category gearbox) mounted in some link"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "partId"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "spur"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "driverTeeth": {
+                      "type": "integer",
+                      "minimum": 8,
+                      "maximum": 9007199254740991
+                    },
+                    "drivenTeeth": {
+                      "type": "integer",
+                      "minimum": 8,
+                      "maximum": 9007199254740991
+                    },
+                    "module_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "Gear module in metres (e.g. 0.001 for m1)"
+                    },
+                    "faceWidth_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "material": {
+                      "type": "string"
+                    },
+                    "efficiency": {
+                      "default": 0.97,
+                      "type": "number",
+                      "minimum": 0.5,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "driverTeeth",
+                    "drivenTeeth",
+                    "module_m",
+                    "faceWidth_m",
+                    "material"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "belt"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "driverTeeth": {
+                      "type": "integer",
+                      "minimum": 10,
+                      "maximum": 9007199254740991
+                    },
+                    "drivenTeeth": {
+                      "type": "integer",
+                      "minimum": 10,
+                      "maximum": 9007199254740991
+                    },
+                    "pitch_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "Belt pitch, e.g. 0.003 for GT2-3M"
+                    },
+                    "beltWidth_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "ratedTension_N": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "Allowable working tension of the belt"
+                    },
+                    "efficiency": {
+                      "default": 0.95,
+                      "type": "number",
+                      "minimum": 0.5,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "driverTeeth",
+                    "drivenTeeth",
+                    "pitch_m",
+                    "beltWidth_m",
+                    "ratedTension_N"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "linkage"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "crank_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "coupler_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "rocker_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "ground_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "efficiency": {
+                      "default": 0.95,
+                      "type": "number",
+                      "minimum": 0.5,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "crank_m",
+                    "coupler_m",
+                    "rocker_m",
+                    "ground_m"
+                  ]
+                }
+              ]
+            }
+          },
+          "driverPartId": {
+            "type": "string",
+            "description": "Component part id of the driver channel powering this motor"
+          },
+          "encoderPartId": {
+            "type": "string"
+          },
+          "bearingPartIds": {
+            "default": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fasteners": {
+            "description": "Bolts that transmit the output torque across the joint",
+            "type": "object",
+            "properties": {
+              "componentId": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "boltCircleRadius_m": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "componentId",
+              "count",
+              "boltCircleRadius_m"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "jointId",
+          "motorPartId",
+          "driverPartId"
+        ]
+      }
+    },
+    "power": {
+      "type": "object",
+      "properties": {
+        "batteryPartIds": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "batteryConfig": {
+          "default": "single",
+          "type": "string",
+          "enum": [
+            "single",
+            "series",
+            "parallel"
+          ]
+        },
+        "regulators": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "partId": {
+                "type": "string"
+              },
+              "loadPartIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "partId",
+              "loadPartIds"
+            ]
+          }
+        },
+        "wiring": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_.-]+$"
+              },
+              "name": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string",
+                "description": "Part id"
+              },
+              "to": {
+                "type": "string",
+                "description": "Part id"
+              },
+              "wireComponentId": {
+                "type": "string"
+              },
+              "length_m": {
+                "description": "Defaults to 1.3x the straight-line distance",
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "kind": {
+                "default": "power",
+                "type": "string",
+                "enum": [
+                  "power",
+                  "signal",
+                  "phase"
+                ]
+              },
+              "loadPartIds": {
+                "default": [],
+                "description": "Consumers whose supply current flows through this wire (motors, drivers, compute, sensors)",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "id",
+              "from",
+              "to",
+              "wireComponentId"
+            ]
+          }
+        }
+      },
+      "required": [
+        "batteryPartIds"
+      ]
+    },
+    "style": {
+      "default": {
+        "styleName": "Utility",
+        "primary": "#d8dde3",
+        "secondary": "#2b2f36",
+        "accent": "#ff7a1a",
+        "emissive": "#7fe7ff",
+        "metalness": 0.3,
+        "roughness": 0.5,
+        "panelLines": true
+      },
+      "type": "object",
+      "properties": {
+        "styleName": {
+          "default": "Utility",
+          "type": "string"
+        },
+        "primary": {
+          "default": "#d8dde3",
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "secondary": {
+          "default": "#2b2f36",
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accent": {
+          "default": "#ff7a1a",
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "emissive": {
+          "default": "#7fe7ff",
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "metalness": {
+          "default": 0.3,
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "roughness": {
+          "default": 0.5,
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "panelLines": {
+          "default": true,
+          "type": "boolean"
+        }
+      }
+    },
+    "behavior": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "legged_gait",
+            "wheeled",
+            "manipulator",
+            "stand"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "nominalPose": {
+          "default": {},
+          "description": "Joint id -> standing/home position",
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "pid": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "object",
+              "properties": {
+                "kp": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "kd": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "ki": {
+                  "default": 0,
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "kp",
+                "kd"
+              ]
+            },
+            "overrides": {
+              "default": {},
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "kp": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "kd": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "ki": {
+                    "default": 0,
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "kp",
+                  "kd"
+                ]
+              }
+            }
+          },
+          "required": [
+            "default"
+          ]
+        },
+        "gait": {
+          "type": "object",
+          "properties": {
+            "legs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "jointIds": {
+                    "minItems": 2,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Joints from body to foot, in chain order"
+                  },
+                  "footLinkId": {
+                    "type": "string"
+                  },
+                  "phase": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "name",
+                  "jointIds",
+                  "footLinkId",
+                  "phase"
+                ]
+              }
+            },
+            "frequency_Hz": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "stepHeight_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "strideLength_m": {
+              "type": "number",
+              "minimum": 0
+            },
+            "dutyFactor": {
+              "default": 0.6,
+              "type": "number",
+              "minimum": 0.3,
+              "maximum": 0.95
+            },
+            "balanceGain": {
+              "default": 0.5,
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "legs",
+            "frequency_Hz",
+            "stepHeight_m",
+            "strideLength_m"
+          ]
+        },
+        "wheels": {
+          "type": "object",
+          "properties": {
+            "left": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "right": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "wheelRadius_m": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "targetSpeed_m_s": {
+              "type": "number",
+              "minimum": 0
+            },
+            "turnRate_rad_s": {
+              "default": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "left",
+            "right",
+            "wheelRadius_m",
+            "targetSpeed_m_s"
+          ]
+        },
+        "manipulator": {
+          "type": "object",
+          "properties": {
+            "waypoints": {
+              "minItems": 2,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "t": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "pose": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "required": [
+                  "t",
+                  "pose"
+                ]
+              }
+            },
+            "loop": {
+              "default": true,
+              "type": "boolean"
+            },
+            "payloadLinkId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "waypoints"
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "pid"
+      ]
+    },
+    "requirements": {
+      "default": {
+        "payload_kg": 0,
+        "payloadOffset": [
+          0,
+          0,
+          0
+        ],
+        "minRuntime_min": 0,
+        "maxSlope_deg": 0,
+        "safetyFactor": 1.5,
+        "dynamicLoadFactor": 1.5,
+        "ambientTemp_C": 25,
+        "dutyCycle": 0.6
+      },
+      "type": "object",
+      "properties": {
+        "payload_kg": {
+          "default": 0,
+          "type": "number",
+          "minimum": 0
+        },
+        "payloadLinkId": {
+          "description": "Link that carries the payload; defaults to the root link",
+          "type": "string"
+        },
+        "payloadOffset": {
+          "default": [
+            0,
+            0,
+            0
+          ],
+          "minItems": 3,
+          "maxItems": 3,
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "[x, y, z] vector in metres (or unitless for axes)"
+        },
+        "minRuntime_min": {
+          "default": 0,
+          "type": "number",
+          "minimum": 0
+        },
+        "maxSlope_deg": {
+          "default": 0,
+          "type": "number",
+          "minimum": 0
+        },
+        "safetyFactor": {
+          "default": 1.5,
+          "type": "number",
+          "minimum": 1
+        },
+        "dynamicLoadFactor": {
+          "default": 1.5,
+          "description": "Multiplier on static loads for gait impacts / accelerations",
+          "type": "number",
+          "minimum": 1
+        },
+        "ambientTemp_C": {
+          "default": 25,
+          "type": "number"
+        },
+        "targetSpeed_m_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maxMass_kg": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "dutyCycle": {
+          "default": 0.6,
+          "description": "Fraction of time actuators are under load, for runtime/thermal",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "assumptions": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "hand_written",
+            "designer_agent"
+          ]
+        },
+        "model": {
+          "type": "string"
+        },
+        "iteration": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "briefTitle": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "description",
+    "rootLink",
+    "links",
+    "joints",
+    "power",
+    "behavior"
+  ]
+}

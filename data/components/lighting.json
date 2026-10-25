@@ -1,0 +1,64 @@
+[
+  {
+    "id": "led_ws2812_ring16",
+    "category": "lighting",
+    "name": "Addressable LED ring (16 x WS2812B)",
+    "realWorldEquivalent": "Adafruit NeoPixel Ring 16",
+    "manufacturer": "Adafruit",
+    "mass_kg": 0.006,
+    "cost_usd": 10,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.022,
+      "length": 0.003,
+      "axis": "z"
+    },
+    "specs": {
+      "voltage_V": 5,
+      "power_W": 4.8,
+      "lumens": 150
+    }
+  },
+  {
+    "id": "led_cob_10w",
+    "category": "lighting",
+    "name": "COB LED module 10 W",
+    "realWorldEquivalent": "Bridgelux Vero-class 10W COB, 12V",
+    "manufacturer": "Bridgelux",
+    "mass_kg": 0.015,
+    "cost_usd": 6,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.015,
+      "length": 0.004,
+      "axis": "z"
+    },
+    "specs": {
+      "voltage_V": 12,
+      "power_W": 10,
+      "lumens": 1000
+    }
+  },
+  {
+    "id": "led_strip_30cm",
+    "category": "lighting",
+    "name": "LED strip 30 cm (18 LEDs)",
+    "realWorldEquivalent": "SK6812 60/m strip, 30 cm",
+    "manufacturer": "generic",
+    "mass_kg": 0.01,
+    "cost_usd": 5,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.3,
+        0.01,
+        0.003
+      ]
+    },
+    "specs": {
+      "voltage_V": 5,
+      "power_W": 3.5,
+      "lumens": 100
+    }
+  }
+]

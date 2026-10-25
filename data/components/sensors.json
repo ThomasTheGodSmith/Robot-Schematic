@@ -1,0 +1,225 @@
+[
+  {
+    "id": "imu_bno085",
+    "category": "sensor",
+    "name": "9-DoF IMU BNO085",
+    "realWorldEquivalent": "CEVA/Hillcrest BNO085 breakout",
+    "manufacturer": "Adafruit",
+    "mass_kg": 0.003,
+    "cost_usd": 25,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.025,
+        0.018,
+        0.004
+      ]
+    },
+    "specs": {
+      "sensorType": "imu",
+      "voltage_V": 3.3,
+      "power_W": 0.05,
+      "rate_Hz": 400
+    }
+  },
+  {
+    "id": "imu_vn100",
+    "category": "sensor",
+    "name": "Industrial IMU VN-100",
+    "realWorldEquivalent": "VectorNav VN-100 rugged",
+    "manufacturer": "VectorNav",
+    "mass_kg": 0.016,
+    "cost_usd": 800,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.036,
+        0.033,
+        0.009
+      ]
+    },
+    "specs": {
+      "sensorType": "imu",
+      "voltage_V": 5,
+      "power_W": 0.22,
+      "rate_Hz": 800
+    }
+  },
+  {
+    "id": "enc_as5047p",
+    "category": "sensor",
+    "name": "Magnetic encoder AS5047P",
+    "realWorldEquivalent": "ams AS5047P 14-bit",
+    "manufacturer": "ams OSRAM",
+    "mass_kg": 0.003,
+    "cost_usd": 12,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.02,
+        0.02,
+        0.004
+      ]
+    },
+    "specs": {
+      "sensorType": "encoder",
+      "voltage_V": 5,
+      "power_W": 0.08,
+      "resolution": "14-bit"
+    }
+  },
+  {
+    "id": "cam_d435i",
+    "category": "sensor",
+    "name": "Depth camera RealSense D435i",
+    "realWorldEquivalent": "Intel RealSense D435i",
+    "manufacturer": "Intel",
+    "mass_kg": 0.072,
+    "cost_usd": 330,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.09,
+        0.025,
+        0.025
+      ]
+    },
+    "specs": {
+      "sensorType": "depth_camera",
+      "voltage_V": 5,
+      "power_W": 3.5,
+      "rate_Hz": 30,
+      "range_m": 6
+    }
+  },
+  {
+    "id": "lidar_rplidar_a1",
+    "category": "sensor",
+    "name": "2D lidar RPLIDAR A1",
+    "realWorldEquivalent": "Slamtec RPLIDAR A1M8",
+    "manufacturer": "Slamtec",
+    "mass_kg": 0.17,
+    "cost_usd": 99,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.035,
+      "length": 0.05,
+      "axis": "z"
+    },
+    "specs": {
+      "sensorType": "lidar",
+      "voltage_V": 5,
+      "power_W": 2.5,
+      "rate_Hz": 8,
+      "range_m": 12
+    }
+  },
+  {
+    "id": "lidar_mid360",
+    "category": "sensor",
+    "name": "3D lidar Livox Mid-360",
+    "realWorldEquivalent": "Livox Mid-360",
+    "manufacturer": "Livox",
+    "mass_kg": 0.265,
+    "cost_usd": 749,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0325,
+      "length": 0.065,
+      "axis": "z"
+    },
+    "specs": {
+      "sensorType": "lidar",
+      "voltage_V": 12,
+      "power_W": 6.5,
+      "rate_Hz": 10,
+      "range_m": 40
+    }
+  },
+  {
+    "id": "cam_rpi3",
+    "category": "sensor",
+    "name": "Camera Module 3",
+    "realWorldEquivalent": "Raspberry Pi Camera Module 3",
+    "manufacturer": "Raspberry Pi",
+    "mass_kg": 0.004,
+    "cost_usd": 25,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.025,
+        0.024,
+        0.012
+      ]
+    },
+    "specs": {
+      "sensorType": "camera",
+      "voltage_V": 3.3,
+      "power_W": 0.3,
+      "rate_Hz": 60
+    }
+  },
+  {
+    "id": "foot_contact_fsr",
+    "category": "sensor",
+    "name": "Foot contact sensor (FSR 402 + potting)",
+    "realWorldEquivalent": "Interlink FSR 402",
+    "manufacturer": "Interlink",
+    "mass_kg": 0.004,
+    "cost_usd": 8,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.009,
+      "length": 0.004,
+      "axis": "z"
+    },
+    "specs": {
+      "sensorType": "contact",
+      "voltage_V": 3.3,
+      "power_W": 0.01
+    }
+  },
+  {
+    "id": "ft_mini45",
+    "category": "sensor",
+    "name": "6-axis force/torque sensor Mini45",
+    "realWorldEquivalent": "ATI Mini45",
+    "manufacturer": "ATI",
+    "mass_kg": 0.092,
+    "cost_usd": 5000,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0225,
+      "length": 0.0157,
+      "axis": "z"
+    },
+    "specs": {
+      "sensorType": "force_torque",
+      "voltage_V": 5,
+      "power_W": 1.0,
+      "rate_Hz": 7000
+    }
+  },
+  {
+    "id": "cur_ina226",
+    "category": "sensor",
+    "name": "Current/voltage monitor INA226",
+    "realWorldEquivalent": "TI INA226 breakout",
+    "manufacturer": "TI",
+    "mass_kg": 0.002,
+    "cost_usd": 6,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.02,
+        0.015,
+        0.003
+      ]
+    },
+    "specs": {
+      "sensorType": "current",
+      "voltage_V": 3.3,
+      "power_W": 0.005
+    }
+  }
+]

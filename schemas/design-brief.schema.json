@@ -1,0 +1,312 @@
+{
+  "title": "Design Brief",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "originalPrompt": {
+      "type": "string"
+    },
+    "interpretation": {
+      "type": "string",
+      "description": "One-paragraph restatement of the intent"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "setting": {
+          "type": "string",
+          "enum": [
+            "indoor",
+            "outdoor",
+            "mixed"
+          ]
+        },
+        "terrain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "setting",
+        "terrain"
+      ]
+    },
+    "sizeClass": {
+      "type": "string",
+      "enum": [
+        "desktop",
+        "small",
+        "medium",
+        "large",
+        "human_scale"
+      ]
+    },
+    "targetMass_kg": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ]
+    },
+    "approxDimensions_m": {
+      "type": "object",
+      "properties": {
+        "length": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "length",
+        "width",
+        "height"
+      ]
+    },
+    "locomotion": {
+      "type": "string",
+      "enum": [
+        "quadruped",
+        "biped",
+        "hexapod",
+        "wheeled",
+        "tracked",
+        "stationary_arm",
+        "mobile_manipulator",
+        "other"
+      ]
+    },
+    "payload_kg": {
+      "type": "number",
+      "minimum": 0
+    },
+    "runtime_min": {
+      "type": "number",
+      "minimum": 0
+    },
+    "speed_m_s": {
+      "type": "number",
+      "minimum": 0
+    },
+    "maxSlope_deg": {
+      "type": "number",
+      "minimum": 0
+    },
+    "stepHeight_m": {
+      "type": "number",
+      "minimum": 0
+    },
+    "behaviours": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capabilities": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability": {
+            "type": "string",
+            "description": "Short name, e.g. 'Repulsor flight'"
+          },
+          "requested": {
+            "type": "string",
+            "description": "What the user asked for, in their terms"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "achievable",
+              "compromise",
+              "infeasible"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Engineering reasoning with numbers where possible"
+          },
+          "compromise": {
+            "description": "Required when verdict is 'compromise' or 'infeasible': what will be built instead",
+            "type": "string"
+          }
+        },
+        "required": [
+          "capability",
+          "requested",
+          "verdict",
+          "rationale"
+        ]
+      }
+    },
+    "styling": {
+      "type": "object",
+      "properties": {
+        "styleName": {
+          "type": "string"
+        },
+        "silhouette": {
+          "type": "string"
+        },
+        "proportions": {
+          "type": "string"
+        },
+        "panelLines": {
+          "type": "string"
+        },
+        "colorScheme": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "secondary": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "accent": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "emissive": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            }
+          },
+          "required": [
+            "primary",
+            "secondary",
+            "accent"
+          ]
+        },
+        "finish": {
+          "type": "string"
+        },
+        "distinctiveFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "styleName",
+        "silhouette",
+        "proportions",
+        "panelLines",
+        "colorScheme",
+        "finish",
+        "distinctiveFeatures"
+      ]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "visual",
+              "robot",
+              "mechanism",
+              "component",
+              "paper"
+            ]
+          },
+          "attribution": {
+            "type": "string",
+            "description": "Publisher / rights holder"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string",
+            "description": "What this reference contributes to the design"
+          },
+          "verified": {
+            "description": "Set by the server: true when the URL appeared in this session's web search/fetch results",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "title",
+          "url",
+          "kind",
+          "attribution",
+          "notes"
+        ]
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Hard engineering constraints the Designer must respect"
+    },
+    "openQuestions": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "title",
+    "originalPrompt",
+    "interpretation",
+    "purpose",
+    "environment",
+    "sizeClass",
+    "targetMass_kg",
+    "approxDimensions_m",
+    "locomotion",
+    "payload_kg",
+    "runtime_min",
+    "behaviours",
+    "capabilities",
+    "styling",
+    "references",
+    "constraints"
+  ]
+}

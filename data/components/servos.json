@@ -1,0 +1,332 @@
+[
+  {
+    "id": "dxl_xl430_w250",
+    "category": "servo",
+    "name": "Smart servo XL430-W250",
+    "realWorldEquivalent": "ROBOTIS Dynamixel XL430-W250-T",
+    "manufacturer": "ROBOTIS",
+    "mass_kg": 0.0573,
+    "cost_usd": 24,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.0285,
+        0.034,
+        0.0465
+      ]
+    },
+    "specs": {
+      "nominalVoltage_V": 11.1,
+      "voltageRange_V": [
+        6.5,
+        12
+      ],
+      "stallTorque_Nm": 1.5,
+      "continuousTorque_Nm": 0.5,
+      "noLoadSpeed_rpm": 57,
+      "stallCurrent_A": 1.4,
+      "continuousCurrent_A": 0.5,
+      "internalRatio": 258.5,
+      "internalEfficiency": 0.32,
+      "phaseResistance_ohm": 8.0,
+      "thermalResistance_C_per_W": 10,
+      "maxWindingTemp_C": 80,
+      "idleCurrent_A": 0.052,
+      "backlash_arcmin": 15,
+      "bus": "ttl"
+    },
+    "datasheetUrl": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/"
+  },
+  {
+    "id": "dxl_xm430_w350",
+    "category": "servo",
+    "name": "Smart servo XM430-W350",
+    "realWorldEquivalent": "ROBOTIS Dynamixel XM430-W350-T",
+    "manufacturer": "ROBOTIS",
+    "mass_kg": 0.082,
+    "cost_usd": 290,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.0285,
+        0.034,
+        0.0465
+      ]
+    },
+    "specs": {
+      "nominalVoltage_V": 12,
+      "voltageRange_V": [
+        10,
+        14.8
+      ],
+      "stallTorque_Nm": 4.1,
+      "continuousTorque_Nm": 1.4,
+      "noLoadSpeed_rpm": 46,
+      "stallCurrent_A": 2.3,
+      "continuousCurrent_A": 0.9,
+      "internalRatio": 353.5,
+      "internalEfficiency": 0.3,
+      "phaseResistance_ohm": 5.0,
+      "thermalResistance_C_per_W": 8,
+      "maxWindingTemp_C": 80,
+      "idleCurrent_A": 0.1,
+      "backlash_arcmin": 15,
+      "bus": "ttl"
+    },
+    "datasheetUrl": "https://emanual.robotis.com/docs/en/dxl/x/xm430-w350/"
+  },
+  {
+    "id": "dxl_xm540_w270",
+    "category": "servo",
+    "name": "Smart servo XM540-W270",
+    "realWorldEquivalent": "ROBOTIS Dynamixel XM540-W270-T",
+    "manufacturer": "ROBOTIS",
+    "mass_kg": 0.165,
+    "cost_usd": 500,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.0335,
+        0.058,
+        0.044
+      ]
+    },
+    "specs": {
+      "nominalVoltage_V": 12,
+      "voltageRange_V": [
+        10,
+        14.8
+      ],
+      "stallTorque_Nm": 10.6,
+      "continuousTorque_Nm": 3.5,
+      "noLoadSpeed_rpm": 30,
+      "stallCurrent_A": 4.4,
+      "continuousCurrent_A": 1.6,
+      "internalRatio": 272.5,
+      "internalEfficiency": 0.33,
+      "phaseResistance_ohm": 2.6,
+      "thermalResistance_C_per_W": 5,
+      "maxWindingTemp_C": 80,
+      "idleCurrent_A": 0.1,
+      "backlash_arcmin": 15,
+      "bus": "ttl"
+    },
+    "datasheetUrl": "https://emanual.robotis.com/docs/en/dxl/x/xm540-w270/"
+  },
+  {
+    "id": "feetech_sts3215",
+    "category": "servo",
+    "name": "Smart servo STS3215 (12 V)",
+    "realWorldEquivalent": "Feetech STS3215 12V",
+    "manufacturer": "Feetech",
+    "mass_kg": 0.055,
+    "cost_usd": 20,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.0245,
+        0.0345,
+        0.045
+      ]
+    },
+    "specs": {
+      "nominalVoltage_V": 12,
+      "voltageRange_V": [
+        6,
+        12.6
+      ],
+      "stallTorque_Nm": 2.9,
+      "continuousTorque_Nm": 0.9,
+      "noLoadSpeed_rpm": 45,
+      "stallCurrent_A": 2.7,
+      "continuousCurrent_A": 0.8,
+      "internalRatio": 345,
+      "internalEfficiency": 0.3,
+      "phaseResistance_ohm": 4.4,
+      "thermalResistance_C_per_W": 12,
+      "maxWindingTemp_C": 80,
+      "idleCurrent_A": 0.05,
+      "backlash_arcmin": 25,
+      "bus": "ttl"
+    }
+  },
+  {
+    "id": "hobby_mg996r",
+    "category": "servo",
+    "name": "Hobby servo MG996R",
+    "realWorldEquivalent": "TowerPro MG996R",
+    "manufacturer": "TowerPro",
+    "mass_kg": 0.055,
+    "cost_usd": 8,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.02,
+        0.0407,
+        0.0427
+      ]
+    },
+    "specs": {
+      "nominalVoltage_V": 6,
+      "voltageRange_V": [
+        4.8,
+        7.2
+      ],
+      "stallTorque_Nm": 1.08,
+      "continuousTorque_Nm": 0.35,
+      "noLoadSpeed_rpm": 60,
+      "stallCurrent_A": 2.5,
+      "continuousCurrent_A": 0.7,
+      "internalRatio": 300,
+      "internalEfficiency": 0.3,
+      "phaseResistance_ohm": 2.0,
+      "thermalResistance_C_per_W": 15,
+      "maxWindingTemp_C": 70,
+      "idleCurrent_A": 0.01,
+      "backlash_arcmin": 60,
+      "bus": "pwm"
+    },
+    "notes": "No position feedback to host; backlash and deadband are large."
+  },
+  {
+    "id": "unitree_go1_joint",
+    "category": "servo",
+    "name": "Integrated actuator GO1 joint motor",
+    "realWorldEquivalent": "Unitree GO1 / A1-class joint motor",
+    "manufacturer": "Unitree",
+    "mass_kg": 0.53,
+    "cost_usd": 400,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.048,
+      "length": 0.045,
+      "axis": "z"
+    },
+    "specs": {
+      "nominalVoltage_V": 24,
+      "voltageRange_V": [
+        18,
+        30
+      ],
+      "stallTorque_Nm": 23.7,
+      "continuousTorque_Nm": 8.0,
+      "noLoadSpeed_rpm": 286,
+      "stallCurrent_A": 40,
+      "continuousCurrent_A": 12,
+      "internalRatio": 6.33,
+      "internalEfficiency": 0.92,
+      "phaseResistance_ohm": 0.2,
+      "thermalResistance_C_per_W": 1.8,
+      "maxWindingTemp_C": 120,
+      "idleCurrent_A": 0.15,
+      "backlash_arcmin": 20,
+      "bus": "rs485"
+    }
+  },
+  {
+    "id": "cubemars_ak80_9",
+    "category": "servo",
+    "name": "Integrated actuator AK80-9",
+    "realWorldEquivalent": "CubeMars AK80-9 (V2)",
+    "manufacturer": "CubeMars",
+    "mass_kg": 0.485,
+    "cost_usd": 520,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.049,
+      "length": 0.039,
+      "axis": "z"
+    },
+    "specs": {
+      "nominalVoltage_V": 24,
+      "voltageRange_V": [
+        18,
+        52
+      ],
+      "stallTorque_Nm": 18,
+      "continuousTorque_Nm": 9,
+      "noLoadSpeed_rpm": 245,
+      "stallCurrent_A": 30,
+      "continuousCurrent_A": 12,
+      "internalRatio": 9,
+      "internalEfficiency": 0.9,
+      "phaseResistance_ohm": 0.2,
+      "thermalResistance_C_per_W": 1.8,
+      "maxWindingTemp_C": 120,
+      "idleCurrent_A": 0.1,
+      "backlash_arcmin": 12,
+      "bus": "can"
+    },
+    "datasheetUrl": "https://www.cubemars.com/goods-1031-AK80-9.html"
+  },
+  {
+    "id": "cubemars_ak60_6",
+    "category": "servo",
+    "name": "Integrated actuator AK60-6",
+    "realWorldEquivalent": "CubeMars AK60-6 (V1.1)",
+    "manufacturer": "CubeMars",
+    "mass_kg": 0.315,
+    "cost_usd": 300,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0395,
+      "length": 0.0435,
+      "axis": "z"
+    },
+    "specs": {
+      "nominalVoltage_V": 24,
+      "voltageRange_V": [
+        18,
+        30
+      ],
+      "stallTorque_Nm": 9,
+      "continuousTorque_Nm": 3,
+      "noLoadSpeed_rpm": 420,
+      "stallCurrent_A": 15,
+      "continuousCurrent_A": 6,
+      "internalRatio": 6,
+      "internalEfficiency": 0.9,
+      "phaseResistance_ohm": 0.35,
+      "thermalResistance_C_per_W": 2.5,
+      "maxWindingTemp_C": 120,
+      "idleCurrent_A": 0.08,
+      "backlash_arcmin": 15,
+      "bus": "can"
+    }
+  },
+  {
+    "id": "cubemars_ak10_9",
+    "category": "servo",
+    "name": "Integrated actuator AK10-9",
+    "realWorldEquivalent": "CubeMars AK10-9 (V2)",
+    "manufacturer": "CubeMars",
+    "mass_kg": 0.96,
+    "cost_usd": 780,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0535,
+      "length": 0.065,
+      "axis": "z"
+    },
+    "specs": {
+      "nominalVoltage_V": 48,
+      "voltageRange_V": [
+        24,
+        52
+      ],
+      "stallTorque_Nm": 48,
+      "continuousTorque_Nm": 18,
+      "noLoadSpeed_rpm": 180,
+      "stallCurrent_A": 48,
+      "continuousCurrent_A": 18,
+      "internalRatio": 9,
+      "internalEfficiency": 0.9,
+      "phaseResistance_ohm": 0.09,
+      "thermalResistance_C_per_W": 1.2,
+      "maxWindingTemp_C": 120,
+      "idleCurrent_A": 0.15,
+      "backlash_arcmin": 12,
+      "bus": "can"
+    }
+  }
+]

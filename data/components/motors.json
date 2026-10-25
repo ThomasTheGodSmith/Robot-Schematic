@@ -1,0 +1,287 @@
+[
+  {
+    "id": "bldc_5208_kv330",
+    "category": "motor",
+    "name": "BLDC outrunner 5208, 330 KV",
+    "realWorldEquivalent": "mjbots mj5208",
+    "manufacturer": "mjbots",
+    "mass_kg": 0.19,
+    "cost_usd": 90,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0315,
+      "length": 0.026,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "bldc",
+      "nominalVoltage_V": 24,
+      "kv_rpm_per_V": 330,
+      "kt_Nm_per_A": 0.02894,
+      "noLoadSpeed_rpm": 7524,
+      "stallTorque_Nm": 1.157,
+      "continuousTorque_Nm": 0.347,
+      "peakCurrent_A": 40,
+      "continuousCurrent_A": 12,
+      "phaseResistance_ohm": 0.1,
+      "rotorInertia_kgm2": 6e-05,
+      "thermalResistance_C_per_W": 3.0,
+      "maxWindingTemp_C": 125,
+      "noLoadCurrent_A": 0.4
+    },
+    "datasheetUrl": "https://mjbots.com/products/mj5208",
+    "notes": "Peak current limited by typical FOC driver; continuous rating assumes passive cooling in an enclosed leg."
+  },
+  {
+    "id": "bldc_8318_kv100",
+    "category": "motor",
+    "name": "BLDC outrunner 8318, 100 KV",
+    "realWorldEquivalent": "T-Motor U8 Lite KV100",
+    "manufacturer": "T-Motor",
+    "mass_kg": 0.24,
+    "cost_usd": 180,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0435,
+      "length": 0.03,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "bldc",
+      "nominalVoltage_V": 24,
+      "kv_rpm_per_V": 100,
+      "kt_Nm_per_A": 0.09549,
+      "noLoadSpeed_rpm": 2280,
+      "stallTorque_Nm": 4.011,
+      "continuousTorque_Nm": 1.337,
+      "peakCurrent_A": 42,
+      "continuousCurrent_A": 14,
+      "phaseResistance_ohm": 0.11,
+      "rotorInertia_kgm2": 0.00016,
+      "thermalResistance_C_per_W": 2.0,
+      "maxWindingTemp_C": 120,
+      "noLoadCurrent_A": 0.35
+    },
+    "datasheetUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": "bldc_10015_kv80",
+    "category": "motor",
+    "name": "BLDC outrunner 10015, 80 KV",
+    "realWorldEquivalent": "CubeMars RI100-class frameless / T-Motor U10 class",
+    "manufacturer": "CubeMars",
+    "mass_kg": 0.45,
+    "cost_usd": 260,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.053,
+      "length": 0.036,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "bldc",
+      "nominalVoltage_V": 48,
+      "kv_rpm_per_V": 80,
+      "kt_Nm_per_A": 0.11937,
+      "noLoadSpeed_rpm": 3648,
+      "stallTorque_Nm": 9.549,
+      "continuousTorque_Nm": 2.984,
+      "peakCurrent_A": 80,
+      "continuousCurrent_A": 25,
+      "phaseResistance_ohm": 0.08,
+      "rotorInertia_kgm2": 0.0005,
+      "thermalResistance_C_per_W": 1.5,
+      "maxWindingTemp_C": 120,
+      "noLoadCurrent_A": 0.5
+    }
+  },
+  {
+    "id": "bldc_4310_kv170",
+    "category": "motor",
+    "name": "BLDC gimbal-class 4310, 170 KV",
+    "realWorldEquivalent": "T-Motor GB-class 4310",
+    "manufacturer": "T-Motor",
+    "mass_kg": 0.09,
+    "cost_usd": 55,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.025,
+      "length": 0.022,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "bldc",
+      "nominalVoltage_V": 24,
+      "kv_rpm_per_V": 170,
+      "kt_Nm_per_A": 0.05617,
+      "noLoadSpeed_rpm": 3876,
+      "stallTorque_Nm": 0.843,
+      "continuousTorque_Nm": 0.281,
+      "peakCurrent_A": 15,
+      "continuousCurrent_A": 5,
+      "phaseResistance_ohm": 0.35,
+      "rotorInertia_kgm2": 2.5e-05,
+      "thermalResistance_C_per_W": 5.0,
+      "maxWindingTemp_C": 120,
+      "noLoadCurrent_A": 0.2
+    }
+  },
+  {
+    "id": "dc_25d_12v_hp",
+    "category": "motor",
+    "name": "Brushed DC 25 mm, 12 V high-power",
+    "realWorldEquivalent": "Pololu 25D HP 12V (motor only)",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.045,
+    "cost_usd": 18,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0125,
+      "length": 0.035,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "brushed_dc",
+      "nominalVoltage_V": 12,
+      "kv_rpm_per_V": 833,
+      "kt_Nm_per_A": 0.01146,
+      "noLoadSpeed_rpm": 9496,
+      "stallTorque_Nm": 0.064,
+      "continuousTorque_Nm": 0.016,
+      "peakCurrent_A": 5.6,
+      "continuousCurrent_A": 1.4,
+      "phaseResistance_ohm": 2.14,
+      "rotorInertia_kgm2": 1.2e-06,
+      "thermalResistance_C_per_W": 12.0,
+      "maxWindingTemp_C": 100,
+      "noLoadCurrent_A": 0.3
+    }
+  },
+  {
+    "id": "dc_37d_12v",
+    "category": "motor",
+    "name": "Brushed DC 37 mm, 12 V",
+    "realWorldEquivalent": "Pololu 37D 12V (motor only)",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.12,
+    "cost_usd": 25,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0185,
+      "length": 0.045,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "brushed_dc",
+      "nominalVoltage_V": 12,
+      "kv_rpm_per_V": 580,
+      "kt_Nm_per_A": 0.01646,
+      "noLoadSpeed_rpm": 6612,
+      "stallTorque_Nm": 0.091,
+      "continuousTorque_Nm": 0.026,
+      "peakCurrent_A": 5.5,
+      "continuousCurrent_A": 1.6,
+      "phaseResistance_ohm": 2.2,
+      "rotorInertia_kgm2": 4e-06,
+      "thermalResistance_C_per_W": 9.0,
+      "maxWindingTemp_C": 100,
+      "noLoadCurrent_A": 0.2
+    }
+  },
+  {
+    "id": "dc_maxon_re25",
+    "category": "motor",
+    "name": "Brushed DC precision 25 mm, 24 V",
+    "realWorldEquivalent": "Maxon RE 25 (118752-class)",
+    "manufacturer": "maxon",
+    "mass_kg": 0.13,
+    "cost_usd": 280,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0125,
+      "length": 0.054,
+      "axis": "z"
+    },
+    "specs": {
+      "motorType": "brushed_dc",
+      "nominalVoltage_V": 24,
+      "kv_rpm_per_V": 400,
+      "kt_Nm_per_A": 0.02387,
+      "noLoadSpeed_rpm": 9120,
+      "stallTorque_Nm": 0.301,
+      "continuousTorque_Nm": 0.036,
+      "peakCurrent_A": 12.6,
+      "continuousCurrent_A": 1.5,
+      "phaseResistance_ohm": 1.9,
+      "rotorInertia_kgm2": 1.1e-06,
+      "thermalResistance_C_per_W": 9.0,
+      "maxWindingTemp_C": 125,
+      "noLoadCurrent_A": 0.05
+    }
+  },
+  {
+    "id": "stepper_nema17_45",
+    "category": "motor",
+    "name": "Stepper NEMA 17, 0.45 N\u00b7m",
+    "realWorldEquivalent": "StepperOnline 17HS19-2004S1",
+    "manufacturer": "StepperOnline",
+    "mass_kg": 0.28,
+    "cost_usd": 14,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.042,
+        0.042,
+        0.048
+      ]
+    },
+    "specs": {
+      "motorType": "stepper",
+      "nominalVoltage_V": 24,
+      "kt_Nm_per_A": 0.225,
+      "noLoadSpeed_rpm": 1000,
+      "stallTorque_Nm": 0.45,
+      "continuousTorque_Nm": 0.35,
+      "peakCurrent_A": 2.0,
+      "continuousCurrent_A": 1.6,
+      "phaseResistance_ohm": 1.1,
+      "rotorInertia_kgm2": 8.2e-06,
+      "thermalResistance_C_per_W": 6.0,
+      "maxWindingTemp_C": 130,
+      "noLoadCurrent_A": 0.5
+    },
+    "notes": "Stepper modelled with a linear torque/speed falloff to ~1000 rpm; real pull-out curves depend on driver voltage."
+  },
+  {
+    "id": "stepper_nema23_126",
+    "category": "motor",
+    "name": "Stepper NEMA 23, 1.26 N\u00b7m",
+    "realWorldEquivalent": "StepperOnline 23HS22-2804S",
+    "manufacturer": "StepperOnline",
+    "mass_kg": 0.7,
+    "cost_usd": 24,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.057,
+        0.057,
+        0.056
+      ]
+    },
+    "specs": {
+      "motorType": "stepper",
+      "nominalVoltage_V": 36,
+      "kt_Nm_per_A": 0.45,
+      "noLoadSpeed_rpm": 900,
+      "stallTorque_Nm": 1.26,
+      "continuousTorque_Nm": 1.0,
+      "peakCurrent_A": 2.8,
+      "continuousCurrent_A": 2.2,
+      "phaseResistance_ohm": 0.9,
+      "rotorInertia_kgm2": 3e-05,
+      "thermalResistance_C_per_W": 4.0,
+      "maxWindingTemp_C": 130,
+      "noLoadCurrent_A": 0.6
+    }
+  }
+]

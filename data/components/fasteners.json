@@ -1,0 +1,141 @@
+[
+  {
+    "id": "bolt_m2_5x8",
+    "category": "fastener",
+    "name": "M2.5 x 8 socket head cap screw 12.9",
+    "realWorldEquivalent": "ISO 4762 M2.5x8 12.9",
+    "manufacturer": "ISO 4762",
+    "mass_kg": 0.0006,
+    "cost_usd": 0.15,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.008,
+      "axis": "z"
+    },
+    "specs": {
+      "fastenerType": "socket_head_bolt",
+      "thread": "M2.5",
+      "length_m": 0.008,
+      "grade": "12.9",
+      "tensileCapacity_N": 4136,
+      "shearCapacity_N": 2481
+    }
+  },
+  {
+    "id": "bolt_m3x10",
+    "category": "fastener",
+    "name": "M3 x 10 socket head cap screw 12.9",
+    "realWorldEquivalent": "ISO 4762 M3x10 12.9",
+    "manufacturer": "ISO 4762",
+    "mass_kg": 0.0011,
+    "cost_usd": 0.15,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0024000000000000002,
+      "length": 0.01,
+      "axis": "z"
+    },
+    "specs": {
+      "fastenerType": "socket_head_bolt",
+      "thread": "M3",
+      "length_m": 0.01,
+      "grade": "12.9",
+      "tensileCapacity_N": 6137,
+      "shearCapacity_N": 3682
+    }
+  },
+  {
+    "id": "bolt_m4x12",
+    "category": "fastener",
+    "name": "M4 x 12 socket head cap screw 12.9",
+    "realWorldEquivalent": "ISO 4762 M4x12 12.9",
+    "manufacturer": "ISO 4762",
+    "mass_kg": 0.0021,
+    "cost_usd": 0.2,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0032,
+      "length": 0.012,
+      "axis": "z"
+    },
+    "specs": {
+      "fastenerType": "socket_head_bolt",
+      "thread": "M4",
+      "length_m": 0.012,
+      "grade": "12.9",
+      "tensileCapacity_N": 10712,
+      "shearCapacity_N": 6427
+    }
+  },
+  {
+    "id": "bolt_m5x16",
+    "category": "fastener",
+    "name": "M5 x 16 socket head cap screw 12.9",
+    "realWorldEquivalent": "ISO 4762 M5x16 12.9",
+    "manufacturer": "ISO 4762",
+    "mass_kg": 0.004,
+    "cost_usd": 0.25,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.004,
+      "length": 0.016,
+      "axis": "z"
+    },
+    "specs": {
+      "fastenerType": "socket_head_bolt",
+      "thread": "M5",
+      "length_m": 0.016,
+      "grade": "12.9",
+      "tensileCapacity_N": 17324,
+      "shearCapacity_N": 10394
+    }
+  },
+  {
+    "id": "bolt_m6x20",
+    "category": "fastener",
+    "name": "M6 x 20 socket head cap screw 8.8",
+    "realWorldEquivalent": "ISO 4762 M6x20 8.8",
+    "manufacturer": "ISO 4762",
+    "mass_kg": 0.0068,
+    "cost_usd": 0.25,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0048000000000000004,
+      "length": 0.02,
+      "axis": "z"
+    },
+    "specs": {
+      "fastenerType": "socket_head_bolt",
+      "thread": "M6",
+      "length_m": 0.02,
+      "grade": "8.8",
+      "tensileCapacity_N": 16080,
+      "shearCapacity_N": 9648
+    }
+  },
+  {
+    "id": "insert_m3_heatset",
+    "category": "fastener",
+    "name": "M3 heat-set insert (in PETG/PLA)",
+    "realWorldEquivalent": "Ruthex M3 x 5.7 brass insert",
+    "manufacturer": "Ruthex",
+    "mass_kg": 0.0006,
+    "cost_usd": 0.1,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0025,
+      "length": 0.0057,
+      "axis": "z"
+    },
+    "specs": {
+      "fastenerType": "heat_set_insert",
+      "thread": "M3",
+      "length_m": 0.0057,
+      "grade": "brass",
+      "tensileCapacity_N": 900,
+      "shearCapacity_N": 600
+    },
+    "notes": "Capacity limited by pull-out from the printed boss, not the brass."
+  }
+]

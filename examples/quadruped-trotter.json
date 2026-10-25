@@ -1,0 +1,3401 @@
+{
+ "schemaVersion": "1.0",
+ "id": "trotter-q9",
+ "name": "Trotter Q9 quadruped",
+ "description": "A ~9 kg research quadruped in the MIT Mini Cheetah mould: 12 quasi-direct-drive actuators (8318-class BLDC + 6:1 planetary), belt-driven knees with the knee motor carried high on the thigh, 6S LiPo, Raspberry Pi 5 + Teensy real-time controller. Hand-written test fixture and demo design.",
+ "rootLink": "torso",
+ "rootFixed": false,
+ "links": [
+  {
+   "id": "torso",
+   "name": "Torso",
+   "subsystem": "Torso",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "torso_rail_l",
+     "name": "Torso side rail (left)",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.025,
+      "height": 0.05,
+      "wall": 0.002,
+      "length": 0.36,
+      "axis": "x"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.085,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Chassis"
+    },
+    {
+     "kind": "fabricated",
+     "id": "torso_rail_r",
+     "name": "Torso side rail (right)",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.025,
+      "height": 0.05,
+      "wall": 0.002,
+      "length": 0.36,
+      "axis": "x"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.085,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Chassis"
+    },
+    {
+     "kind": "fabricated",
+     "id": "torso_plate_top",
+     "name": "Top deck plate",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.36,
+       0.2,
+       0.003
+      ]
+     },
+     "material": "cfrp_plate",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.0265
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "waterjet",
+     "assembly": "Chassis"
+    },
+    {
+     "kind": "fabricated",
+     "id": "torso_plate_bot",
+     "name": "Bottom deck plate",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.36,
+       0.2,
+       0.003
+      ]
+     },
+     "material": "cfrp_plate",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.0265
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "waterjet",
+     "assembly": "Chassis"
+    },
+    {
+     "kind": "fabricated",
+     "id": "torso_shell",
+     "name": "Torso cover",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.4,
+       0.21,
+       0.13
+      ],
+      "wall": 0.0015
+     },
+     "material": "polycarbonate",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": true,
+     "process": "sheet_metal",
+     "assembly": "Body shell"
+    },
+    {
+     "kind": "fabricated",
+     "id": "torso_nose",
+     "name": "Sensor nose fairing",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.05,
+       0.16,
+       0.07
+      ],
+      "wall": 0.002
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0.215,
+       0,
+       0.03
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Body shell"
+    },
+    {
+     "kind": "component",
+     "id": "battery",
+     "componentId": "lipo_6s_5000",
+     "name": "Main battery",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "reg_5v",
+     "componentId": "reg_d36v50f5",
+     "name": "5 V logic regulator",
+     "pose": {
+      "xyz": [
+       -0.13,
+       0,
+       0.045
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "sbc",
+     "componentId": "cpu_rpi5",
+     "name": "High-level computer",
+     "pose": {
+      "xyz": [
+       0.0,
+       0,
+       0.05
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
+    },
+    {
+     "kind": "component",
+     "id": "mcu",
+     "componentId": "mcu_teensy41",
+     "name": "Real-time controller",
+     "pose": {
+      "xyz": [
+       0.09,
+       0,
+       0.045
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
+    },
+    {
+     "kind": "component",
+     "id": "imu",
+     "componentId": "imu_bno085",
+     "name": "Body IMU",
+     "pose": {
+      "xyz": [
+       -0.08,
+       0,
+       0.045
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
+    },
+    {
+     "kind": "component",
+     "id": "depth_cam",
+     "componentId": "cam_d435i",
+     "name": "Front depth camera",
+     "pose": {
+      "xyz": [
+       0.215,
+       0,
+       0.03
+      ],
+      "rpy": [
+       0,
+       0,
+       1.570796
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
+    },
+    {
+     "kind": "component",
+     "id": "haa_motor_fl",
+     "componentId": "bldc_8318_kv100",
+     "name": "Front-left hip abduction motor",
+     "pose": {
+      "xyz": [
+       0.142,
+       0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "haa_gearbox_fl",
+     "componentId": "planetary_9to1",
+     "name": "Front-left hip abduction gearbox",
+     "pose": {
+      "xyz": [
+       0.172,
+       0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "drv_haa_fl",
+     "componentId": "drv_moteus_r411",
+     "name": "Front-left HAA driver",
+     "pose": {
+      "xyz": [
+       -0.075,
+       -0.03,
+       0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_hfe_fl",
+     "componentId": "drv_moteus_r411",
+     "name": "Front-left HFE driver",
+     "pose": {
+      "xyz": [
+       -0.075,
+       0.03,
+       0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_knee_fl",
+     "componentId": "drv_moteus_r411",
+     "name": "Front-left KNEE driver",
+     "pose": {
+      "xyz": [
+       0,
+       -0.03,
+       0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "haa_motor_fr",
+     "componentId": "bldc_8318_kv100",
+     "name": "Front-right hip abduction motor",
+     "pose": {
+      "xyz": [
+       0.142,
+       -0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "haa_gearbox_fr",
+     "componentId": "planetary_9to1",
+     "name": "Front-right hip abduction gearbox",
+     "pose": {
+      "xyz": [
+       0.172,
+       -0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "drv_haa_fr",
+     "componentId": "drv_moteus_r411",
+     "name": "Front-right HAA driver",
+     "pose": {
+      "xyz": [
+       0,
+       0.03,
+       0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_hfe_fr",
+     "componentId": "drv_moteus_r411",
+     "name": "Front-right HFE driver",
+     "pose": {
+      "xyz": [
+       0.075,
+       -0.03,
+       0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_knee_fr",
+     "componentId": "drv_moteus_r411",
+     "name": "Front-right KNEE driver",
+     "pose": {
+      "xyz": [
+       0.075,
+       0.03,
+       0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "haa_motor_rl",
+     "componentId": "bldc_8318_kv100",
+     "name": "Rear-left hip abduction motor",
+     "pose": {
+      "xyz": [
+       -0.142,
+       0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "haa_gearbox_rl",
+     "componentId": "planetary_9to1",
+     "name": "Rear-left hip abduction gearbox",
+     "pose": {
+      "xyz": [
+       -0.172,
+       0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "drv_haa_rl",
+     "componentId": "drv_moteus_r411",
+     "name": "Rear-left HAA driver",
+     "pose": {
+      "xyz": [
+       -0.075,
+       -0.03,
+       -0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_hfe_rl",
+     "componentId": "drv_moteus_r411",
+     "name": "Rear-left HFE driver",
+     "pose": {
+      "xyz": [
+       -0.075,
+       0.03,
+       -0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_knee_rl",
+     "componentId": "drv_moteus_r411",
+     "name": "Rear-left KNEE driver",
+     "pose": {
+      "xyz": [
+       0,
+       -0.03,
+       -0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "haa_motor_rr",
+     "componentId": "bldc_8318_kv100",
+     "name": "Rear-right hip abduction motor",
+     "pose": {
+      "xyz": [
+       -0.142,
+       -0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "haa_gearbox_rr",
+     "componentId": "planetary_9to1",
+     "name": "Rear-right hip abduction gearbox",
+     "pose": {
+      "xyz": [
+       -0.172,
+       -0.05,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right hip abduction"
+    },
+    {
+     "kind": "component",
+     "id": "drv_haa_rr",
+     "componentId": "drv_moteus_r411",
+     "name": "Rear-right HAA driver",
+     "pose": {
+      "xyz": [
+       0,
+       0.03,
+       -0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_hfe_rr",
+     "componentId": "drv_moteus_r411",
+     "name": "Rear-right HFE driver",
+     "pose": {
+      "xyz": [
+       0.075,
+       -0.03,
+       -0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "drv_knee_rr",
+     "componentId": "drv_moteus_r411",
+     "name": "Rear-right KNEE driver",
+     "pose": {
+      "xyz": [
+       0.075,
+       0.03,
+       -0.0335
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Motor drivers"
+    }
+   ]
+  },
+  {
+   "id": "hip_fl",
+   "name": "Front-left hip",
+   "subsystem": "Front-left leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "hip_bracket_fl",
+     "name": "Front-left hip bracket",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.03,
+       0.1,
+       0.04
+      ],
+      "wall": 0.004
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0.015,
+       0.045,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Front-left hip"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_motor_fl",
+     "componentId": "bldc_8318_kv100",
+     "name": "Front-left hip flexion motor",
+     "pose": {
+      "xyz": [
+       0.015,
+       0.105,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_gearbox_fl",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Front-left hip flexion gearbox",
+     "pose": {
+      "xyz": [
+       0.015,
+       0.131,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "haa_bearing_fl",
+     "componentId": "brg_6808",
+     "name": "Front-left hip abduction bearing",
+     "pose": {
+      "xyz": [
+       0.004,
+       0,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left hip abduction"
+    }
+   ]
+  },
+  {
+   "id": "thigh_fl",
+   "name": "Front-left thigh",
+   "subsystem": "Front-left leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "thigh_beam_fl",
+     "name": "Front-left thigh beam",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.035,
+      "height": 0.025,
+      "wall": 0.002,
+      "length": 0.2,
+      "axis": "z"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Front-left thigh"
+    },
+    {
+     "kind": "component",
+     "id": "knee_motor_fl",
+     "componentId": "bldc_8318_kv100",
+     "name": "Front-left knee motor",
+     "pose": {
+      "xyz": [
+       0,
+       0.035,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "knee_gearbox_fl",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Front-left knee gearbox",
+     "pose": {
+      "xyz": [
+       0,
+       0.061,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_drive_pulley_fl",
+     "name": "Front-left knee drive pulley (20T HTD-5M)",
+     "shape": {
+      "type": "cylinder",
+      "radius": 0.016,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Front-left knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_belt_cover_fl",
+     "name": "Front-left belt guard",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.07,
+       0.003,
+       0.23
+      ]
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0,
+       0.095,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Front-left knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_bearing_fl",
+     "componentId": "brg_6808",
+     "name": "Front-left hip flexion bearing",
+     "pose": {
+      "xyz": [
+       0,
+       -0.004,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "knee_bearing_fl",
+     "componentId": "brg_6805",
+     "name": "Front-left knee bearing",
+     "pose": {
+      "xyz": [
+       0,
+       0.06,
+       -0.2
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left knee joint"
+    }
+   ]
+  },
+  {
+   "id": "shank_fl",
+   "name": "Front-left shank",
+   "subsystem": "Front-left leg",
+   "contact": {
+    "point": [
+     0,
+     0,
+     -0.2
+    ],
+    "radius": 0.02,
+    "friction": 0.9
+   },
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "knee_driven_pulley_fl",
+     "name": "Front-left knee pulley (40T HTD-5M)",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.032,
+      "innerRadius": 0.02,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Front-left knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_hub_fl",
+     "name": "Front-left knee hub",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.025,
+       0.085,
+       0.02
+      ]
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.04,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Front-left knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "shank_tube_fl",
+     "name": "Front-left shank tube",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.012,
+      "innerRadius": 0.0095,
+      "length": 0.18,
+      "axis": "z"
+     },
+     "material": "cfrp_tube",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "layup",
+     "assembly": "Front-left shank"
+    },
+    {
+     "kind": "fabricated",
+     "id": "foot_fl",
+     "name": "Front-left foot",
+     "shape": {
+      "type": "sphere",
+      "radius": 0.02
+     },
+     "material": "tpu95a",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.2
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "foot",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Front-left foot"
+    },
+    {
+     "kind": "component",
+     "id": "foot_sensor_fl",
+     "componentId": "foot_contact_fsr",
+     "name": "Front-left foot contact sensor",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.185
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-left foot"
+    }
+   ]
+  },
+  {
+   "id": "hip_fr",
+   "name": "Front-right hip",
+   "subsystem": "Front-right leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "hip_bracket_fr",
+     "name": "Front-right hip bracket",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.03,
+       0.1,
+       0.04
+      ],
+      "wall": 0.004
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0.015,
+       -0.045,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Front-right hip"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_motor_fr",
+     "componentId": "bldc_8318_kv100",
+     "name": "Front-right hip flexion motor",
+     "pose": {
+      "xyz": [
+       0.015,
+       -0.105,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_gearbox_fr",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Front-right hip flexion gearbox",
+     "pose": {
+      "xyz": [
+       0.015,
+       -0.131,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "haa_bearing_fr",
+     "componentId": "brg_6808",
+     "name": "Front-right hip abduction bearing",
+     "pose": {
+      "xyz": [
+       0.004,
+       0,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right hip abduction"
+    }
+   ]
+  },
+  {
+   "id": "thigh_fr",
+   "name": "Front-right thigh",
+   "subsystem": "Front-right leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "thigh_beam_fr",
+     "name": "Front-right thigh beam",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.035,
+      "height": 0.025,
+      "wall": 0.002,
+      "length": 0.2,
+      "axis": "z"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Front-right thigh"
+    },
+    {
+     "kind": "component",
+     "id": "knee_motor_fr",
+     "componentId": "bldc_8318_kv100",
+     "name": "Front-right knee motor",
+     "pose": {
+      "xyz": [
+       0,
+       -0.035,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "knee_gearbox_fr",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Front-right knee gearbox",
+     "pose": {
+      "xyz": [
+       0,
+       -0.061,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_drive_pulley_fr",
+     "name": "Front-right knee drive pulley (20T HTD-5M)",
+     "shape": {
+      "type": "cylinder",
+      "radius": 0.016,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Front-right knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_belt_cover_fr",
+     "name": "Front-right belt guard",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.07,
+       0.003,
+       0.23
+      ]
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0,
+       -0.095,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Front-right knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_bearing_fr",
+     "componentId": "brg_6808",
+     "name": "Front-right hip flexion bearing",
+     "pose": {
+      "xyz": [
+       0,
+       0.004,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "knee_bearing_fr",
+     "componentId": "brg_6805",
+     "name": "Front-right knee bearing",
+     "pose": {
+      "xyz": [
+       0,
+       -0.06,
+       -0.2
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right knee joint"
+    }
+   ]
+  },
+  {
+   "id": "shank_fr",
+   "name": "Front-right shank",
+   "subsystem": "Front-right leg",
+   "contact": {
+    "point": [
+     0,
+     0,
+     -0.2
+    ],
+    "radius": 0.02,
+    "friction": 0.9
+   },
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "knee_driven_pulley_fr",
+     "name": "Front-right knee pulley (40T HTD-5M)",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.032,
+      "innerRadius": 0.02,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Front-right knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_hub_fr",
+     "name": "Front-right knee hub",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.025,
+       0.085,
+       0.02
+      ]
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.04,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Front-right knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "shank_tube_fr",
+     "name": "Front-right shank tube",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.012,
+      "innerRadius": 0.0095,
+      "length": 0.18,
+      "axis": "z"
+     },
+     "material": "cfrp_tube",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "layup",
+     "assembly": "Front-right shank"
+    },
+    {
+     "kind": "fabricated",
+     "id": "foot_fr",
+     "name": "Front-right foot",
+     "shape": {
+      "type": "sphere",
+      "radius": 0.02
+     },
+     "material": "tpu95a",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.2
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "foot",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Front-right foot"
+    },
+    {
+     "kind": "component",
+     "id": "foot_sensor_fr",
+     "componentId": "foot_contact_fsr",
+     "name": "Front-right foot contact sensor",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.185
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Front-right foot"
+    }
+   ]
+  },
+  {
+   "id": "hip_rl",
+   "name": "Rear-left hip",
+   "subsystem": "Rear-left leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "hip_bracket_rl",
+     "name": "Rear-left hip bracket",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.03,
+       0.1,
+       0.04
+      ],
+      "wall": 0.004
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       -0.015,
+       0.045,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Rear-left hip"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_motor_rl",
+     "componentId": "bldc_8318_kv100",
+     "name": "Rear-left hip flexion motor",
+     "pose": {
+      "xyz": [
+       -0.015,
+       0.105,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_gearbox_rl",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Rear-left hip flexion gearbox",
+     "pose": {
+      "xyz": [
+       -0.015,
+       0.131,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "haa_bearing_rl",
+     "componentId": "brg_6808",
+     "name": "Rear-left hip abduction bearing",
+     "pose": {
+      "xyz": [
+       -0.004,
+       0,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left hip abduction"
+    }
+   ]
+  },
+  {
+   "id": "thigh_rl",
+   "name": "Rear-left thigh",
+   "subsystem": "Rear-left leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "thigh_beam_rl",
+     "name": "Rear-left thigh beam",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.035,
+      "height": 0.025,
+      "wall": 0.002,
+      "length": 0.2,
+      "axis": "z"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Rear-left thigh"
+    },
+    {
+     "kind": "component",
+     "id": "knee_motor_rl",
+     "componentId": "bldc_8318_kv100",
+     "name": "Rear-left knee motor",
+     "pose": {
+      "xyz": [
+       0,
+       0.035,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "knee_gearbox_rl",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Rear-left knee gearbox",
+     "pose": {
+      "xyz": [
+       0,
+       0.061,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_drive_pulley_rl",
+     "name": "Rear-left knee drive pulley (20T HTD-5M)",
+     "shape": {
+      "type": "cylinder",
+      "radius": 0.016,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Rear-left knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_belt_cover_rl",
+     "name": "Rear-left belt guard",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.07,
+       0.003,
+       0.23
+      ]
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0,
+       0.095,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Rear-left knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_bearing_rl",
+     "componentId": "brg_6808",
+     "name": "Rear-left hip flexion bearing",
+     "pose": {
+      "xyz": [
+       0,
+       -0.004,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "knee_bearing_rl",
+     "componentId": "brg_6805",
+     "name": "Rear-left knee bearing",
+     "pose": {
+      "xyz": [
+       0,
+       0.06,
+       -0.2
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left knee joint"
+    }
+   ]
+  },
+  {
+   "id": "shank_rl",
+   "name": "Rear-left shank",
+   "subsystem": "Rear-left leg",
+   "contact": {
+    "point": [
+     0,
+     0,
+     -0.2
+    ],
+    "radius": 0.02,
+    "friction": 0.9
+   },
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "knee_driven_pulley_rl",
+     "name": "Rear-left knee pulley (40T HTD-5M)",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.032,
+      "innerRadius": 0.02,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Rear-left knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_hub_rl",
+     "name": "Rear-left knee hub",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.025,
+       0.085,
+       0.02
+      ]
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.04,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Rear-left knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "shank_tube_rl",
+     "name": "Rear-left shank tube",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.012,
+      "innerRadius": 0.0095,
+      "length": 0.18,
+      "axis": "z"
+     },
+     "material": "cfrp_tube",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "layup",
+     "assembly": "Rear-left shank"
+    },
+    {
+     "kind": "fabricated",
+     "id": "foot_rl",
+     "name": "Rear-left foot",
+     "shape": {
+      "type": "sphere",
+      "radius": 0.02
+     },
+     "material": "tpu95a",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.2
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "foot",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Rear-left foot"
+    },
+    {
+     "kind": "component",
+     "id": "foot_sensor_rl",
+     "componentId": "foot_contact_fsr",
+     "name": "Rear-left foot contact sensor",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.185
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-left foot"
+    }
+   ]
+  },
+  {
+   "id": "hip_rr",
+   "name": "Rear-right hip",
+   "subsystem": "Rear-right leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "hip_bracket_rr",
+     "name": "Rear-right hip bracket",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.03,
+       0.1,
+       0.04
+      ],
+      "wall": 0.004
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       -0.015,
+       -0.045,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Rear-right hip"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_motor_rr",
+     "componentId": "bldc_8318_kv100",
+     "name": "Rear-right hip flexion motor",
+     "pose": {
+      "xyz": [
+       -0.015,
+       -0.105,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_gearbox_rr",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Rear-right hip flexion gearbox",
+     "pose": {
+      "xyz": [
+       -0.015,
+       -0.131,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "haa_bearing_rr",
+     "componentId": "brg_6808",
+     "name": "Rear-right hip abduction bearing",
+     "pose": {
+      "xyz": [
+       -0.004,
+       0,
+       0
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right hip abduction"
+    }
+   ]
+  },
+  {
+   "id": "thigh_rr",
+   "name": "Rear-right thigh",
+   "subsystem": "Rear-right leg",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "thigh_beam_rr",
+     "name": "Rear-right thigh beam",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.035,
+      "height": 0.025,
+      "wall": 0.002,
+      "length": 0.2,
+      "axis": "z"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Rear-right thigh"
+    },
+    {
+     "kind": "component",
+     "id": "knee_motor_rr",
+     "componentId": "bldc_8318_kv100",
+     "name": "Rear-right knee motor",
+     "pose": {
+      "xyz": [
+       0,
+       -0.035,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "knee_gearbox_rr",
+     "componentId": "planetary_6to1_qdd",
+     "name": "Rear-right knee gearbox",
+     "pose": {
+      "xyz": [
+       0,
+       -0.061,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_drive_pulley_rr",
+     "name": "Rear-right knee drive pulley (20T HTD-5M)",
+     "shape": {
+      "type": "cylinder",
+      "radius": 0.016,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Rear-right knee drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_belt_cover_rr",
+     "name": "Rear-right belt guard",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.07,
+       0.003,
+       0.23
+      ]
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0,
+       -0.095,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Rear-right knee drive"
+    },
+    {
+     "kind": "component",
+     "id": "hfe_bearing_rr",
+     "componentId": "brg_6808",
+     "name": "Rear-right hip flexion bearing",
+     "pose": {
+      "xyz": [
+       0,
+       0.004,
+       0
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right hip flexion"
+    },
+    {
+     "kind": "component",
+     "id": "knee_bearing_rr",
+     "componentId": "brg_6805",
+     "name": "Rear-right knee bearing",
+     "pose": {
+      "xyz": [
+       0,
+       -0.06,
+       -0.2
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right knee joint"
+    }
+   ]
+  },
+  {
+   "id": "shank_rr",
+   "name": "Rear-right shank",
+   "subsystem": "Rear-right leg",
+   "contact": {
+    "point": [
+     0,
+     0,
+     -0.2
+    ],
+    "radius": 0.02,
+    "friction": 0.9
+   },
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "knee_driven_pulley_rr",
+     "name": "Rear-right knee pulley (40T HTD-5M)",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.032,
+      "innerRadius": 0.02,
+      "length": 0.017,
+      "axis": "y"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.08,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Rear-right knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "knee_hub_rr",
+     "name": "Rear-right knee hub",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.025,
+       0.085,
+       0.02
+      ]
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       -0.04,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Rear-right knee joint"
+    },
+    {
+     "kind": "fabricated",
+     "id": "shank_tube_rr",
+     "name": "Rear-right shank tube",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.012,
+      "innerRadius": 0.0095,
+      "length": 0.18,
+      "axis": "z"
+     },
+     "material": "cfrp_tube",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "layup",
+     "assembly": "Rear-right shank"
+    },
+    {
+     "kind": "fabricated",
+     "id": "foot_rr",
+     "name": "Rear-right foot",
+     "shape": {
+      "type": "sphere",
+      "radius": 0.02
+     },
+     "material": "tpu95a",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.2
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "foot",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Rear-right foot"
+    },
+    {
+     "kind": "component",
+     "id": "foot_sensor_rr",
+     "componentId": "foot_contact_fsr",
+     "name": "Rear-right foot contact sensor",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       -0.185
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Rear-right foot"
+    }
+   ]
+  }
+ ],
+ "joints": [
+  {
+   "id": "haa_fl",
+   "name": "Front-left hip abduction",
+   "type": "revolute",
+   "parent": "torso",
+   "child": "hip_fl",
+   "origin": {
+    "xyz": [
+     0.19,
+     0.05,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "limits": {
+    "lower": -0.6,
+    "upper": 0.6,
+    "velocity": 8
+   }
+  },
+  {
+   "id": "hfe_fl",
+   "name": "Front-left hip flexion",
+   "type": "revolute",
+   "parent": "hip_fl",
+   "child": "thigh_fl",
+   "origin": {
+    "xyz": [
+     0.015,
+     0.145,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -0.6,
+    "upper": 2.2,
+    "velocity": 12
+   }
+  },
+  {
+   "id": "knee_fl",
+   "name": "Front-left knee",
+   "type": "revolute",
+   "parent": "thigh_fl",
+   "child": "shank_fl",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     -0.2
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -2.6,
+    "upper": -0.5,
+    "velocity": 15
+   }
+  },
+  {
+   "id": "haa_fr",
+   "name": "Front-right hip abduction",
+   "type": "revolute",
+   "parent": "torso",
+   "child": "hip_fr",
+   "origin": {
+    "xyz": [
+     0.19,
+     -0.05,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "limits": {
+    "lower": -0.6,
+    "upper": 0.6,
+    "velocity": 8
+   }
+  },
+  {
+   "id": "hfe_fr",
+   "name": "Front-right hip flexion",
+   "type": "revolute",
+   "parent": "hip_fr",
+   "child": "thigh_fr",
+   "origin": {
+    "xyz": [
+     0.015,
+     -0.145,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -0.6,
+    "upper": 2.2,
+    "velocity": 12
+   }
+  },
+  {
+   "id": "knee_fr",
+   "name": "Front-right knee",
+   "type": "revolute",
+   "parent": "thigh_fr",
+   "child": "shank_fr",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     -0.2
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -2.6,
+    "upper": -0.5,
+    "velocity": 15
+   }
+  },
+  {
+   "id": "haa_rl",
+   "name": "Rear-left hip abduction",
+   "type": "revolute",
+   "parent": "torso",
+   "child": "hip_rl",
+   "origin": {
+    "xyz": [
+     -0.19,
+     0.05,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "limits": {
+    "lower": -0.6,
+    "upper": 0.6,
+    "velocity": 8
+   }
+  },
+  {
+   "id": "hfe_rl",
+   "name": "Rear-left hip flexion",
+   "type": "revolute",
+   "parent": "hip_rl",
+   "child": "thigh_rl",
+   "origin": {
+    "xyz": [
+     -0.015,
+     0.145,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": 0.1,
+    "upper": 2.2,
+    "velocity": 12
+   }
+  },
+  {
+   "id": "knee_rl",
+   "name": "Rear-left knee",
+   "type": "revolute",
+   "parent": "thigh_rl",
+   "child": "shank_rl",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     -0.2
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -2.6,
+    "upper": -0.5,
+    "velocity": 15
+   }
+  },
+  {
+   "id": "haa_rr",
+   "name": "Rear-right hip abduction",
+   "type": "revolute",
+   "parent": "torso",
+   "child": "hip_rr",
+   "origin": {
+    "xyz": [
+     -0.19,
+     -0.05,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "limits": {
+    "lower": -0.6,
+    "upper": 0.6,
+    "velocity": 8
+   }
+  },
+  {
+   "id": "hfe_rr",
+   "name": "Rear-right hip flexion",
+   "type": "revolute",
+   "parent": "hip_rr",
+   "child": "thigh_rr",
+   "origin": {
+    "xyz": [
+     -0.015,
+     -0.145,
+     0
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": 0.1,
+    "upper": 2.2,
+    "velocity": 12
+   }
+  },
+  {
+   "id": "knee_rr",
+   "name": "Rear-right knee",
+   "type": "revolute",
+   "parent": "thigh_rr",
+   "child": "shank_rr",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     -0.2
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -2.6,
+    "upper": -0.5,
+    "velocity": 15
+   }
+  }
+ ],
+ "drivetrains": [
+  {
+   "id": "dt_haa_fl",
+   "jointId": "haa_fl",
+   "name": "Front-left hip abduction drive",
+   "motorPartId": "haa_motor_fl",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "haa_gearbox_fl"
+    }
+   ],
+   "driverPartId": "drv_haa_fl",
+   "bearingPartIds": [
+    "haa_bearing_fl"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_hfe_fl",
+   "jointId": "hfe_fl",
+   "name": "Front-left hip flexion drive",
+   "motorPartId": "hfe_motor_fl",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "hfe_gearbox_fl"
+    }
+   ],
+   "driverPartId": "drv_hfe_fl",
+   "bearingPartIds": [
+    "hfe_bearing_fl"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_knee_fl",
+   "jointId": "knee_fl",
+   "name": "Front-left knee drive",
+   "motorPartId": "knee_motor_fl",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "knee_gearbox_fl"
+    },
+    {
+     "kind": "belt",
+     "name": "HTD-5M 15 mm belt 20T:40T",
+     "driverTeeth": 20,
+     "drivenTeeth": 40,
+     "pitch_m": 0.005,
+     "beltWidth_m": 0.015,
+     "ratedTension_N": 600,
+     "efficiency": 0.96
+    }
+   ],
+   "driverPartId": "drv_knee_fl",
+   "bearingPartIds": [
+    "knee_bearing_fl"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m3x10",
+    "count": 6,
+    "boltCircleRadius_m": 0.026
+   }
+  },
+  {
+   "id": "dt_haa_fr",
+   "jointId": "haa_fr",
+   "name": "Front-right hip abduction drive",
+   "motorPartId": "haa_motor_fr",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "haa_gearbox_fr"
+    }
+   ],
+   "driverPartId": "drv_haa_fr",
+   "bearingPartIds": [
+    "haa_bearing_fr"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_hfe_fr",
+   "jointId": "hfe_fr",
+   "name": "Front-right hip flexion drive",
+   "motorPartId": "hfe_motor_fr",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "hfe_gearbox_fr"
+    }
+   ],
+   "driverPartId": "drv_hfe_fr",
+   "bearingPartIds": [
+    "hfe_bearing_fr"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_knee_fr",
+   "jointId": "knee_fr",
+   "name": "Front-right knee drive",
+   "motorPartId": "knee_motor_fr",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "knee_gearbox_fr"
+    },
+    {
+     "kind": "belt",
+     "name": "HTD-5M 15 mm belt 20T:40T",
+     "driverTeeth": 20,
+     "drivenTeeth": 40,
+     "pitch_m": 0.005,
+     "beltWidth_m": 0.015,
+     "ratedTension_N": 600,
+     "efficiency": 0.96
+    }
+   ],
+   "driverPartId": "drv_knee_fr",
+   "bearingPartIds": [
+    "knee_bearing_fr"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m3x10",
+    "count": 6,
+    "boltCircleRadius_m": 0.026
+   }
+  },
+  {
+   "id": "dt_haa_rl",
+   "jointId": "haa_rl",
+   "name": "Rear-left hip abduction drive",
+   "motorPartId": "haa_motor_rl",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "haa_gearbox_rl"
+    }
+   ],
+   "driverPartId": "drv_haa_rl",
+   "bearingPartIds": [
+    "haa_bearing_rl"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_hfe_rl",
+   "jointId": "hfe_rl",
+   "name": "Rear-left hip flexion drive",
+   "motorPartId": "hfe_motor_rl",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "hfe_gearbox_rl"
+    }
+   ],
+   "driverPartId": "drv_hfe_rl",
+   "bearingPartIds": [
+    "hfe_bearing_rl"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_knee_rl",
+   "jointId": "knee_rl",
+   "name": "Rear-left knee drive",
+   "motorPartId": "knee_motor_rl",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "knee_gearbox_rl"
+    },
+    {
+     "kind": "belt",
+     "name": "HTD-5M 15 mm belt 20T:40T",
+     "driverTeeth": 20,
+     "drivenTeeth": 40,
+     "pitch_m": 0.005,
+     "beltWidth_m": 0.015,
+     "ratedTension_N": 600,
+     "efficiency": 0.96
+    }
+   ],
+   "driverPartId": "drv_knee_rl",
+   "bearingPartIds": [
+    "knee_bearing_rl"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m3x10",
+    "count": 6,
+    "boltCircleRadius_m": 0.026
+   }
+  },
+  {
+   "id": "dt_haa_rr",
+   "jointId": "haa_rr",
+   "name": "Rear-right hip abduction drive",
+   "motorPartId": "haa_motor_rr",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "haa_gearbox_rr"
+    }
+   ],
+   "driverPartId": "drv_haa_rr",
+   "bearingPartIds": [
+    "haa_bearing_rr"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_hfe_rr",
+   "jointId": "hfe_rr",
+   "name": "Rear-right hip flexion drive",
+   "motorPartId": "hfe_motor_rr",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "hfe_gearbox_rr"
+    }
+   ],
+   "driverPartId": "drv_hfe_rr",
+   "bearingPartIds": [
+    "hfe_bearing_rr"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m4x12",
+    "count": 6,
+    "boltCircleRadius_m": 0.022
+   }
+  },
+  {
+   "id": "dt_knee_rr",
+   "jointId": "knee_rr",
+   "name": "Rear-right knee drive",
+   "motorPartId": "knee_motor_rr",
+   "stages": [
+    {
+     "kind": "gearbox",
+     "partId": "knee_gearbox_rr"
+    },
+    {
+     "kind": "belt",
+     "name": "HTD-5M 15 mm belt 20T:40T",
+     "driverTeeth": 20,
+     "drivenTeeth": 40,
+     "pitch_m": 0.005,
+     "beltWidth_m": 0.015,
+     "ratedTension_N": 600,
+     "efficiency": 0.96
+    }
+   ],
+   "driverPartId": "drv_knee_rr",
+   "bearingPartIds": [
+    "knee_bearing_rr"
+   ],
+   "fasteners": {
+    "componentId": "bolt_m3x10",
+    "count": 6,
+    "boltCircleRadius_m": 0.026
+   }
+  }
+ ],
+ "power": {
+  "batteryPartIds": [
+   "battery"
+  ],
+  "batteryConfig": "single",
+  "regulators": [
+   {
+    "partId": "reg_5v",
+    "loadPartIds": [
+     "sbc",
+     "mcu",
+     "imu",
+     "depth_cam",
+     "foot_sensor_fl",
+     "foot_sensor_fr",
+     "foot_sensor_rl",
+     "foot_sensor_rr"
+    ]
+   }
+  ],
+  "wiring": [
+   {
+    "id": "bus_front",
+    "name": "Main bus, front actuators",
+    "from": "battery",
+    "to": "drv_haa_fl",
+    "wireComponentId": "wire_awg12",
+    "kind": "power",
+    "loadPartIds": [
+     "haa_motor_fl",
+     "hfe_motor_fl",
+     "knee_motor_fl",
+     "drv_haa_fl",
+     "drv_hfe_fl",
+     "drv_knee_fl",
+     "haa_motor_fr",
+     "hfe_motor_fr",
+     "knee_motor_fr",
+     "drv_haa_fr",
+     "drv_hfe_fr",
+     "drv_knee_fr"
+    ]
+   },
+   {
+    "id": "bus_rear",
+    "name": "Main bus, rear actuators",
+    "from": "battery",
+    "to": "drv_haa_rl",
+    "wireComponentId": "wire_awg12",
+    "kind": "power",
+    "loadPartIds": [
+     "haa_motor_rl",
+     "hfe_motor_rl",
+     "knee_motor_rl",
+     "drv_haa_rl",
+     "drv_hfe_rl",
+     "drv_knee_rl",
+     "haa_motor_rr",
+     "hfe_motor_rr",
+     "knee_motor_rr",
+     "drv_haa_rr",
+     "drv_hfe_rr",
+     "drv_knee_rr"
+    ]
+   },
+   {
+    "id": "logic_feed",
+    "name": "Logic regulator feed",
+    "from": "battery",
+    "to": "reg_5v",
+    "wireComponentId": "wire_awg20",
+    "kind": "power",
+    "loadPartIds": [
+     "reg_5v",
+     "sbc",
+     "mcu",
+     "imu",
+     "depth_cam",
+     "foot_sensor_fl",
+     "foot_sensor_fr",
+     "foot_sensor_rl",
+     "foot_sensor_rr"
+    ]
+   },
+   {
+    "id": "logic_5v",
+    "name": "5 V logic rail",
+    "from": "reg_5v",
+    "to": "sbc",
+    "wireComponentId": "wire_awg20",
+    "kind": "power",
+    "loadPartIds": [
+     "sbc",
+     "mcu",
+     "imu",
+     "depth_cam",
+     "foot_sensor_fl",
+     "foot_sensor_fr",
+     "foot_sensor_rl",
+     "foot_sensor_rr"
+    ]
+   },
+   {
+    "id": "phase_haa_fl",
+    "name": "Front-left HAA phase leads",
+    "from": "drv_haa_fl",
+    "to": "haa_motor_fl",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "haa_motor_fl"
+    ]
+   },
+   {
+    "id": "phase_hfe_fl",
+    "name": "Front-left HFE phase leads",
+    "from": "drv_hfe_fl",
+    "to": "hfe_motor_fl",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "hfe_motor_fl"
+    ]
+   },
+   {
+    "id": "phase_knee_fl",
+    "name": "Front-left KNEE phase leads",
+    "from": "drv_knee_fl",
+    "to": "knee_motor_fl",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "knee_motor_fl"
+    ]
+   },
+   {
+    "id": "phase_haa_fr",
+    "name": "Front-right HAA phase leads",
+    "from": "drv_haa_fr",
+    "to": "haa_motor_fr",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "haa_motor_fr"
+    ]
+   },
+   {
+    "id": "phase_hfe_fr",
+    "name": "Front-right HFE phase leads",
+    "from": "drv_hfe_fr",
+    "to": "hfe_motor_fr",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "hfe_motor_fr"
+    ]
+   },
+   {
+    "id": "phase_knee_fr",
+    "name": "Front-right KNEE phase leads",
+    "from": "drv_knee_fr",
+    "to": "knee_motor_fr",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "knee_motor_fr"
+    ]
+   },
+   {
+    "id": "phase_haa_rl",
+    "name": "Rear-left HAA phase leads",
+    "from": "drv_haa_rl",
+    "to": "haa_motor_rl",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "haa_motor_rl"
+    ]
+   },
+   {
+    "id": "phase_hfe_rl",
+    "name": "Rear-left HFE phase leads",
+    "from": "drv_hfe_rl",
+    "to": "hfe_motor_rl",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "hfe_motor_rl"
+    ]
+   },
+   {
+    "id": "phase_knee_rl",
+    "name": "Rear-left KNEE phase leads",
+    "from": "drv_knee_rl",
+    "to": "knee_motor_rl",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "knee_motor_rl"
+    ]
+   },
+   {
+    "id": "phase_haa_rr",
+    "name": "Rear-right HAA phase leads",
+    "from": "drv_haa_rr",
+    "to": "haa_motor_rr",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "haa_motor_rr"
+    ]
+   },
+   {
+    "id": "phase_hfe_rr",
+    "name": "Rear-right HFE phase leads",
+    "from": "drv_hfe_rr",
+    "to": "hfe_motor_rr",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "hfe_motor_rr"
+    ]
+   },
+   {
+    "id": "phase_knee_rr",
+    "name": "Rear-right KNEE phase leads",
+    "from": "drv_knee_rr",
+    "to": "knee_motor_rr",
+    "wireComponentId": "wire_awg16",
+    "kind": "phase",
+    "loadPartIds": [
+     "knee_motor_rr"
+    ]
+   }
+  ]
+ },
+ "style": {
+  "styleName": "Field research",
+  "primary": "#e7e9ec",
+  "secondary": "#2a2e35",
+  "accent": "#ff7a1a",
+  "emissive": "#7fe7ff",
+  "metalness": 0.35,
+  "roughness": 0.45,
+  "panelLines": true
+ },
+ "behavior": {
+  "mode": "legged_gait",
+  "description": "Trotting gait: diagonal leg pairs in phase, 2 Hz, 12 cm stride (~0.4 m/s).",
+  "nominalPose": {
+   "haa_fl": 0.0,
+   "hfe_fl": 0.7,
+   "knee_fl": -1.4,
+   "haa_fr": 0.0,
+   "hfe_fr": 0.7,
+   "knee_fr": -1.4,
+   "haa_rl": 0.0,
+   "hfe_rl": 0.7,
+   "knee_rl": -1.4,
+   "haa_rr": 0.0,
+   "hfe_rr": 0.7,
+   "knee_rr": -1.4
+  },
+  "pid": {
+   "default": {
+    "kp": 80,
+    "kd": 1.6,
+    "ki": 0
+   },
+   "overrides": {}
+  },
+  "gait": {
+   "legs": [
+    {
+     "name": "Front-left",
+     "jointIds": [
+      "haa_fl",
+      "hfe_fl",
+      "knee_fl"
+     ],
+     "footLinkId": "shank_fl",
+     "phase": 0.0
+    },
+    {
+     "name": "Front-right",
+     "jointIds": [
+      "haa_fr",
+      "hfe_fr",
+      "knee_fr"
+     ],
+     "footLinkId": "shank_fr",
+     "phase": 0.5
+    },
+    {
+     "name": "Rear-left",
+     "jointIds": [
+      "haa_rl",
+      "hfe_rl",
+      "knee_rl"
+     ],
+     "footLinkId": "shank_rl",
+     "phase": 0.5
+    },
+    {
+     "name": "Rear-right",
+     "jointIds": [
+      "haa_rr",
+      "hfe_rr",
+      "knee_rr"
+     ],
+     "footLinkId": "shank_rr",
+     "phase": 0.0
+    }
+   ],
+   "frequency_Hz": 2.0,
+   "stepHeight_m": 0.06,
+   "strideLength_m": 0.12,
+   "dutyFactor": 0.6,
+   "balanceGain": 0.6
+  }
+ },
+ "requirements": {
+  "payload_kg": 2.0,
+  "payloadLinkId": "torso",
+  "payloadOffset": [
+   0,
+   0,
+   0.08
+  ],
+  "minRuntime_min": 20,
+  "maxSlope_deg": 15,
+  "safetyFactor": 1.5,
+  "dynamicLoadFactor": 1.5,
+  "ambientTemp_C": 25,
+  "targetSpeed_m_s": 0.4,
+  "maxMass_kg": 15,
+  "dutyCycle": 0.6
+ },
+ "assumptions": [
+  "Belt pre-tension maintained by an eccentric idler (not modelled).",
+  "Driver boards share the battery bus directly; regen absorbed by the LiPo.",
+  "Carbon tube strength is a conservative first-ply-failure allowable."
+ ],
+ "provenance": {
+  "source": "hand_written"
+ }
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "wheel_pneumatic_125",
+    "category": "propulsion",
+    "name": "Pneumatic wheel 125 mm",
+    "realWorldEquivalent": "AndyMark 5in pneumatic wheel",
+    "manufacturer": "AndyMark",
+    "mass_kg": 0.35,
+    "cost_usd": 18,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0625,
+      "length": 0.045,
+      "axis": "y"
+    },
+    "specs": {
+      "propulsionType": "wheel",
+      "radius_m": 0.0625,
+      "maxLoad_N": 400,
+      "friction": 0.8
+    }
+  },
+  {
+    "id": "wheel_rubber_70",
+    "category": "propulsion",
+    "name": "Rubber wheel 70 mm",
+    "realWorldEquivalent": "Pololu 70x8mm wheel",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.02,
+    "cost_usd": 6,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.035,
+      "length": 0.008,
+      "axis": "y"
+    },
+    "specs": {
+      "propulsionType": "wheel",
+      "radius_m": 0.035,
+      "maxLoad_N": 40,
+      "friction": 0.9
+    }
+  },
+  {
+    "id": "wheel_mecanum_100",
+    "category": "propulsion",
+    "name": "Mecanum wheel 100 mm",
+    "realWorldEquivalent": "Nexus Robot 100mm mecanum",
+    "manufacturer": "Nexus Robot",
+    "mass_kg": 0.4,
+    "cost_usd": 35,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.05,
+      "length": 0.045,
+      "axis": "y"
+    },
+    "specs": {
+      "propulsionType": "wheel",
+      "radius_m": 0.05,
+      "maxLoad_N": 150,
+      "friction": 0.5
+    }
+  },
+  {
+    "id": "prop_5in_2207",
+    "category": "propulsion",
+    "name": "Propeller 5\" + 2207 motor (6S)",
+    "realWorldEquivalent": "T-Motor F60 Pro + HQProp 5x4.3x3",
+    "manufacturer": "T-Motor",
+    "mass_kg": 0.04,
+    "cost_usd": 35,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0635,
+      "length": 0.025,
+      "axis": "z"
+    },
+    "specs": {
+      "propulsionType": "propeller",
+      "radius_m": 0.0635,
+      "maxThrust_N": 16,
+      "powerAtMaxThrust_W": 600
+    }
+  },
+  {
+    "id": "prop_15in_4114",
+    "category": "propulsion",
+    "name": "Propeller 15\" + 4114 motor (6S)",
+    "realWorldEquivalent": "T-Motor MN4114 400KV + 15x5 prop",
+    "manufacturer": "T-Motor",
+    "mass_kg": 0.17,
+    "cost_usd": 120,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.19,
+      "length": 0.03,
+      "axis": "z"
+    },
+    "specs": {
+      "propulsionType": "propeller",
+      "radius_m": 0.19,
+      "maxThrust_N": 32,
+      "powerAtMaxThrust_W": 650
+    }
+  },
+  {
+    "id": "edf_90mm",
+    "category": "propulsion",
+    "name": "Ducted fan 90 mm (12S)",
+    "realWorldEquivalent": "Sch\u00fcbeler/Freewing 90mm 12S EDF",
+    "manufacturer": "Freewing",
+    "mass_kg": 0.45,
+    "cost_usd": 220,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.048,
+      "length": 0.11,
+      "axis": "z"
+    },
+    "specs": {
+      "propulsionType": "ducted_fan",
+      "radius_m": 0.045,
+      "maxThrust_N": 45,
+      "powerAtMaxThrust_W": 3500
+    }
+  }
+]

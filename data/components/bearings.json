@@ -1,0 +1,227 @@
+[
+  {
+    "id": "brg_608",
+    "category": "bearing",
+    "name": "Deep groove 608-2RS",
+    "realWorldEquivalent": "SKF 608-2RSH",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.012,
+    "cost_usd": 2,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.011,
+      "innerRadius": 0.004,
+      "length": 0.007,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "deep_groove",
+      "bore_m": 0.008,
+      "outerDiameter_m": 0.022,
+      "width_m": 0.007,
+      "dynamicLoad_N": 3450,
+      "staticLoad_N": 1370,
+      "maxSpeed_rpm": 28000
+    }
+  },
+  {
+    "id": "brg_6001",
+    "category": "bearing",
+    "name": "Deep groove 6001-2RS",
+    "realWorldEquivalent": "SKF 6001-2RSH",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.019,
+    "cost_usd": 4,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.014,
+      "innerRadius": 0.006,
+      "length": 0.008,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "deep_groove",
+      "bore_m": 0.012,
+      "outerDiameter_m": 0.028,
+      "width_m": 0.008,
+      "dynamicLoad_N": 5400,
+      "staticLoad_N": 2360,
+      "maxSpeed_rpm": 22000
+    }
+  },
+  {
+    "id": "brg_6805",
+    "category": "bearing",
+    "name": "Thin-section 6805-2RS",
+    "realWorldEquivalent": "SKF 61805-2RS1",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.025,
+    "cost_usd": 6,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.0185,
+      "innerRadius": 0.0125,
+      "length": 0.007,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "deep_groove",
+      "bore_m": 0.025,
+      "outerDiameter_m": 0.037,
+      "width_m": 0.007,
+      "dynamicLoad_N": 4360,
+      "staticLoad_N": 2600,
+      "maxSpeed_rpm": 13000
+    }
+  },
+  {
+    "id": "brg_6808",
+    "category": "bearing",
+    "name": "Thin-section 6808-2RS",
+    "realWorldEquivalent": "SKF 61808-2RS1",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.035,
+    "cost_usd": 9,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.026,
+      "innerRadius": 0.02,
+      "length": 0.007,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "deep_groove",
+      "bore_m": 0.04,
+      "outerDiameter_m": 0.052,
+      "width_m": 0.007,
+      "dynamicLoad_N": 4940,
+      "staticLoad_N": 3450,
+      "maxSpeed_rpm": 9500
+    }
+  },
+  {
+    "id": "brg_7002",
+    "category": "bearing",
+    "name": "Angular contact 7002",
+    "realWorldEquivalent": "SKF 7002 BEP",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.026,
+    "cost_usd": 18,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.016,
+      "innerRadius": 0.0075,
+      "length": 0.009,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "angular_contact",
+      "bore_m": 0.015,
+      "outerDiameter_m": 0.032,
+      "width_m": 0.009,
+      "dynamicLoad_N": 6050,
+      "staticLoad_N": 3350,
+      "maxSpeed_rpm": 30000
+    }
+  },
+  {
+    "id": "brg_ru42",
+    "category": "bearing",
+    "name": "Crossed roller RU42",
+    "realWorldEquivalent": "THK RU42UUCC0",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.29,
+    "cost_usd": 140,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.035,
+      "innerRadius": 0.01,
+      "length": 0.012,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "crossed_roller",
+      "bore_m": 0.02,
+      "outerDiameter_m": 0.07,
+      "width_m": 0.012,
+      "dynamicLoad_N": 7350,
+      "staticLoad_N": 8360,
+      "maxSpeed_rpm": 1500
+    }
+  },
+  {
+    "id": "brg_ra6008",
+    "category": "bearing",
+    "name": "Crossed roller RA6008 (thin)",
+    "realWorldEquivalent": "THK RA6008C",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.06,
+    "cost_usd": 95,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.038,
+      "innerRadius": 0.03,
+      "length": 0.008,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "crossed_roller",
+      "bore_m": 0.06,
+      "outerDiameter_m": 0.076,
+      "width_m": 0.008,
+      "dynamicLoad_N": 3150,
+      "staticLoad_N": 4610,
+      "maxSpeed_rpm": 2000
+    }
+  },
+  {
+    "id": "brg_51104",
+    "category": "bearing",
+    "name": "Thrust ball 51104",
+    "realWorldEquivalent": "SKF 51104",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.035,
+    "cost_usd": 5,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.0175,
+      "innerRadius": 0.01,
+      "length": 0.01,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "thrust",
+      "bore_m": 0.02,
+      "outerDiameter_m": 0.035,
+      "width_m": 0.01,
+      "dynamicLoad_N": 10000,
+      "staticLoad_N": 14000,
+      "maxSpeed_rpm": 8500
+    }
+  },
+  {
+    "id": "brg_igus_8mm",
+    "category": "bearing",
+    "name": "Polymer flange bushing 8 mm",
+    "realWorldEquivalent": "igus iglidur GFM-0810-06",
+    "manufacturer": "SKF/NSK equivalent",
+    "mass_kg": 0.001,
+    "cost_usd": 1,
+    "envelope": {
+      "type": "tube",
+      "outerRadius": 0.005,
+      "innerRadius": 0.004,
+      "length": 0.006,
+      "axis": "z"
+    },
+    "specs": {
+      "bearingType": "bushing",
+      "bore_m": 0.008,
+      "outerDiameter_m": 0.01,
+      "width_m": 0.006,
+      "dynamicLoad_N": 800,
+      "staticLoad_N": 1200,
+      "maxSpeed_rpm": 500
+    }
+  }
+]

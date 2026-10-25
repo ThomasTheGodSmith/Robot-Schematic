@@ -1,0 +1,106 @@
+[
+  {
+    "id": "reg_d36v50f5",
+    "category": "regulator",
+    "name": "5 V 5.5 A step-down",
+    "realWorldEquivalent": "Pololu D36V50F5",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.006,
+    "cost_usd": 30,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.033,
+        0.025,
+        0.006
+      ]
+    },
+    "specs": {
+      "inputRange_V": [
+        6,
+        50
+      ],
+      "output_V": 5,
+      "maxCurrent_A": 5.5,
+      "efficiency": 0.9
+    }
+  },
+  {
+    "id": "reg_d36v50f12",
+    "category": "regulator",
+    "name": "12 V 4.5 A step-down",
+    "realWorldEquivalent": "Pololu D36V50F12",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.006,
+    "cost_usd": 30,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.033,
+        0.025,
+        0.006
+      ]
+    },
+    "specs": {
+      "inputRange_V": [
+        13,
+        50
+      ],
+      "output_V": 12,
+      "maxCurrent_A": 4.5,
+      "efficiency": 0.92
+    }
+  },
+  {
+    "id": "reg_ubec_5v3a",
+    "category": "regulator",
+    "name": "5 V 3 A UBEC",
+    "realWorldEquivalent": "Hobbywing 3A UBEC",
+    "manufacturer": "Hobbywing",
+    "mass_kg": 0.01,
+    "cost_usd": 8,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.045,
+        0.02,
+        0.008
+      ]
+    },
+    "specs": {
+      "inputRange_V": [
+        5.5,
+        26
+      ],
+      "output_V": 5,
+      "maxCurrent_A": 3,
+      "efficiency": 0.85
+    }
+  },
+  {
+    "id": "reg_6v_10a",
+    "category": "regulator",
+    "name": "6 V 10 A servo BEC",
+    "realWorldEquivalent": "Castle Creations CC BEC 2.0",
+    "manufacturer": "Castle Creations",
+    "mass_kg": 0.03,
+    "cost_usd": 40,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.05,
+        0.025,
+        0.012
+      ]
+    },
+    "specs": {
+      "inputRange_V": [
+        6,
+        50
+      ],
+      "output_V": 6,
+      "maxCurrent_A": 10,
+      "efficiency": 0.88
+    }
+  }
+]

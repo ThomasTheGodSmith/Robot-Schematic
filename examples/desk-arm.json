@@ -1,0 +1,1135 @@
+{
+ "schemaVersion": "1.0",
+ "id": "desk-arm-a5",
+ "name": "Desk Arm A5",
+ "description": "A 4-DOF desktop arm with a four-bar parallel gripper: Dynamixel X-series servos on a TTL bus, a 3:1 steel spur stage boosting the shoulder, crossed-roller turntable, 3S LiPo. Hand-written test fixture for the manipulator path.",
+ "rootLink": "base",
+ "rootFixed": true,
+ "links": [
+  {
+   "id": "base",
+   "name": "Base",
+   "subsystem": "Base",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "base_plate",
+     "name": "Base plate",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.22,
+       0.2,
+       0.01
+      ]
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.005
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Base"
+    },
+    {
+     "kind": "fabricated",
+     "id": "base_cover",
+     "name": "Base cover",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.22,
+       0.2,
+       0.06
+      ],
+      "wall": 0.002
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.04
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "shell",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Base"
+    },
+    {
+     "kind": "component",
+     "id": "yaw_servo",
+     "componentId": "dxl_xm430_w350",
+     "name": "Base yaw servo",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.04
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Base yaw"
+    },
+    {
+     "kind": "component",
+     "id": "yaw_bearing",
+     "componentId": "brg_ru42",
+     "name": "Turntable crossed-roller bearing",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.066
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Base yaw"
+    },
+    {
+     "kind": "component",
+     "id": "battery",
+     "componentId": "lipo_3s_2200",
+     "name": "Battery",
+     "pose": {
+      "xyz": [
+       -0.06,
+       0.05,
+       0.025
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "servo_hub",
+     "componentId": "drv_dxl_hub",
+     "name": "Servo bus adapter + power hub",
+     "pose": {
+      "xyz": [
+       0.065,
+       0.05,
+       0.02
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
+    },
+    {
+     "kind": "component",
+     "id": "mcu",
+     "componentId": "mcu_esp32s3",
+     "name": "Controller",
+     "pose": {
+      "xyz": [
+       0.065,
+       -0.05,
+       0.015
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
+    },
+    {
+     "kind": "component",
+     "id": "ubec",
+     "componentId": "reg_ubec_5v3a",
+     "name": "5 V regulator",
+     "pose": {
+      "xyz": [
+       -0.06,
+       -0.05,
+       0.015
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "status_ring",
+     "componentId": "led_ws2812_ring16",
+     "name": "Status light ring",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.071
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Base"
+    }
+   ]
+  },
+  {
+   "id": "turret",
+   "name": "Turret",
+   "subsystem": "Shoulder",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "turret_bracket",
+     "name": "Turret bracket",
+     "shape": {
+      "type": "shellBox",
+      "size": [
+       0.07,
+       0.09,
+       0.05
+      ],
+      "wall": 0.003
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       -0.015,
+       0,
+       0.025
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Turret"
+    },
+    {
+     "kind": "component",
+     "id": "shoulder_servo",
+     "componentId": "dxl_xm540_w270",
+     "name": "Shoulder servo",
+     "pose": {
+      "xyz": [
+       -0.045,
+       -0.005,
+       0.06
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Shoulder drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "shoulder_pinion",
+     "name": "Shoulder pinion (20T m1)",
+     "shape": {
+      "type": "cylinder",
+      "radius": 0.011,
+      "length": 0.008,
+      "axis": "y"
+     },
+     "material": "steel_1045",
+     "pose": {
+      "xyz": [
+       -0.045,
+       0.04,
+       0.06
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Shoulder drive"
+    },
+    {
+     "kind": "component",
+     "id": "shoulder_bearing",
+     "componentId": "brg_6001",
+     "name": "Shoulder bearing",
+     "pose": {
+      "xyz": [
+       0,
+       -0.04,
+       0.06
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Shoulder joint"
+    }
+   ]
+  },
+  {
+   "id": "upper_arm",
+   "name": "Upper arm",
+   "subsystem": "Arm",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "upper_beam",
+     "name": "Upper arm beam",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.03,
+      "height": 0.02,
+      "wall": 0.0015,
+      "length": 0.22,
+      "axis": "z"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.11
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Upper arm"
+    },
+    {
+     "kind": "fabricated",
+     "id": "shoulder_gear",
+     "name": "Shoulder gear (60T m1)",
+     "shape": {
+      "type": "tube",
+      "outerRadius": 0.031,
+      "innerRadius": 0.006,
+      "length": 0.008,
+      "axis": "y"
+     },
+     "material": "al7075_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0.04,
+       0
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Shoulder drive"
+    },
+    {
+     "kind": "component",
+     "id": "elbow_servo",
+     "componentId": "dxl_xm430_w350",
+     "name": "Elbow servo",
+     "pose": {
+      "xyz": [
+       0,
+       0.0,
+       0.22
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Elbow drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "upper_cover",
+     "name": "Upper arm cover",
+     "shape": {
+      "type": "capsule",
+      "radius": 0.022,
+      "length": 0.17,
+      "axis": "z"
+     },
+     "material": "petg",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.11
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "cosmetic",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Upper arm"
+    }
+   ]
+  },
+  {
+   "id": "forearm",
+   "name": "Forearm",
+   "subsystem": "Arm",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "fore_beam",
+     "name": "Forearm beam",
+     "shape": {
+      "type": "rectTube",
+      "width": 0.025,
+      "height": 0.02,
+      "wall": 0.0015,
+      "length": 0.16,
+      "axis": "z"
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.1
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "cnc",
+     "assembly": "Forearm"
+    },
+    {
+     "kind": "component",
+     "id": "wrist_servo",
+     "componentId": "dxl_xl430_w250",
+     "name": "Wrist servo",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.185
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Wrist drive"
+    }
+   ]
+  },
+  {
+   "id": "wrist",
+   "name": "Gripper palm",
+   "subsystem": "Gripper",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "palm",
+     "name": "Palm",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.05,
+       0.03,
+       0.02
+      ]
+     },
+     "material": "pa12_sls",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.03
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Gripper"
+    },
+    {
+     "kind": "component",
+     "id": "jaw_servo",
+     "componentId": "dxl_xl430_w250",
+     "name": "Jaw servo",
+     "pose": {
+      "xyz": [
+       0.0,
+       -0.035,
+       0.03
+      ],
+      "rpy": [
+       1.570796,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Gripper drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "jaw_crank",
+     "name": "Jaw drive crank",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.006,
+       0.004,
+       0.015
+      ]
+     },
+     "material": "al6061_t6",
+     "pose": {
+      "xyz": [
+       0.0,
+       -0.012,
+       0.03
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "gear",
+     "collide": false,
+     "process": "cnc",
+     "assembly": "Gripper drive"
+    },
+    {
+     "kind": "fabricated",
+     "id": "finger_fixed",
+     "name": "Fixed finger",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.008,
+       0.02,
+       0.06
+      ]
+     },
+     "material": "pa12_sls",
+     "pose": {
+      "xyz": [
+       0.02,
+       0,
+       0.07
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Gripper"
+    }
+   ]
+  },
+  {
+   "id": "jaw",
+   "name": "Moving jaw",
+   "subsystem": "Gripper",
+   "parts": [
+    {
+     "kind": "fabricated",
+     "id": "finger_moving",
+     "name": "Moving finger",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.008,
+       0.02,
+       0.06
+      ]
+     },
+     "material": "pa12_sls",
+     "pose": {
+      "xyz": [
+       0,
+       0,
+       0.03
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "structure",
+     "collide": true,
+     "process": "3d_print",
+     "assembly": "Gripper"
+    },
+    {
+     "kind": "fabricated",
+     "id": "finger_pad",
+     "name": "Finger pad",
+     "shape": {
+      "type": "box",
+      "size": [
+       0.003,
+       0.018,
+       0.03
+      ]
+     },
+     "material": "tpu95a",
+     "pose": {
+      "xyz": [
+       0.0055,
+       0,
+       0.045
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "role": "cosmetic",
+     "collide": false,
+     "process": "3d_print",
+     "assembly": "Gripper"
+    }
+   ]
+  }
+ ],
+ "joints": [
+  {
+   "id": "yaw",
+   "name": "Base yaw",
+   "type": "revolute",
+   "parent": "base",
+   "child": "turret",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     0.075
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    0,
+    1
+   ],
+   "limits": {
+    "lower": -2.6,
+    "upper": 2.6,
+    "velocity": 2
+   }
+  },
+  {
+   "id": "shoulder",
+   "name": "Shoulder pitch",
+   "type": "revolute",
+   "parent": "turret",
+   "child": "upper_arm",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     0.06
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -1.4,
+    "upper": 1.6,
+    "velocity": 0.8
+   }
+  },
+  {
+   "id": "elbow",
+   "name": "Elbow pitch",
+   "type": "revolute",
+   "parent": "upper_arm",
+   "child": "forearm",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     0.22
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -0.2,
+    "upper": 2.3,
+    "velocity": 2
+   }
+  },
+  {
+   "id": "wrist_pitch",
+   "name": "Wrist pitch",
+   "type": "revolute",
+   "parent": "forearm",
+   "child": "wrist",
+   "origin": {
+    "xyz": [
+     0,
+     0,
+     0.185
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -1.7,
+    "upper": 1.7,
+    "velocity": 3
+   }
+  },
+  {
+   "id": "jaw",
+   "name": "Gripper jaw",
+   "type": "revolute",
+   "parent": "wrist",
+   "child": "jaw",
+   "origin": {
+    "xyz": [
+     -0.02,
+     0,
+     0.04
+    ],
+    "rpy": [
+     0,
+     0,
+     0
+    ]
+   },
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "limits": {
+    "lower": -0.5,
+    "upper": 0.15,
+    "velocity": 2
+   }
+  }
+ ],
+ "drivetrains": [
+  {
+   "id": "dt_yaw",
+   "jointId": "yaw",
+   "motorPartId": "yaw_servo",
+   "stages": [],
+   "driverPartId": "servo_hub",
+   "bearingPartIds": [
+    "yaw_bearing"
+   ]
+  },
+  {
+   "id": "dt_shoulder",
+   "jointId": "shoulder",
+   "motorPartId": "shoulder_servo",
+   "stages": [
+    {
+     "kind": "spur",
+     "name": "Shoulder spur 20T:60T m1",
+     "driverTeeth": 20,
+     "drivenTeeth": 60,
+     "module_m": 0.001,
+     "faceWidth_m": 0.008,
+     "material": "steel_1045",
+     "efficiency": 0.97
+    }
+   ],
+   "driverPartId": "servo_hub",
+   "bearingPartIds": [
+    "shoulder_bearing"
+   ]
+  },
+  {
+   "id": "dt_elbow",
+   "jointId": "elbow",
+   "motorPartId": "elbow_servo",
+   "stages": [],
+   "driverPartId": "servo_hub"
+  },
+  {
+   "id": "dt_wrist",
+   "jointId": "wrist_pitch",
+   "motorPartId": "wrist_servo",
+   "stages": [],
+   "driverPartId": "servo_hub"
+  },
+  {
+   "id": "dt_jaw",
+   "jointId": "jaw",
+   "motorPartId": "jaw_servo",
+   "stages": [
+    {
+     "kind": "linkage",
+     "name": "Jaw four-bar",
+     "crank_m": 0.012,
+     "coupler_m": 0.03,
+     "rocker_m": 0.02,
+     "ground_m": 0.028,
+     "efficiency": 0.95
+    }
+   ],
+   "driverPartId": "servo_hub"
+  }
+ ],
+ "power": {
+  "batteryPartIds": [
+   "battery"
+  ],
+  "batteryConfig": "single",
+  "regulators": [
+   {
+    "partId": "ubec",
+    "loadPartIds": [
+     "mcu",
+     "status_ring"
+    ]
+   }
+  ],
+  "wiring": [
+   {
+    "id": "main",
+    "name": "Battery to servo hub",
+    "from": "battery",
+    "to": "servo_hub",
+    "wireComponentId": "wire_awg16",
+    "kind": "power",
+    "loadPartIds": [
+     "yaw_servo",
+     "shoulder_servo",
+     "elbow_servo",
+     "wrist_servo",
+     "jaw_servo",
+     "servo_hub"
+    ]
+   },
+   {
+    "id": "logic_feed",
+    "name": "Battery to 5 V UBEC",
+    "from": "battery",
+    "to": "ubec",
+    "wireComponentId": "wire_awg22",
+    "kind": "power",
+    "loadPartIds": [
+     "mcu",
+     "status_ring"
+    ]
+   },
+   {
+    "id": "bus_shoulder",
+    "name": "Servo bus to shoulder",
+    "from": "servo_hub",
+    "to": "shoulder_servo",
+    "wireComponentId": "wire_awg20",
+    "kind": "power",
+    "loadPartIds": [
+     "shoulder_servo",
+     "elbow_servo",
+     "wrist_servo",
+     "jaw_servo"
+    ]
+   },
+   {
+    "id": "bus_elbow",
+    "name": "Servo bus to elbow",
+    "from": "shoulder_servo",
+    "to": "elbow_servo",
+    "wireComponentId": "wire_awg22",
+    "kind": "power",
+    "loadPartIds": [
+     "elbow_servo",
+     "wrist_servo",
+     "jaw_servo"
+    ]
+   },
+   {
+    "id": "bus_wrist",
+    "name": "Servo bus to wrist",
+    "from": "elbow_servo",
+    "to": "wrist_servo",
+    "wireComponentId": "wire_awg24",
+    "kind": "power",
+    "loadPartIds": [
+     "wrist_servo",
+     "jaw_servo"
+    ]
+   },
+   {
+    "id": "bus_jaw",
+    "name": "Servo bus to jaw",
+    "from": "wrist_servo",
+    "to": "jaw_servo",
+    "wireComponentId": "wire_awg24",
+    "kind": "power",
+    "loadPartIds": [
+     "jaw_servo"
+    ]
+   },
+   {
+    "id": "bus_yaw",
+    "name": "Servo bus to yaw",
+    "from": "servo_hub",
+    "to": "yaw_servo",
+    "wireComponentId": "wire_awg22",
+    "kind": "power",
+    "loadPartIds": [
+     "yaw_servo"
+    ]
+   }
+  ]
+ },
+ "style": {
+  "styleName": "Lab white",
+  "primary": "#f2f2f0",
+  "secondary": "#33363b",
+  "accent": "#2f7cff",
+  "emissive": "#7fd0ff",
+  "metalness": 0.2,
+  "roughness": 0.55,
+  "panelLines": true
+ },
+ "behavior": {
+  "mode": "manipulator",
+  "description": "Pick-and-place cycle: reach, grip, carry, release, home (6.5 s).",
+  "nominalPose": {
+   "yaw": 0,
+   "shoulder": 0.3,
+   "elbow": 1.3,
+   "wrist_pitch": 0.0,
+   "jaw": -0.4
+  },
+  "pid": {
+   "default": {
+    "kp": 10,
+    "kd": 0.3,
+    "ki": 0
+   },
+   "overrides": {
+    "shoulder": {
+     "kp": 40,
+     "kd": 1.0,
+     "ki": 0
+    },
+    "elbow": {
+     "kp": 14,
+     "kd": 0.35,
+     "ki": 0
+    },
+    "wrist_pitch": {
+     "kp": 4,
+     "kd": 0.06,
+     "ki": 0
+    },
+    "jaw": {
+     "kp": 1.5,
+     "kd": 0.02,
+     "ki": 0
+    }
+   }
+  },
+  "manipulator": {
+   "waypoints": [
+    {
+     "t": 0,
+     "pose": {
+      "yaw": 0,
+      "shoulder": 0.3,
+      "elbow": 1.3,
+      "wrist_pitch": 0.0,
+      "jaw": -0.4
+     }
+    },
+    {
+     "t": 1.5,
+     "pose": {
+      "yaw": 0.5,
+      "shoulder": 0.9,
+      "elbow": 1.45,
+      "wrist_pitch": 0.75,
+      "jaw": -0.4
+     }
+    },
+    {
+     "t": 2.3,
+     "pose": {
+      "yaw": 0.5,
+      "shoulder": 0.9,
+      "elbow": 1.45,
+      "wrist_pitch": 0.75,
+      "jaw": 0.0
+     }
+    },
+    {
+     "t": 4.0,
+     "pose": {
+      "yaw": -0.8,
+      "shoulder": 0.35,
+      "elbow": 1.2,
+      "wrist_pitch": 0.4,
+      "jaw": 0.0
+     }
+    },
+    {
+     "t": 5.0,
+     "pose": {
+      "yaw": -0.8,
+      "shoulder": 0.35,
+      "elbow": 1.2,
+      "wrist_pitch": 0.4,
+      "jaw": -0.4
+     }
+    },
+    {
+     "t": 6.5,
+     "pose": {
+      "yaw": 0,
+      "shoulder": 0.3,
+      "elbow": 1.3,
+      "wrist_pitch": 0.0,
+      "jaw": -0.4
+     }
+    }
+   ],
+   "loop": true,
+   "payloadLinkId": "wrist"
+  }
+ },
+ "requirements": {
+  "payload_kg": 0.3,
+  "payloadLinkId": "wrist",
+  "payloadOffset": [
+   0,
+   0,
+   0.075
+  ],
+  "minRuntime_min": 60,
+  "maxSlope_deg": 0,
+  "safetyFactor": 1.5,
+  "dynamicLoadFactor": 1.3,
+  "ambientTemp_C": 25,
+  "maxMass_kg": 4.5,
+  "dutyCycle": 0.5
+ },
+ "assumptions": [
+  "Base is clamped to the bench (rootFixed).",
+  "Payload treated as a point mass 75 mm beyond the wrist axis."
+ ],
+ "provenance": {
+  "source": "hand_written"
+ }
+}

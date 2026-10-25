@@ -1,0 +1,301 @@
+[
+  {
+    "id": "planetary_6to1_qdd",
+    "category": "gearbox",
+    "name": "Planetary 6:1 single stage (QDD class)",
+    "realWorldEquivalent": "mjbots qdd100 / MIT Mini Cheetah-style planetary",
+    "manufacturer": "custom/mjbots",
+    "mass_kg": 0.15,
+    "cost_usd": 60,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.045,
+      "length": 0.022,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "planetary",
+      "ratio": 6,
+      "efficiency": 0.95,
+      "backlash_arcmin": 20,
+      "ratedTorque_Nm": 12,
+      "peakTorque_Nm": 30,
+      "maxInputSpeed_rpm": 8000,
+      "stages": 1,
+      "teeth": {
+        "sun": 12,
+        "planet": 18,
+        "ring": 60
+      }
+    },
+    "notes": "Ring 60 / sun 12 -> ratio 1+60/12 = 6"
+  },
+  {
+    "id": "planetary_9to1",
+    "category": "gearbox",
+    "name": "Planetary 9:1 single stage",
+    "realWorldEquivalent": "CubeMars AK80-9 internal stage (as separate unit)",
+    "manufacturer": "custom",
+    "mass_kg": 0.2,
+    "cost_usd": 80,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.05,
+      "length": 0.025,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "planetary",
+      "ratio": 9,
+      "efficiency": 0.93,
+      "backlash_arcmin": 15,
+      "ratedTorque_Nm": 20,
+      "peakTorque_Nm": 45,
+      "maxInputSpeed_rpm": 6000,
+      "stages": 1,
+      "teeth": {
+        "sun": 10,
+        "planet": 35,
+        "ring": 80
+      }
+    }
+  },
+  {
+    "id": "planetary_4to1_small",
+    "category": "gearbox",
+    "name": "Planetary 4:1 for NEMA 17",
+    "realWorldEquivalent": "StepperOnline PLE-class 4:1 / 3D-printed equivalent",
+    "manufacturer": "StepperOnline",
+    "mass_kg": 0.16,
+    "cost_usd": 35,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.022,
+      "length": 0.03,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "planetary",
+      "ratio": 4,
+      "efficiency": 0.94,
+      "backlash_arcmin": 30,
+      "ratedTorque_Nm": 3,
+      "peakTorque_Nm": 8,
+      "maxInputSpeed_rpm": 3000,
+      "stages": 1,
+      "teeth": {
+        "sun": 15,
+        "planet": 15,
+        "ring": 45
+      }
+    }
+  },
+  {
+    "id": "planetary_16to1_two",
+    "category": "gearbox",
+    "name": "Planetary 16:1 two stage",
+    "realWorldEquivalent": "Neugart/Apex PN-class 16:1 (compact)",
+    "manufacturer": "Apex",
+    "mass_kg": 0.45,
+    "cost_usd": 190,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.03,
+      "length": 0.06,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "planetary",
+      "ratio": 16,
+      "efficiency": 0.9,
+      "backlash_arcmin": 10,
+      "ratedTorque_Nm": 15,
+      "peakTorque_Nm": 30,
+      "maxInputSpeed_rpm": 5000,
+      "stages": 2,
+      "teeth": {
+        "sun": 12,
+        "planet": 12,
+        "ring": 36
+      }
+    }
+  },
+  {
+    "id": "harmonic_csf14_50",
+    "category": "gearbox",
+    "name": "Strain-wave CSF-14-50",
+    "realWorldEquivalent": "Harmonic Drive CSF-14-50-2A-GR",
+    "manufacturer": "Harmonic Drive",
+    "mass_kg": 0.16,
+    "cost_usd": 550,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0355,
+      "length": 0.025,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "harmonic",
+      "ratio": 50,
+      "efficiency": 0.7,
+      "backlash_arcmin": 1,
+      "ratedTorque_Nm": 5.4,
+      "peakTorque_Nm": 18,
+      "maxInputSpeed_rpm": 8500,
+      "stages": 1
+    }
+  },
+  {
+    "id": "harmonic_csf17_100",
+    "category": "gearbox",
+    "name": "Strain-wave CSF-17-100",
+    "realWorldEquivalent": "Harmonic Drive CSF-17-100-2A-GR",
+    "manufacturer": "Harmonic Drive",
+    "mass_kg": 0.25,
+    "cost_usd": 650,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0415,
+      "length": 0.027,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "harmonic",
+      "ratio": 100,
+      "efficiency": 0.68,
+      "backlash_arcmin": 1,
+      "ratedTorque_Nm": 31,
+      "peakTorque_Nm": 51,
+      "maxInputSpeed_rpm": 7300,
+      "stages": 1
+    }
+  },
+  {
+    "id": "harmonic_csf25_100",
+    "category": "gearbox",
+    "name": "Strain-wave CSF-25-100",
+    "realWorldEquivalent": "Harmonic Drive CSF-25-100-2A-GR",
+    "manufacturer": "Harmonic Drive",
+    "mass_kg": 0.55,
+    "cost_usd": 900,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0535,
+      "length": 0.034,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "harmonic",
+      "ratio": 100,
+      "efficiency": 0.7,
+      "backlash_arcmin": 1,
+      "ratedTorque_Nm": 67,
+      "peakTorque_Nm": 204,
+      "maxInputSpeed_rpm": 5600,
+      "stages": 1
+    }
+  },
+  {
+    "id": "cycloidal_20to1",
+    "category": "gearbox",
+    "name": "Cycloidal 20:1",
+    "realWorldEquivalent": "CNC cycloidal reducer (Nabtesco RV-class, compact)",
+    "manufacturer": "custom",
+    "mass_kg": 0.35,
+    "cost_usd": 240,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.045,
+      "length": 0.035,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "cycloidal",
+      "ratio": 20,
+      "efficiency": 0.85,
+      "backlash_arcmin": 6,
+      "ratedTorque_Nm": 25,
+      "peakTorque_Nm": 60,
+      "maxInputSpeed_rpm": 4000,
+      "stages": 1
+    }
+  },
+  {
+    "id": "spur_25d_34to1",
+    "category": "gearbox",
+    "name": "Spur gearbox 34:1 for 25D motor",
+    "realWorldEquivalent": "Pololu 25D 34:1 metal spur gearbox",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.055,
+    "cost_usd": 15,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0125,
+      "length": 0.025,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "spur",
+      "ratio": 34,
+      "efficiency": 0.6,
+      "backlash_arcmin": 90,
+      "ratedTorque_Nm": 0.45,
+      "peakTorque_Nm": 1.0,
+      "maxInputSpeed_rpm": 12000,
+      "stages": 4
+    }
+  },
+  {
+    "id": "spur_37d_50to1",
+    "category": "gearbox",
+    "name": "Spur gearbox 50:1 for 37D motor",
+    "realWorldEquivalent": "Pololu 37D 50:1 metal spur gearbox",
+    "manufacturer": "Pololu",
+    "mass_kg": 0.1,
+    "cost_usd": 20,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.0185,
+      "length": 0.03,
+      "axis": "z"
+    },
+    "specs": {
+      "gearType": "spur",
+      "ratio": 50,
+      "efficiency": 0.6,
+      "backlash_arcmin": 90,
+      "ratedTorque_Nm": 1.6,
+      "peakTorque_Nm": 3.5,
+      "maxInputSpeed_rpm": 10000,
+      "stages": 4
+    }
+  },
+  {
+    "id": "worm_30to1",
+    "category": "gearbox",
+    "name": "Worm gearbox 30:1 (self-locking)",
+    "realWorldEquivalent": "NMRV-030 worm reducer",
+    "manufacturer": "generic",
+    "mass_kg": 0.85,
+    "cost_usd": 45,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.065,
+        0.054,
+        0.08
+      ]
+    },
+    "specs": {
+      "gearType": "worm",
+      "ratio": 30,
+      "efficiency": 0.45,
+      "backlash_arcmin": 40,
+      "ratedTorque_Nm": 12,
+      "peakTorque_Nm": 24,
+      "maxInputSpeed_rpm": 3000,
+      "stages": 1
+    },
+    "notes": "Self-locking: back-driving efficiency ~0"
+  }
+]

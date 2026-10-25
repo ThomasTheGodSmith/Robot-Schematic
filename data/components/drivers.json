@@ -1,0 +1,251 @@
+[
+  {
+    "id": "drv_moteus_r411",
+    "category": "driver",
+    "name": "FOC driver moteus r4.11",
+    "realWorldEquivalent": "mjbots moteus r4.11",
+    "manufacturer": "mjbots",
+    "mass_kg": 0.014,
+    "cost_usd": 69,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.046,
+        0.046,
+        0.01
+      ]
+    },
+    "specs": {
+      "driverType": "foc_bldc",
+      "voltageRange_V": [
+        10,
+        44
+      ],
+      "continuousCurrent_A": 22,
+      "peakCurrent_A": 100,
+      "channels": 1,
+      "idlePower_W": 0.6,
+      "supports": [
+        "bldc"
+      ]
+    }
+  },
+  {
+    "id": "drv_odrive_s1",
+    "category": "driver",
+    "name": "FOC driver ODrive S1",
+    "realWorldEquivalent": "ODrive Robotics S1",
+    "manufacturer": "ODrive",
+    "mass_kg": 0.04,
+    "cost_usd": 149,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.066,
+        0.051,
+        0.016
+      ]
+    },
+    "specs": {
+      "driverType": "foc_bldc",
+      "voltageRange_V": [
+        12,
+        48
+      ],
+      "continuousCurrent_A": 40,
+      "peakCurrent_A": 80,
+      "channels": 1,
+      "idlePower_W": 1.0,
+      "supports": [
+        "bldc"
+      ]
+    }
+  },
+  {
+    "id": "drv_vesc6",
+    "category": "driver",
+    "name": "FOC driver VESC 6 MkVI",
+    "realWorldEquivalent": "Trampa VESC 6 MkVI",
+    "manufacturer": "Trampa",
+    "mass_kg": 0.075,
+    "cost_usd": 230,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.075,
+        0.045,
+        0.02
+      ]
+    },
+    "specs": {
+      "driverType": "foc_bldc",
+      "voltageRange_V": [
+        8,
+        60
+      ],
+      "continuousCurrent_A": 80,
+      "peakCurrent_A": 150,
+      "channels": 1,
+      "idlePower_W": 1.2,
+      "supports": [
+        "bldc",
+        "brushed_dc"
+      ]
+    }
+  },
+  {
+    "id": "drv_cytron_mdd10a",
+    "category": "driver",
+    "name": "Dual brushed driver MDD10A",
+    "realWorldEquivalent": "Cytron MDD10A",
+    "manufacturer": "Cytron",
+    "mass_kg": 0.045,
+    "cost_usd": 25,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.067,
+        0.071,
+        0.02
+      ]
+    },
+    "specs": {
+      "driverType": "brushed_hbridge",
+      "voltageRange_V": [
+        5,
+        30
+      ],
+      "continuousCurrent_A": 10,
+      "peakCurrent_A": 30,
+      "channels": 2,
+      "idlePower_W": 0.3,
+      "supports": [
+        "brushed_dc"
+      ]
+    }
+  },
+  {
+    "id": "drv_tmc2209",
+    "category": "driver",
+    "name": "Stepper driver TMC2209",
+    "realWorldEquivalent": "BigTreeTech TMC2209 v1.3",
+    "manufacturer": "BigTreeTech",
+    "mass_kg": 0.005,
+    "cost_usd": 6,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.02,
+        0.015,
+        0.012
+      ]
+    },
+    "specs": {
+      "driverType": "stepper",
+      "voltageRange_V": [
+        4.75,
+        29
+      ],
+      "continuousCurrent_A": 2.0,
+      "peakCurrent_A": 2.8,
+      "channels": 1,
+      "idlePower_W": 0.1,
+      "supports": [
+        "stepper"
+      ]
+    }
+  },
+  {
+    "id": "drv_dxl_hub",
+    "category": "driver",
+    "name": "Servo bus adapter + power hub",
+    "realWorldEquivalent": "ROBOTIS U2D2 + U2D2 Power Hub",
+    "manufacturer": "ROBOTIS",
+    "mass_kg": 0.03,
+    "cost_usd": 60,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.06,
+        0.04,
+        0.02
+      ]
+    },
+    "specs": {
+      "driverType": "servo_bus",
+      "voltageRange_V": [
+        3.5,
+        24
+      ],
+      "continuousCurrent_A": 10,
+      "peakCurrent_A": 10,
+      "channels": 32,
+      "idlePower_W": 0.3,
+      "supports": [
+        "servo"
+      ]
+    }
+  },
+  {
+    "id": "drv_pca9685",
+    "category": "driver",
+    "name": "16-ch PWM servo driver",
+    "realWorldEquivalent": "Adafruit PCA9685 16-channel",
+    "manufacturer": "Adafruit",
+    "mass_kg": 0.009,
+    "cost_usd": 15,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.062,
+        0.025,
+        0.01
+      ]
+    },
+    "specs": {
+      "driverType": "servo_bus",
+      "voltageRange_V": [
+        4.8,
+        6
+      ],
+      "continuousCurrent_A": 8,
+      "peakCurrent_A": 10,
+      "channels": 16,
+      "idlePower_W": 0.1,
+      "supports": [
+        "servo"
+      ]
+    }
+  },
+  {
+    "id": "drv_can_hub6",
+    "category": "driver",
+    "name": "Integrated-actuator power/CAN distribution board (6 ports)",
+    "realWorldEquivalent": "Custom PDB with XT30 + CAN-FD (as used with CubeMars/Unitree actuators)",
+    "manufacturer": "custom",
+    "mass_kg": 0.06,
+    "cost_usd": 80,
+    "envelope": {
+      "type": "box",
+      "size": [
+        0.08,
+        0.06,
+        0.015
+      ]
+    },
+    "specs": {
+      "driverType": "servo_bus",
+      "voltageRange_V": [
+        12,
+        52
+      ],
+      "continuousCurrent_A": 60,
+      "peakCurrent_A": 120,
+      "channels": 6,
+      "idlePower_W": 0.5,
+      "supports": [
+        "servo"
+      ]
+    }
+  }
+]

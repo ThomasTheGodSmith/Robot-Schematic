@@ -1,0 +1,194 @@
+[
+  {
+    "id": "wire_awg10",
+    "category": "wire",
+    "name": "Silicone wire 10 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 10 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.095,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 10,
+      "maxCurrent_A": 35,
+      "resistance_ohm_per_m": 0.00328,
+      "mass_kg_per_m": 0.095,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg12",
+    "category": "wire",
+    "name": "Silicone wire 12 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 12 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.062,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 12,
+      "maxCurrent_A": 25,
+      "resistance_ohm_per_m": 0.00521,
+      "mass_kg_per_m": 0.062,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg14",
+    "category": "wire",
+    "name": "Silicone wire 14 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 14 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.04,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 14,
+      "maxCurrent_A": 18,
+      "resistance_ohm_per_m": 0.00828,
+      "mass_kg_per_m": 0.04,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg16",
+    "category": "wire",
+    "name": "Silicone wire 16 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 16 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.026,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 16,
+      "maxCurrent_A": 13,
+      "resistance_ohm_per_m": 0.0132,
+      "mass_kg_per_m": 0.026,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg18",
+    "category": "wire",
+    "name": "Silicone wire 18 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 18 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.017,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 18,
+      "maxCurrent_A": 10,
+      "resistance_ohm_per_m": 0.0209,
+      "mass_kg_per_m": 0.017,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg20",
+    "category": "wire",
+    "name": "Silicone wire 20 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 20 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.011,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 20,
+      "maxCurrent_A": 7.5,
+      "resistance_ohm_per_m": 0.0333,
+      "mass_kg_per_m": 0.011,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg22",
+    "category": "wire",
+    "name": "Silicone wire 22 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 22 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.007,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 22,
+      "maxCurrent_A": 5,
+      "resistance_ohm_per_m": 0.053,
+      "mass_kg_per_m": 0.007,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  },
+  {
+    "id": "wire_awg24",
+    "category": "wire",
+    "name": "Silicone wire 24 AWG (pair)",
+    "realWorldEquivalent": "BNTECHGO 24 AWG silicone, red/black pair",
+    "manufacturer": "generic",
+    "mass_kg": 0.0045,
+    "cost_usd": 1.5,
+    "envelope": {
+      "type": "cylinder",
+      "radius": 0.002,
+      "length": 0.1,
+      "axis": "z"
+    },
+    "specs": {
+      "awg": 24,
+      "maxCurrent_A": 3.5,
+      "resistance_ohm_per_m": 0.0842,
+      "mass_kg_per_m": 0.0045,
+      "insulationRating_C": 200,
+      "conductors": 2
+    },
+    "notes": "mass_kg is per metre of pair; maxCurrent is a conservative bundled-chassis rating"
+  }
+]
