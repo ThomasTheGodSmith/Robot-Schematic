@@ -1,0 +1,72 @@
+[
+  {
+    "id": "pdb_precharge_xt30",
+    "category": "electrical",
+    "name": "Power distribution board with precharge and soft switch",
+    "realWorldEquivalent": "mjbots power_dist r4.5b (XT90 in, XT30 outputs, precharge, switch input)",
+    "manufacturer": "mjbots",
+    "mass_kg": 0.03,
+    "cost_usd": 90,
+    "envelope": { "type": "box", "size": [0.06, 0.04, 0.015] },
+    "specs": { "electricalType": "power_distribution", "voltageRange_V": [10, 44], "currentRating_A": 30, "power_W": 0.3 },
+    "notes": "Ratings are conservative placeholders; confirm current and voltage limits on the mjbots datasheet before relying on them. Precharge limits inrush into the motor drivers' bus capacitors; the switch input takes a latching e-stop."
+  },
+  {
+    "id": "estop_16mm",
+    "category": "electrical",
+    "name": "16 mm latching emergency-stop button",
+    "realWorldEquivalent": "16 mm panel-mount latching mushroom e-stop (e.g. IDEC XA series)",
+    "manufacturer": "generic",
+    "mass_kg": 0.02,
+    "cost_usd": 20,
+    "envelope": { "type": "cylinder", "radius": 0.011, "length": 0.03, "axis": "z" },
+    "specs": { "electricalType": "estop", "voltageRange_V": [0, 30], "currentRating_A": 3, "power_W": 0 },
+    "notes": "Wired to a power distribution board's switch input, so it carries signal current only and does not break the main bus directly."
+  },
+  {
+    "id": "fuse_ato_25a",
+    "category": "electrical",
+    "name": "25 A blade fuse in inline holder",
+    "realWorldEquivalent": "Littelfuse 0257025 ATO 25 A, 32 V, with an inline 12 AWG holder",
+    "manufacturer": "Littelfuse",
+    "mass_kg": 0.02,
+    "cost_usd": 8,
+    "envelope": { "type": "box", "size": [0.045, 0.014, 0.012] },
+    "specs": { "electricalType": "fuse", "voltageRange_V": [0, 32], "currentRating_A": 25, "power_W": 0 }
+  },
+  {
+    "id": "fuse_ato_10a",
+    "category": "electrical",
+    "name": "10 A blade fuse in inline holder",
+    "realWorldEquivalent": "Littelfuse 0257010 ATO 10 A, 32 V, with an inline 16 AWG holder",
+    "manufacturer": "Littelfuse",
+    "mass_kg": 0.012,
+    "cost_usd": 6,
+    "envelope": { "type": "box", "size": [0.04, 0.012, 0.01] },
+    "specs": { "electricalType": "fuse", "voltageRange_V": [0, 32], "currentRating_A": 10, "power_W": 0 }
+  },
+  {
+    "id": "switch_toggle_15a",
+    "category": "electrical",
+    "name": "Panel toggle power switch 15 A",
+    "realWorldEquivalent": "Panel-mount SPST toggle switch rated 15 A at 28 V DC",
+    "manufacturer": "generic",
+    "mass_kg": 0.015,
+    "cost_usd": 6,
+    "envelope": { "type": "cylinder", "radius": 0.008, "length": 0.035, "axis": "z" },
+    "specs": { "electricalType": "switch", "voltageRange_V": [0, 28], "currentRating_A": 15, "power_W": 0 }
+  },
+  {
+    "id": "can_fd_transceiver",
+    "category": "electrical",
+    "name": "CAN FD bus transceiver",
+    "realWorldEquivalent": "Adafruit CAN Pal (NXP TJA1051T/3), product 5708",
+    "manufacturer": "Adafruit",
+    "mass_kg": 0.0014,
+    "cost_usd": 4,
+    "envelope": { "type": "box", "size": [0.0203, 0.0202, 0.004] },
+    "datasheetUrl": "https://www.adafruit.com/product/5708",
+    "specs": { "electricalType": "bus_interface", "voltageRange_V": [3, 5.5], "currentRating_A": 0.1, "power_W": 0.15, "bus": "can_fd" },
+    "notes": "Up to 5 Mbit/s in the CAN FD data phase; switchable 120 ohm termination on board. Logic I/O accepts 3-5 V."
+  }
+]
