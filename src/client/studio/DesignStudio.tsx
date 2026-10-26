@@ -331,7 +331,10 @@ function upsert(its: Iteration[], n: number, patch: Partial<Iteration>): Iterati
 
 function ProgressLog({ log, notes, busy }: { log: LogLine[]; notes: Record<string, string>; busy: boolean }) {
   const end = useRef<HTMLDivElement>(null);
-  useEffect(() => end.current?.scrollIntoView({ block: "nearest" }), [log.length]);
+  useEffect(() => {
+    // Braces matter: newer browsers return a Promise from scrollIntoView, which React would treat as a cleanup function
+    end.current?.scrollIntoView({ block: "nearest" });
+  }, [log.length]);
   const [showNotes, setShowNotes] = useState(false);
   if (!log.length && !busy) return null;
   return (

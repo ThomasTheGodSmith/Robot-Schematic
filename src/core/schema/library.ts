@@ -174,6 +174,14 @@ export const LightingSpecs = z.object({
   color: z.string().optional(),
 });
 
+export const ElectricalSpecs = z.object({
+  electricalType: z.enum(["power_distribution", "switch", "estop", "fuse", "bus_interface"]),
+  voltageRange_V: z.array(z.number()).length(2).describe("Rated operating voltage (for a fuse, 0 to its voltage rating)"),
+  currentRating_A: z.number().positive().describe("Continuous current rating; for a fuse, its rated current"),
+  power_W: z.number().nonnegative().default(0).describe("Own consumption from its supply"),
+  bus: z.enum(["can_fd", "can", "rs485", "ttl"]).optional().describe("bus_interface only"),
+});
+
 export const Component = z.discriminatedUnion("category", [
   z.object({ ...base, category: z.literal("motor"), specs: MotorSpecs }),
   z.object({ ...base, category: z.literal("servo"), specs: ServoSpecs }),
@@ -188,6 +196,7 @@ export const Component = z.discriminatedUnion("category", [
   z.object({ ...base, category: z.literal("wire"), specs: WireSpecs }),
   z.object({ ...base, category: z.literal("propulsion"), specs: PropulsionSpecs }),
   z.object({ ...base, category: z.literal("lighting"), specs: LightingSpecs }),
+  z.object({ ...base, category: z.literal("electrical"), specs: ElectricalSpecs }),
 ]);
 export type Component = z.infer<typeof Component>;
 export type ComponentCategory = Component["category"];

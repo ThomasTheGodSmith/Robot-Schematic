@@ -159,6 +159,8 @@ export class RobotRig {
       if (p.role === "shell" && this.design.style.panelLines) {
         const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo, 25), new THREE.LineBasicMaterial({ color: this.design.style.secondary, transparent: true, opacity: 0.55 }));
         edges.userData.partId = p.id;
+        // Panel lines are decoration; lines raycast with a ~1 m tolerance and would swallow every click
+        edges.raycast = () => {};
         holder.add(edges);
       }
     } else {

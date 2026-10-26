@@ -188,6 +188,18 @@ describe("quadruped integration", () => {
     sim.dispose();
   });
 
+  it("walks up the slope holding its heading instead of turning downhill", () => {
+    const sim = new RobotSimulator(load("quadruped-trotter.json"), lib, { scenario: "slope" });
+    sim.step(Math.round(12 / sim.dt));
+    const f = sim.frame();
+    const { x, y, z, w } = (sim as unknown as { rootBody: { rotation(): { x: number; y: number; z: number; w: number } } }).rootBody.rotation();
+    const yawDeg = (Math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z)) * 180) / Math.PI;
+    expect(f.status).toBe("running");
+    expect(f.base.distance).toBeGreaterThan(1); // uphill is +x
+    expect(Math.abs(yawDeg)).toBeLessThan(25);
+    sim.dispose();
+  }, 60000);
+
   it.each(["slope", "steps", "push", "payload"] as const)("runs the %s scenario without numerical blow-up", (scenario) => {
     const sim = new RobotSimulator(load("quadruped-trotter.json"), lib, { scenario });
     const w = sim.world();

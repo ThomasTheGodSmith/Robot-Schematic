@@ -55,6 +55,7 @@ Smart servos (category servo) already include their gearing; motors (category mo
 
 # Power
 power.batteryPartIds (battery component parts), batteryConfig, regulators [{partId, loadPartIds}] (loads listed on a regulator are fed its output voltage; everything else sees the battery voltage), wiring [{id, from, to, wireComponentId, kind: power|phase|signal, loadPartIds, length_m?}]. Size wires by current; phase leads carry motor current.
+Include the parts a real build needs between the battery and the loads (category electrical): a fuse (rated for the charged pack voltage, above the average current, and no larger than the ampacity of the wire after it) and a main power switch, or a power distribution board with an e-stop on its switch input. Route the power wiring through them (battery -> fuse -> switch/board -> loads). When drivers or servos are on a bus (CAN, RS-485, TTL), include the bus interface the controller needs and add kind "signal" wires for buses, USB and sensor links.
 
 # Behaviour (drives the simulator controller and the validator's load cases)
 - legged_gait: nominalPose (standing joint angles), pid {default {kp,kd}, overrides}, gait {legs:[{name, jointIds (body->foot order), footLinkId, phase 0..1}], frequency_Hz, stepHeight_m, strideLength_m, dutyFactor, balanceGain}. Feet follow a stance/swing trajectory solved by IK from the nominal foot positions; the foot path must stay reachable within joint limits. Trot = diagonal pairs at phase 0 and 0.5.
@@ -73,7 +74,7 @@ payload_kg (+payloadLinkId, payloadOffset), minRuntime_min, maxSlope_deg, safety
 - speed: required joint speed (gait or limits.velocity) vs no-load output speed
 - gearing: each stage's peak/rated torque and gearbox max input speed
 - electrical: motor/servo/driver voltage vs bus, driver type/channels/current, regulator rails and loads
-- power: average power, runtime vs minRuntime_min, battery continuous and peak discharge
+- power: average power, runtime vs minRuntime_min, battery continuous and peak discharge; fuse and main switch present and correctly rated
 - wiring: RMS and peak current vs ampacity, voltage drop
 - thermal: steady-state winding temperature from RMS current
 - structure: von Mises stress of structure members at each link root vs yield / safety factor

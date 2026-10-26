@@ -319,11 +319,20 @@ export function componentVisual(c: Component, mat: (k: MatKey) => THREE.Material
     return { group: g, spinAxis };
   }
 
-  if ((c.category === "driver" || c.category === "compute" || c.category === "regulator") && env.type === "box") {
+  const isBoard = c.category === "electrical" && (c.specs.electricalType === "power_distribution" || c.specs.electricalType === "bus_interface");
+  if ((c.category === "driver" || c.category === "compute" || c.category === "regulator" || isBoard) && env.type === "box") {
     const [x, y, z] = env.size;
     add(new THREE.BoxGeometry(x, y, z * 0.25), "pcb").position.set(0, 0, -z * 0.375);
     add(new THREE.BoxGeometry(x * 0.35, y * 0.35, z * 0.6), "dark").position.set(x * 0.15, 0, 0);
     add(new THREE.BoxGeometry(x * 0.18, y * 0.5, z * 0.5), "metal").position.set(-x * 0.32, 0, -z * 0.1);
+    return { group: g, spinAxis };
+  }
+
+  if (c.category === "electrical" && c.specs.electricalType === "estop" && env.type === "cylinder") {
+    // body below the panel, mushroom cap on top
+    const r = env.radius, L = env.length;
+    add(alignY(new THREE.CylinderGeometry(r * 0.75, r * 0.75, L * 0.6, 24), ax), "dark").position.copy(along(ax, -L * 0.2));
+    add(alignY(new THREE.CylinderGeometry(r * 1.3, r * 1.3, L * 0.4, 24), ax), "accent").position.copy(along(ax, L * 0.3));
     return { group: g, spinAxis };
   }
 

@@ -289,6 +289,7 @@ export function electronicsPower(a: Analysis): { typical: number; peak: number; 
     else if (c.category === "sensor") t = p = c.specs.power_W;
     else if (c.category === "lighting") (t = c.specs.power_W * 0.6), (p = c.specs.power_W);
     else if (c.category === "driver") t = p = c.specs.idlePower_W;
+    else if (c.category === "electrical" && c.specs.power_W > 0) t = p = c.specs.power_W;
     else continue;
     byPart.set(id, { typical: t, peak: p });
     typical += t;
@@ -397,6 +398,7 @@ export function electricalChecks(a: Analysis): Check[] {
     if (c.category === "compute") ok = v >= c.specs.voltageRange_V[0] * 0.98 && v <= c.specs.voltageRange_V[1] * 1.02;
     else if (c.category === "sensor") ok = Math.abs(v - c.specs.voltage_V) / c.specs.voltage_V < 0.55 && v <= c.specs.voltage_V * 1.55; // 3.3V parts commonly have onboard LDOs from 5V
     else if (c.category === "lighting") ok = Math.abs(v - c.specs.voltage_V) / c.specs.voltage_V < 0.1;
+    else if (c.category === "electrical") ok = v >= c.specs.voltageRange_V[0] && v <= c.specs.voltageRange_V[1];
     if (!ok) vIssues.push(`${c.name} (${id}) fed ${fmt(v, 1)} V`), vInvolves.push(id);
   }
   out(list, {
@@ -404,7 +406,7 @@ export function electricalChecks(a: Analysis): Check[] {
     category: "electrical",
     title: "Electronics supply rails",
     status: vIssues.length ? "fail" : "pass",
-    message: vIssues.length ? `Wrong supply voltage (add/route a regulator): ${vIssues.join("; ")}` : "All compute, sensor and lighting loads see a compatible supply voltage.",
+    message: vIssues.length ? `Wrong supply voltage (add/route a regulator): ${vIssues.join("; ")}` : "All compute, sensor, lighting and powered electrical loads see a compatible supply voltage.",
     metrics: [],
     involves: vInvolves,
   });
@@ -489,7 +491,72 @@ export function powerChecks(a: Analysis): { checks: Check[]; avgPower: number | 
     ],
     involves: b.partIds,
   });
+  list.push(...protectionChecks(a, Iavg, Ipeak));
   return { checks: list, avgPower: avg, peakPower: peak, runtime };
+}
+
+/** Fuse, main switch / e-stop and power distribution between the battery and the loads. */
+function protectionChecks(a: Analysis, Iavg: number, Ipeak: number): Check[] {
+  const list: Check[] = [];
+  const b = a.battery!;
+  const parts = [...a.parts.keys()]
+    .map((id) => ({ id, c: compOf(a, id) }))
+    .filter((x): x is { id: string; c: Extract<NonNullable<ReturnType<typeof compOf>>, { category: "electrical" }> } => x.c?.category === "electrical");
+  const ofType = (...t: string[]) => parts.filter((x) => t.includes(x.c.specs.electricalType));
+  const fuses = ofType("fuse");
+  const switches = ofType("switch", "estop", "power_distribution");
+
+  if (!fuses.length)
+    out(list, { id: "power:fuse", category: "power", title: "Battery fuse", status: "warn", message: "No fuse between the battery and the loads; a short anywhere would be limited only by the battery's burst current.", metrics: [], involves: b.partIds });
+  for (const f of fuses) {
+    const s = f.c.specs;
+    const st: Status[] = [];
+    const msgs: string[] = [];
+    if (b.maxVoltage > s.voltageRange_V[1]) st.push("fail"), msgs.push(`fully charged pack ${fmt(b.maxVoltage, 1)} V exceeds the fuse's ${s.voltageRange_V[1]} V rating`);
+    if (s.currentRating_A < Iavg * 1.25) st.push("fail"), msgs.push(`rating is below 1.25× the ${fmt(Iavg, 1)} A average draw, so it would blow in normal use`);
+    else if (Ipeak > s.currentRating_A * 2) st.push("warn"), msgs.push(`peak draw ${fmt(Ipeak, 1)} A is over twice the rating and may blow it on load spikes`);
+    // The fuse must open before the wire directly after it overheats
+    for (const w of a.design.power.wiring.filter((w) => w.from === f.id && w.kind === "power")) {
+      const wc = a.lib.getAs(w.wireComponentId, "wire");
+      if (wc && wc.specs.maxCurrent_A < s.currentRating_A) st.push("warn"), msgs.push(`wire '${w.id}' (${wc.specs.maxCurrent_A} A ampacity) is smaller than the fuse protecting it`);
+    }
+    out(list, {
+      id: `power:fuse:${f.id}`,
+      category: "power",
+      title: `${f.c.name}`,
+      status: worst(st),
+      message: msgs.length ? msgs.join("; ") : `${s.currentRating_A} A fuse carries the ${fmt(Iavg, 1)} A average and ${fmt(Ipeak, 1)} A peak draw, and is rated for the ${fmt(b.maxVoltage, 1)} V charged pack.`,
+      metrics: [{ label: "Average current", value: Iavg, unit: "A", limit: s.currentRating_A / 1.25, relation: "≤" }],
+      involves: [f.id],
+    });
+  }
+
+  if (!switches.length)
+    out(list, { id: "power:switch", category: "power", title: "Main power switch", status: "warn", message: "No main power switch, e-stop or switched power distribution board; the robot can only be turned off by unplugging the battery.", metrics: [], involves: b.partIds });
+  for (const sw of switches) {
+    const s = sw.c.specs;
+    // An e-stop drives a distribution board's switch input, so it only sees signal current.
+    const Irated = sw.c.specs.electricalType === "estop" ? null : s.currentRating_A;
+    const st: Status[] = [];
+    const msgs: string[] = [];
+    if (b.maxVoltage > s.voltageRange_V[1]) st.push("fail"), msgs.push(`fully charged pack ${fmt(b.maxVoltage, 1)} V exceeds its ${s.voltageRange_V[1]} V rating`);
+    if (s.electricalType === "power_distribution" && b.voltage < s.voltageRange_V[0]) st.push("fail"), msgs.push(`pack ${fmt(b.voltage, 1)} V is below its ${s.voltageRange_V[0]} V minimum`);
+    if (Irated !== null) st.push(grade(Ipeak, Irated, 0.85));
+    out(list, {
+      id: `power:switch:${sw.id}`,
+      category: "power",
+      title: `${sw.c.name}`,
+      status: worst(st),
+      message: msgs.length
+        ? msgs.join("; ")
+        : Irated === null
+          ? `Switches the power distribution board's enable input; rated for the ${fmt(b.maxVoltage, 1)} V charged pack.`
+          : `Peak draw ${fmt(Ipeak, 1)} A vs ${Irated} A rating at up to ${fmt(b.maxVoltage, 1)} V.`,
+      metrics: Irated === null ? [] : [{ label: "Peak current", value: Ipeak, unit: "A", limit: Irated, relation: "≤" }],
+      involves: [sw.id],
+    });
+  }
+  return list;
 }
 
 // ---------------------------------------------------------------- wiring

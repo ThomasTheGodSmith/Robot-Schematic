@@ -240,7 +240,7 @@
      "name": "High-level computer",
      "pose": {
       "xyz": [
-       0.0,
+       0,
        0,
        0.05
       ],
@@ -712,6 +712,86 @@
      },
      "collide": false,
      "assembly": "Motor drivers"
+    },
+    {
+     "kind": "component",
+     "id": "fuse_main",
+     "componentId": "fuse_ato_25a",
+     "name": "Main battery fuse",
+     "pose": {
+      "xyz": [
+       -0.05,
+       0.08,
+       0.034
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "pdb",
+     "componentId": "pdb_precharge_xt30",
+     "name": "Power distribution board",
+     "pose": {
+      "xyz": [
+       0.03,
+       0.077,
+       0.0355
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "estop",
+     "componentId": "estop_16mm",
+     "name": "Emergency stop",
+     "pose": {
+      "xyz": [
+       -0.16,
+       0,
+       0.07
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "can_xcvr",
+     "componentId": "can_fd_transceiver",
+     "name": "CAN FD transceiver",
+     "pose": {
+      "xyz": [
+       0.11,
+       0.03,
+       0.045
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Electronics"
     }
    ]
   },
@@ -3068,15 +3148,106 @@
      "foot_sensor_fl",
      "foot_sensor_fr",
      "foot_sensor_rl",
-     "foot_sensor_rr"
+     "foot_sensor_rr",
+     "can_xcvr"
     ]
    }
   ],
   "wiring": [
    {
+    "id": "bat_fuse",
+    "name": "Battery lead to fuse",
+    "from": "battery",
+    "to": "fuse_main",
+    "wireComponentId": "wire_awg12",
+    "kind": "power",
+    "loadPartIds": [
+     "haa_motor_fl",
+     "hfe_motor_fl",
+     "knee_motor_fl",
+     "drv_haa_fl",
+     "drv_hfe_fl",
+     "drv_knee_fl",
+     "haa_motor_fr",
+     "hfe_motor_fr",
+     "knee_motor_fr",
+     "drv_haa_fr",
+     "drv_hfe_fr",
+     "drv_knee_fr",
+     "haa_motor_rl",
+     "hfe_motor_rl",
+     "knee_motor_rl",
+     "drv_haa_rl",
+     "drv_hfe_rl",
+     "drv_knee_rl",
+     "haa_motor_rr",
+     "hfe_motor_rr",
+     "knee_motor_rr",
+     "drv_haa_rr",
+     "drv_hfe_rr",
+     "drv_knee_rr",
+     "reg_5v",
+     "sbc",
+     "mcu",
+     "imu",
+     "depth_cam",
+     "foot_sensor_fl",
+     "foot_sensor_fr",
+     "foot_sensor_rl",
+     "foot_sensor_rr",
+     "can_xcvr",
+     "pdb"
+    ]
+   },
+   {
+    "id": "fuse_pdb",
+    "name": "Fuse to power distribution board",
+    "from": "fuse_main",
+    "to": "pdb",
+    "wireComponentId": "wire_awg12",
+    "kind": "power",
+    "loadPartIds": [
+     "haa_motor_fl",
+     "hfe_motor_fl",
+     "knee_motor_fl",
+     "drv_haa_fl",
+     "drv_hfe_fl",
+     "drv_knee_fl",
+     "haa_motor_fr",
+     "hfe_motor_fr",
+     "knee_motor_fr",
+     "drv_haa_fr",
+     "drv_hfe_fr",
+     "drv_knee_fr",
+     "haa_motor_rl",
+     "hfe_motor_rl",
+     "knee_motor_rl",
+     "drv_haa_rl",
+     "drv_hfe_rl",
+     "drv_knee_rl",
+     "haa_motor_rr",
+     "hfe_motor_rr",
+     "knee_motor_rr",
+     "drv_haa_rr",
+     "drv_hfe_rr",
+     "drv_knee_rr",
+     "reg_5v",
+     "sbc",
+     "mcu",
+     "imu",
+     "depth_cam",
+     "foot_sensor_fl",
+     "foot_sensor_fr",
+     "foot_sensor_rl",
+     "foot_sensor_rr",
+     "can_xcvr",
+     "pdb"
+    ]
+   },
+   {
     "id": "bus_front",
     "name": "Main bus, front actuators",
-    "from": "battery",
+    "from": "pdb",
     "to": "drv_haa_fl",
     "wireComponentId": "wire_awg12",
     "kind": "power",
@@ -3098,7 +3269,7 @@
    {
     "id": "bus_rear",
     "name": "Main bus, rear actuators",
-    "from": "battery",
+    "from": "pdb",
     "to": "drv_haa_rl",
     "wireComponentId": "wire_awg12",
     "kind": "power",
@@ -3120,7 +3291,7 @@
    {
     "id": "logic_feed",
     "name": "Logic regulator feed",
-    "from": "battery",
+    "from": "pdb",
     "to": "reg_5v",
     "wireComponentId": "wire_awg20",
     "kind": "power",
@@ -3133,7 +3304,8 @@
      "foot_sensor_fl",
      "foot_sensor_fr",
      "foot_sensor_rl",
-     "foot_sensor_rr"
+     "foot_sensor_rr",
+     "can_xcvr"
     ]
    },
    {
@@ -3151,7 +3323,8 @@
      "foot_sensor_fl",
      "foot_sensor_fr",
      "foot_sensor_rl",
-     "foot_sensor_rr"
+     "foot_sensor_rr",
+     "can_xcvr"
     ]
    },
    {
@@ -3285,6 +3458,107 @@
     "loadPartIds": [
      "knee_motor_rr"
     ]
+   },
+   {
+    "id": "estop_sw",
+    "name": "E-stop to PDB switch input",
+    "from": "estop",
+    "to": "pdb",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "can_mcu",
+    "name": "Teensy CAN3 to transceiver",
+    "from": "mcu",
+    "to": "can_xcvr",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "can_front",
+    "name": "CAN FD bus, front drivers (daisy chain)",
+    "from": "can_xcvr",
+    "to": "drv_haa_fr",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": [],
+    "length_m": 0.6
+   },
+   {
+    "id": "can_rear",
+    "name": "CAN FD bus, rear drivers (daisy chain)",
+    "from": "drv_knee_fr",
+    "to": "drv_haa_rl",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": [],
+    "length_m": 0.6
+   },
+   {
+    "id": "usb_mcu",
+    "name": "USB, Raspberry Pi to Teensy",
+    "from": "sbc",
+    "to": "mcu",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "usb_cam",
+    "name": "USB 3, Raspberry Pi to depth camera",
+    "from": "sbc",
+    "to": "depth_cam",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "i2c_imu",
+    "name": "IMU to Teensy",
+    "from": "imu",
+    "to": "mcu",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "foot_sig_fl",
+    "name": "FL foot sensor to Teensy",
+    "from": "foot_sensor_fl",
+    "to": "mcu",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "foot_sig_fr",
+    "name": "FR foot sensor to Teensy",
+    "from": "foot_sensor_fr",
+    "to": "mcu",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "foot_sig_rl",
+    "name": "RL foot sensor to Teensy",
+    "from": "foot_sensor_rl",
+    "to": "mcu",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
+   },
+   {
+    "id": "foot_sig_rr",
+    "name": "RR foot sensor to Teensy",
+    "from": "foot_sensor_rr",
+    "to": "mcu",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
    }
   ]
  },
@@ -3302,16 +3576,16 @@
   "mode": "legged_gait",
   "description": "Trotting gait: diagonal leg pairs in phase, 2 Hz, 12 cm stride (~0.4 m/s).",
   "nominalPose": {
-   "haa_fl": 0.0,
+   "haa_fl": 0,
    "hfe_fl": 0.7,
    "knee_fl": -1.4,
-   "haa_fr": 0.0,
+   "haa_fr": 0,
    "hfe_fr": 0.7,
    "knee_fr": -1.4,
-   "haa_rl": 0.0,
+   "haa_rl": 0,
    "hfe_rl": 0.7,
    "knee_rl": -1.4,
-   "haa_rr": 0.0,
+   "haa_rr": 0,
    "hfe_rr": 0.7,
    "knee_rr": -1.4
   },
@@ -3333,7 +3607,7 @@
       "knee_fl"
      ],
      "footLinkId": "shank_fl",
-     "phase": 0.0
+     "phase": 0
     },
     {
      "name": "Front-right",
@@ -3363,10 +3637,10 @@
       "knee_rr"
      ],
      "footLinkId": "shank_rr",
-     "phase": 0.0
+     "phase": 0
     }
    ],
-   "frequency_Hz": 2.0,
+   "frequency_Hz": 2,
    "stepHeight_m": 0.06,
    "strideLength_m": 0.12,
    "dutyFactor": 0.6,
@@ -3374,7 +3648,7 @@
   }
  },
  "requirements": {
-  "payload_kg": 2.0,
+  "payload_kg": 2,
   "payloadLinkId": "torso",
   "payloadOffset": [
    0,
@@ -3393,7 +3667,10 @@
  "assumptions": [
   "Belt pre-tension maintained by an eccentric idler (not modelled).",
   "Driver boards share the battery bus directly; regen absorbed by the LiPo.",
-  "Carbon tube strength is a conservative first-ply-failure allowable."
+  "Carbon tube strength is a conservative first-ply-failure allowable.",
+  "All 12 moteus controllers share one 5 Mbit/s CAN FD bus from the Teensy's CAN3 port through the transceiver (termination switched on at the transceiver and the last driver). Split onto a second bus if a higher control rate is needed.",
+  "The e-stop latches the power distribution board's switch input, which cuts every driver output; the logic rail is fed from the same board, so the computers also shut down.",
+  "Not modelled: battery strap and tray, board standoffs and screws, connectors and crimps, and a vent for the drivers' heat. The battery charger is off-board."
  ],
  "provenance": {
   "source": "hand_written"

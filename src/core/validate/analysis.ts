@@ -18,6 +18,8 @@ export interface BatteryPack {
   partIds: string[];
   voltage: number;
   minVoltage: number;
+  /** Fully charged pack voltage */
+  maxVoltage: number;
   capacity_Ah: number;
   energy_Wh: number;
   maxContinuous_A: number;
@@ -212,6 +214,7 @@ export function resolveBattery(design: RobotDesign, lib: Library, parts: Map<str
   const series = design.power.batteryConfig === "series";
   const voltage = series ? specs.reduce((s, b) => s + b.nominalVoltage_V, 0) : s0.nominalVoltage_V;
   const minVoltage = series ? specs.reduce((s, b) => s + b.minVoltage_V, 0) : s0.minVoltage_V;
+  const maxVoltage = series ? specs.reduce((s, b) => s + b.maxVoltage_V, 0) : s0.maxVoltage_V;
   const capacity = series ? Math.min(...specs.map((b) => b.capacity_Ah)) : specs.reduce((s, b) => s + b.capacity_Ah, 0);
   const maxCont = series
     ? Math.min(...specs.map((b) => b.capacity_Ah * b.maxContinuousDischarge_C))
@@ -225,6 +228,7 @@ export function resolveBattery(design: RobotDesign, lib: Library, parts: Map<str
     partIds: packs.map((p) => p.id),
     voltage,
     minVoltage,
+    maxVoltage,
     capacity_Ah: capacity,
     energy_Wh: voltage * capacity,
     maxContinuous_A: maxCont,

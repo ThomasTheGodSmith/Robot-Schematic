@@ -49,7 +49,7 @@ function useRobotBase(design: RobotDesign) {
   }, [design]);
 }
 
-function RobotObject(props: ViewerProps & { clipPlanes: THREE.Plane[]; onBox?: (b: THREE.Box3) => void }) {
+function RobotObject(props: ViewerProps & { clipPlanes: THREE.Plane[]; onBox?: (b: THREE.Box3) => void; onExtent?: (b: THREE.Box3) => void }) {
   const { design } = props;
   const { topo, base } = useRobotBase(design);
   const rig = useMemo(() => new RobotRig(design, library), [design]);
@@ -84,6 +84,7 @@ function RobotObject(props: ViewerProps & { clipPlanes: THREE.Plane[]; onBox?: (
       explodeNow.current = e + (explodeTarget - e) * Math.min(1, dt * 6);
       rig.setExplode(explodeNow.current);
       mech.update(q, props.showWires ?? true);
+      props.onExtent?.(new THREE.Box3().setFromObject(rig.root));
     }
   });
 
@@ -96,8 +97,16 @@ function RobotObject(props: ViewerProps & { clipPlanes: THREE.Plane[]; onBox?: (
     } else world = forwardKinematics(topo, q, base);
     rig.setLinkTransforms(world);
     mech.update(q, props.showWires ?? true);
-    if (props.onBox) props.onBox(new THREE.Box3().setFromObject(rig.root));
+    const b = new THREE.Box3().setFromObject(rig.root);
+    if (props.onBox) props.onBox(b);
+    props.onExtent?.(b);
   }, [rig, mech, topo, base, q, props.linkPoses, props.showWires]);
+
+  // Measure as soon as something starts listening (e.g. Section turned on after exploding)
+  const listening = !!props.onExtent;
+  useLayoutEffect(() => {
+    if (listening) props.onExtent?.(new THREE.Box3().setFromObject(rig.root));
+  }, [listening, rig]);
 
   useLayoutEffect(() => {
     rig.applyAppearance({
@@ -113,13 +122,26 @@ function RobotObject(props: ViewerProps & { clipPlanes: THREE.Plane[]; onBox?: (
     mech.setClipping(props.clipPlanes);
   }, [rig, mech, props.xray, props.hidden, props.isolated, props.selected, props.highlight, props.danger, props.blueprint, props.clipPlanes]);
 
+  const lastClick = useRef<{ x: number; y: number } | null>(null);
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     // Ignore drags: only treat as a click when the pointer barely moved
     if (e.delta > 4) return;
     e.stopPropagation();
-    let o: THREE.Object3D | null = e.object;
-    while (o && !o.userData.partId) o = o.parent;
-    props.onPick?.(o?.userData.partId ?? null);
+    // Parts under the cursor, nearest first: skip lines, hidden parts and anything cut away by the
+    // section plane. See-through shells (X-ray, blueprint) go last so clicks reach what is inside.
+    const hits = e.intersections.filter((h) => {
+      if (!(h.object as THREE.Mesh).isMesh || !h.object.userData.partId) return false;
+      for (let o: THREE.Object3D | null = h.object; o; o = o.parent) if (!o.visible) return false;
+      return props.clipPlanes.every((p) => p.distanceToPoint(h.point) >= 0);
+    });
+    const opaque = (h: (typeof hits)[number]) => ((h.object as THREE.Mesh).material as THREE.Material).opacity >= 0.5;
+    const ids = [...new Set([...hits.filter(opaque), ...hits.filter((h) => !opaque(h))].map((h) => h.object.userData.partId as string))];
+    // Clicking the same spot again selects the next part behind, so enclosed parts can be reached
+    const prev = lastClick.current;
+    const sameSpot = prev && Math.hypot(e.nativeEvent.clientX - prev.x, e.nativeEvent.clientY - prev.y) < 6;
+    lastClick.current = { x: e.nativeEvent.clientX, y: e.nativeEvent.clientY };
+    const at = sameSpot && props.selected ? ids.indexOf(props.selected) : -1;
+    props.onPick?.(ids.length ? ids[(at + 1) % ids.length] : null);
   };
 
   return (
@@ -230,15 +252,28 @@ export function Viewer(props: ViewerProps) {
       setBox(b.clone());
     }
   };
+  // Current extent of the model including explode, which the section range must cover
+  const [extent, setExtent] = useState<THREE.Box3 | null>(null);
+  const extentRef = useRef<THREE.Box3 | null>(null);
+  const onExtent = (b: THREE.Box3) => {
+    const prev = extentRef.current;
+    if (!prev || prev.min.distanceTo(b.min) > 0.002 || prev.max.distanceTo(b.max) > 0.002) {
+      extentRef.current = b.clone();
+      setExtent(b.clone());
+    }
+  };
   const clipPlanes = useMemo(() => {
     const c = props.clip;
-    if (!c?.enabled || !box) return [];
+    const range = extent ?? box;
+    if (!c?.enabled || !range) return [];
     const i = { x: 0, y: 1, z: 2 }[c.axis];
-    const min = box.min.getComponent(i), max = box.max.getComponent(i);
+    // Pad so the slider ends sit just outside the model and show all of it
+    const pad = 0.01 + (range.max.getComponent(i) - range.min.getComponent(i)) * 0.02;
+    const min = range.min.getComponent(i) - pad, max = range.max.getComponent(i) + pad;
     const pos = (min + max) / 2 + (c.offset * (max - min)) / 2;
     const n = new THREE.Vector3().setComponent(i, c.flip ? 1 : -1);
     return [new THREE.Plane(n, c.flip ? -pos : pos)];
-  }, [props.clip, box]);
+  }, [props.clip, box, extent]);
 
   return (
     <Canvas
@@ -271,7 +306,7 @@ export function Viewer(props: ViewerProps) {
           </mesh>
         )}
       </group>
-      <RobotObject {...props} clipPlanes={clipPlanes} onBox={onBox} />
+      <RobotObject {...props} clipPlanes={clipPlanes} onBox={onBox} onExtent={props.clip?.enabled ? onExtent : undefined} />
       {props.children}
       <CameraRig box={box} follow={props.followRoot} />
       <GizmoHelper alignment="bottom-right" margin={[60, 60]}>

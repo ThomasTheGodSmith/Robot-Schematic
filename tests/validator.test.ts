@@ -19,7 +19,7 @@ describe("component library", () => {
   it("loads and validates every data file with unique ids", () => {
     expect(lib.components.size).toBeGreaterThanOrEqual(40);
     expect(lib.materials.size).toBeGreaterThanOrEqual(8);
-    for (const cat of ["motor", "servo", "gearbox", "bearing", "battery", "driver", "sensor", "fastener", "wire"] as const)
+    for (const cat of ["motor", "servo", "gearbox", "bearing", "battery", "driver", "sensor", "fastener", "wire", "electrical"] as const)
       expect(lib.byCategory(cat).length).toBeGreaterThan(0);
   });
 
@@ -95,6 +95,26 @@ describe("validator catches violations", () => {
     const d = clone(load("quadruped-trotter.json"));
     d.power.wiring.find((w) => w.id === "phase_knee_fl")!.wireComponentId = "wire_awg24";
     expect(statusOf(d, (id) => id === "wiring:phase_knee_fl")).toEqual(["fail"]);
+  });
+
+  it("missing fuse and switch are flagged; a fuse below the pack voltage fails", () => {
+    const d = clone(load("quadruped-trotter.json"));
+    const torso = d.links.find((l) => l.id === "torso")!;
+    torso.parts = torso.parts.filter((p) => !["fuse_main", "pdb", "estop"].includes(p.id));
+    d.power.wiring = d.power.wiring.filter((w) => !["bat_fuse", "fuse_pdb", "estop_sw"].includes(w.id));
+    for (const w of d.power.wiring) if (w.from === "pdb") w.from = "battery";
+    expect(statusOf(d, (id) => id === "power:fuse" || id === "power:switch")).toEqual(["warn", "warn"]);
+
+    const hv = clone(load("quadruped-trotter.json"));
+    const b = findPart(hv, "battery");
+    if (b.kind === "component") b.componentId = "liion_13s4p_48v"; // 54.6 V charged, above the 32 V fuse
+    expect(statusOf(hv, (id) => id === "power:fuse:fuse_main")).toEqual(["fail"]);
+  });
+
+  it("wire smaller than its fuse is flagged", () => {
+    const d = clone(load("quadruped-trotter.json"));
+    d.power.wiring.find((w) => w.id === "fuse_pdb")!.wireComponentId = "wire_awg16"; // 13 A after a 25 A fuse
+    expect(statusOf(d, (id) => id === "power:fuse:fuse_main")).toEqual(["warn"]);
   });
 
   it("small battery fails runtime", () => {

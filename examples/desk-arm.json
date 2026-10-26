@@ -211,6 +211,46 @@
      },
      "collide": false,
      "assembly": "Base"
+    },
+    {
+     "kind": "component",
+     "id": "power_switch",
+     "componentId": "switch_toggle_15a",
+     "name": "Main power switch",
+     "pose": {
+      "xyz": [
+       -0.105,
+       0,
+       0.04
+      ],
+      "rpy": [
+       0,
+       1.570796,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
+    },
+    {
+     "kind": "component",
+     "id": "fuse_main",
+     "componentId": "fuse_ato_10a",
+     "name": "Main battery fuse",
+     "pose": {
+      "xyz": [
+       -0.065,
+       0,
+       0.015
+      ],
+      "rpy": [
+       0,
+       0,
+       0
+      ]
+     },
+     "collide": false,
+     "assembly": "Power"
     }
    ]
   },
@@ -392,7 +432,7 @@
      "pose": {
       "xyz": [
        0,
-       0.0,
+       0,
        0.22
       ],
       "rpy": [
@@ -533,7 +573,7 @@
      "name": "Jaw servo",
      "pose": {
       "xyz": [
-       0.0,
+       0,
        -0.035,
        0.03
       ],
@@ -561,7 +601,7 @@
      "material": "al6061_t6",
      "pose": {
       "xyz": [
-       0.0,
+       0,
        -0.012,
        0.03
       ],
@@ -903,9 +943,45 @@
   ],
   "wiring": [
    {
-    "id": "main",
-    "name": "Battery to servo hub",
+    "id": "bat_switch",
+    "name": "Battery to power switch",
     "from": "battery",
+    "to": "power_switch",
+    "wireComponentId": "wire_awg16",
+    "kind": "power",
+    "loadPartIds": [
+     "yaw_servo",
+     "shoulder_servo",
+     "elbow_servo",
+     "wrist_servo",
+     "jaw_servo",
+     "servo_hub",
+     "mcu",
+     "status_ring"
+    ]
+   },
+   {
+    "id": "switch_fuse",
+    "name": "Power switch to fuse",
+    "from": "power_switch",
+    "to": "fuse_main",
+    "wireComponentId": "wire_awg16",
+    "kind": "power",
+    "loadPartIds": [
+     "yaw_servo",
+     "shoulder_servo",
+     "elbow_servo",
+     "wrist_servo",
+     "jaw_servo",
+     "servo_hub",
+     "mcu",
+     "status_ring"
+    ]
+   },
+   {
+    "id": "main",
+    "name": "Fuse to servo hub",
+    "from": "fuse_main",
     "to": "servo_hub",
     "wireComponentId": "wire_awg16",
     "kind": "power",
@@ -920,10 +996,10 @@
    },
    {
     "id": "logic_feed",
-    "name": "Battery to 5 V UBEC",
-    "from": "battery",
+    "name": "Fuse to 5 V UBEC",
+    "from": "fuse_main",
     "to": "ubec",
-    "wireComponentId": "wire_awg22",
+    "wireComponentId": "wire_awg16",
     "kind": "power",
     "loadPartIds": [
      "mcu",
@@ -990,6 +1066,15 @@
     "loadPartIds": [
      "yaw_servo"
     ]
+   },
+   {
+    "id": "usb_hub",
+    "name": "USB, ESP32 to servo bus adapter",
+    "from": "mcu",
+    "to": "servo_hub",
+    "wireComponentId": "wire_awg24",
+    "kind": "signal",
+    "loadPartIds": []
    }
   ]
  },
@@ -1010,7 +1095,7 @@
    "yaw": 0,
    "shoulder": 0.3,
    "elbow": 1.3,
-   "wrist_pitch": 0.0,
+   "wrist_pitch": 0,
    "jaw": -0.4
   },
   "pid": {
@@ -1022,7 +1107,7 @@
    "overrides": {
     "shoulder": {
      "kp": 40,
-     "kd": 1.0,
+     "kd": 1,
      "ki": 0
     },
     "elbow": {
@@ -1050,7 +1135,7 @@
       "yaw": 0,
       "shoulder": 0.3,
       "elbow": 1.3,
-      "wrist_pitch": 0.0,
+      "wrist_pitch": 0,
       "jaw": -0.4
      }
     },
@@ -1071,21 +1156,21 @@
       "shoulder": 0.9,
       "elbow": 1.45,
       "wrist_pitch": 0.75,
-      "jaw": 0.0
+      "jaw": 0
      }
     },
     {
-     "t": 4.0,
+     "t": 4,
      "pose": {
       "yaw": -0.8,
       "shoulder": 0.35,
       "elbow": 1.2,
       "wrist_pitch": 0.4,
-      "jaw": 0.0
+      "jaw": 0
      }
     },
     {
-     "t": 5.0,
+     "t": 5,
      "pose": {
       "yaw": -0.8,
       "shoulder": 0.35,
@@ -1100,7 +1185,7 @@
       "yaw": 0,
       "shoulder": 0.3,
       "elbow": 1.3,
-      "wrist_pitch": 0.0,
+      "wrist_pitch": 0,
       "jaw": -0.4
      }
     }
@@ -1127,7 +1212,8 @@
  },
  "assumptions": [
   "Base is clamped to the bench (rootFixed).",
-  "Payload treated as a point mass 75 mm beyond the wrist axis."
+  "Payload treated as a point mass 75 mm beyond the wrist axis.",
+  "The power switch breaks the battery positive lead directly; the 10 A fuse protects everything downstream of it."
  ],
  "provenance": {
   "source": "hand_written"

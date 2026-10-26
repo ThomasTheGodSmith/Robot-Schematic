@@ -33,6 +33,24 @@ const THERMAL_TAU_S = 90;
 const CONTROL_HZ = 250;
 const STAND_TIME_S = 1.0;
 const RAMP_TIME_S = 1.0;
+// Heading hold and terrain estimate for legged gaits are scaled from each design's own gait (see
+// control()): feet can only push once per step, so both loops act over one gait cycle, and the
+// turning sweep is limited to half the designed stride so feet stay within the validated reach.
+const TURN_STRIDE_FRACTION = 0.5;
+
+/** Least-squares plane z = a + b·x + c·y through at least three points. */
+function fitPlane(pts: Vector3[]): { a: number; b: number; c: number } | null {
+  if (pts.length < 3) return null;
+  let n = 0, sx = 0, sy = 0, sz = 0, sxx = 0, syy = 0, sxy = 0, sxz = 0, syz = 0;
+  for (const p of pts) (n++, (sx += p.x), (sy += p.y), (sz += p.z), (sxx += p.x * p.x), (syy += p.y * p.y), (sxy += p.x * p.y), (sxz += p.x * p.z), (syz += p.y * p.z));
+  // Normal equations [n sx sy; sx sxx sxy; sy sxy syy] [a b c]' = [sz sxz syz]'
+  const m = new Matrix4().set(n, sx, sy, 0, sx, sxx, sxy, 0, sy, sxy, syy, 0, 0, 0, 0, 1);
+  if (Math.abs(m.determinant()) < 1e-12) return null;
+  const r = new Vector3(sz, sxz, syz).applyMatrix4(m.invert());
+  return { a: r.x, b: r.y, c: r.z };
+}
+
+const qMeasNow = (joints: { joint: Joint; q: number }[]) => Object.fromEntries(joints.map((s) => [s.joint.id, s.q]));
 /**
  * Smart-servo datasheets rarely give rotor inertia. Small coreless/iron-core servo motors
  * have roughly 2e-6 kg·m² of rotor inertia per N·m of rotor stall torque; used only when
@@ -138,6 +156,12 @@ export class RobotSimulator {
   private armature = new Map<string, number[][]>();
   private gravityFilt = new Vector3(0, 0, -1);
   private nominalHeight = 0.3;
+  /** Heading to hold while walking (world yaw at the start of the run) */
+  private headingTarget: number | null = null;
+  /** Last measured stance position of each foot (body frame), for the terrain plane */
+  private footholds = new Map<string, Vector3>();
+  /** Filtered ground slope in the body frame: dz/dx, dz/dy */
+  private terrainSlope = { x: 0, y: 0 };
 
   constructor(design: RobotDesign, lib: Library, opts: SimOptions = {}) {
     this.design = design;
@@ -351,6 +375,9 @@ export class RobotSimulator {
 
     this.feetNominal = nominalFeet(d, this.topo);
     this.gravityFilt = new Vector3(0, 0, -1).applyQuaternion(groundQ.clone().invert());
+    this.headingTarget = null;
+    this.footholds.clear();
+    this.terrainSlope = { x: 0, y: 0 };
     const feetZ = [...this.feetNominal.values()].map((p) => p.z);
     this.nominalHeight = feetZ.length ? -Math.min(...feetZ) : 0.3;
     this.initialHeight = this.rootHeight();
@@ -409,6 +436,12 @@ export class RobotSimulator {
     }
   }
 
+  /** World yaw of the root body (rotation about vertical) */
+  private rootYaw(): number {
+    const { x, y, z, w } = this.rootBody.rotation();
+    return Math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z));
+  }
+
   private rootAttitude() {
     const q = q4(this.rootBody.rotation());
     // ZYX: roll about x, pitch about y
@@ -444,6 +477,33 @@ export class RobotSimulator {
       const H = this.nominalHeight;
       const gz = Math.min(-0.3, this.gravityFilt.z);
       const shift = new Vector3((this.gravityFilt.x / -gz) * H, (this.gravityFilt.y / -gz) * H, 0);
+      // Heading hold (what the IMU yaw loop does on a real robot): without it, uneven foot slip and
+      // the downhill pull on a slope turn the body until it faces downhill. Stance feet sweep
+      // tangentially about the body centre to yaw it back towards the starting heading.
+      const yaw = this.rootYaw();
+      if (this.headingTarget === null) this.headingTarget = yaw;
+      // Correct the heading error over one gait cycle (gain = step frequency), no faster than the
+      // turning sweep allows for the foot furthest from the body centre.
+      const maxTurnStride = TURN_STRIDE_FRACTION * gait.strideLength_m;
+      const maxRadius = Math.max(1e-6, ...[...this.feetNominal.values()].map((p) => Math.hypot(p.x, p.y)));
+      const maxRate = (maxTurnStride * gait.frequency_Hz) / maxRadius;
+      const omega = Math.max(-maxRate, Math.min(maxRate, gait.frequency_Hz * wrap(this.headingTarget - yaw)));
+      // Terrain estimate: plane z = a + b·x + c·y (body frame) through where the feet last stood, so
+      // steps run parallel to the ground on a slope instead of digging in at the front and lifting
+      // off at the back.
+      const fkMeas = forwardKinematics(this.topo, qMeasNow(this.joints));
+      gait.legs.forEach((leg, li) => {
+        if (tg > 0 && !footOffset(legPhase(tg, gait, li), g).stance) return;
+        const link = this.topo.links.get(leg.footLinkId);
+        if (link) this.footholds.set(leg.name, pointOnLink(fkMeas, leg.footLinkId, link.contact?.point ?? [0, 0, 0]));
+      });
+      const plane = fitPlane([...this.footholds.values()]);
+      if (plane) {
+        // Footholds refresh once per step, so average the plane over one gait cycle
+        const k = Math.min(1, this.controlEvery * this.dt * gait.frequency_Hz);
+        this.terrainSlope.x += (plane.b - this.terrainSlope.x) * k;
+        this.terrainSlope.y += (plane.c - this.terrainSlope.y) * k;
+      }
       stance = [];
       gait.legs.forEach((leg, li) => {
         const off = tg > 0 ? footOffset(legPhase(tg, gait, li), g) : { dx: 0, dz: 0, stance: true };
@@ -451,9 +511,20 @@ export class RobotSimulator {
         const nominal = this.feetNominal.get(leg.name);
         const link = this.topo.links.get(leg.footLinkId);
         if (!nominal || !link) return;
-        // Attitude balance: extend legs on the low side, retract on the high side
+        // Attitude balance: extend legs on the low side, retract on the high side. Applied through the
+        // swing as well, so the foot lifts off and lands at its stance height instead of jumping by
+        // dzBal at every touchdown (several cm on a slope, which made the trot hop onto one foot).
         const dzBal = gait.balanceGain * (roll * nominal.y - pitch * nominal.x);
-        const target = nominal.clone().add(shift).add(new Vector3(off.dx, 0, off.dz + (off.stance ? dzBal : 0)));
+        const target = nominal.clone().add(shift).add(new Vector3(off.dx, 0, off.dz + dzBal));
+        // Turning stride: arc length per gait cycle for this foot's radius at the commanded yaw rate
+        const radius = Math.hypot(nominal.x, nominal.y);
+        if (tg > 0 && radius > 1e-6) {
+          const turnStride = Math.max(-maxTurnStride, Math.min(maxTurnStride, (omega * radius) / gait.frequency_Hz));
+          const sweep = footOffset(legPhase(tg, gait, li), { ...g, strideLength_m: turnStride }).dx;
+          target.add(new Vector3(-nominal.y / radius, nominal.x / radius, 0).multiplyScalar(sweep));
+        }
+        // Follow the estimated ground plane as the foot moves away from its nominal spot
+        target.z += this.terrainSlope.x * (target.x - nominal.x) + this.terrainSlope.y * (target.y - nominal.y);
         const r = solveChainIK(this.topo, leg.jointIds, leg.footLinkId, link.contact?.point ?? [0, 0, 0], target, this.qTargetsIK, { iterations: 12, tol: 1e-5 });
         for (const jid of leg.jointIds) this.qTargetsIK[jid] = r.q[jid];
       });
@@ -755,6 +826,7 @@ export function electronicsTypicalPower(design: RobotDesign, lib: Library): numb
       else if (c.category === "sensor") p += c.specs.power_W;
       else if (c.category === "lighting") p += c.specs.power_W * 0.6;
       else if (c.category === "driver") p += c.specs.idlePower_W;
+      else if (c.category === "electrical") p += c.specs.power_W;
     }
   return p;
 }
