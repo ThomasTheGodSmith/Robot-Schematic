@@ -1,39 +1,34 @@
 # Robot Design Engine
 
-Describe a robot in plain language ("a quadruped that can climb stairs", "a
-humanoid that looks like Iron Man"). Two Claude agents turn the request into a
-design built only from real components and fabricated parts. A validator checks
-the design against engineering limits, and the result is shown as an
-interactive 3D blueprint and run in a rigid-body physics simulation.
+_This README was written with AI (Claude)._
 
-"Feasible" is something the code checks, with numbers you can trace, not
-something the design simply asserts.
+You type in a robot idea (e.g. "a quadruped that can climb stairs") and two
+Claude agents turn it into a design using real parts. Then a validator checks it
+against actual engineering limits, and you can look at it in 3D and run it in a
+physics sim.
+
+The main idea is that the validator decides whether a design actually works,
+not the AI.
 
 ## Running it
 
 You need [Node.js](https://nodejs.org) 22 or newer, which includes `npm`.
 
-On Windows you can skip the terminal: double-click `Start Robot Design Engine.bat`
-in the project folder. It installs dependencies the first time, starts the app and
-opens it in your browser. Close its window to stop the app.
+On Windows, just double-click `Start Robot Design Engine.bat`. It installs
+everything the first time and opens the app in your browser.
 
-Or use a terminal opened in the project folder, the one that contains
-`package.json` (PyCharm's terminal opens there by default).
-
-The first time only:
+Or from a terminal in the project folder, first time only:
 
 ```bash
 npm install
 cp .env.example .env        # only if you don't have a .env yet; set ANTHROPIC_API_KEY to enable the agents
 ```
 
-After that, this is all you need to start the app:
+Then:
 
 ```bash
 npm run dev                 # API on :8787, web app on http://localhost:5173
 ```
-
-Open http://localhost:5173 in your browser. Press Ctrl+C in the terminal to stop.
 
 - `npm test` runs the unit and integration tests: validator, drivetrain and kinematics math, simulator, and agent loops against a fake model.
 - `npm run typecheck`
@@ -41,9 +36,8 @@ Open http://localhost:5173 in your browser. Press Ctrl+C in the terminal to stop
 - `npx tsx scripts/validate.ts examples/quadruped-trotter.json` validates a design from the CLI. Add `--all` to list passing checks too.
 - `npm run schemas` regenerates `schemas/*.schema.json` from the Zod source.
 
-You don't need an API key for the viewer, validator, simulator or example
-designs. Only the Design Studio agents use the key, and it never leaves the
-server.
+The API key is only needed for the Design Studio agents. Everything else works
+without it.
 
 ## Architecture
 
@@ -54,9 +48,10 @@ For a file-by-file guide to where everything lives, see [CODE_MAP.md](CODE_MAP.m
 | Contracts | `src/core/schema/` | Zod schemas for the **Design Brief**, the **Robot Design Document** and the component library. JSON Schema exports are in `schemas/`. |
 | Component library | `data/components/*.json`, `data/materials.json` | 102 components (motors, smart servos and integrated actuators, gearboxes, bearings, batteries, drivers, compute, sensors, regulators, fasteners, wire, wheels and propellers, lighting, and electrical parts: fuses, switches, e-stops, power distribution and bus transceivers) and 14 materials. To extend it, edit the JSON; no code changes are needed. |
 | Engineering core | `src/core/` | URDF-style kinematics, mass and inertia from geometry, damped-least-squares IK, four-bar solver, drivetrain model, statics, BOM. All isomorphic: the same code runs in the browser, the worker and Node. |
-| Validator | `src/core/validate/` | About 15 categories of checks. Each result is pass, warn or fail, with metrics and the ids of the parts involved. |
+| Validator | `src/core/validate/` | About 15 categories of checks. Each result is pass, warn or fail, with metrics and the ids of the parts involved. I used Claude (through Claude Code) to help write the checks and work out the formulas and limits for each one. |
 | Simulator | `src/sim/` | Rapier rigid-body physics in a Web Worker, with an actuator model, a controller built from the design's behaviour spec, scenarios and telemetry. Legged gaits hold their starting heading (as an IMU yaw loop would) and follow a ground plane estimated from where the feet stand. Both loops are scaled from each design's own gait (step frequency, stride, foot positions), not tuned per robot. |
 | Agents | `server/` | Express backend. The Researcher (`claude-sonnet-5-5`) and Designer (`claude-opus-5-5`) stream progress over SSE. |
+| Tests | `tests/` | Unit and integration tests, written with help from Claude (through Claude Code). I ran them against the example designs to make sure the results made sense. |
 | UI | `src/client/` | React + React Three Fiber: Design Studio, Blueprint & inspect, Simulate. |
 
 ### Agent pipeline
@@ -70,12 +65,8 @@ For a file-by-file guide to where everything lives, see [CODE_MAP.md](CODE_MAP.m
    - Each submission is schema-checked and then run through the validator. Failures go back to the model as structured feedback, up to `MAX_DESIGN_ITERATIONS` (default 3).
    - It returns the best design and lists anything still unresolved.
 
-Model IDs, effort levels and the iteration cap are configured with environment
-variables (see `.env.example`). Both agents use adaptive thinking, streamed as
-summaries. Server-side refusal fallbacks are on by default
-(`ROBOT_ENGINE_FALLBACKS=off` disables them). Forced `tool_choice` isn't
-available on these models, so the agents use `auto` plus an instruction, and
-every tool input is validated with Zod.
+Models, effort levels and the iteration cap are set in `.env` (see
+`.env.example`). Tool inputs from the agents are all validated with Zod.
 
 ### What the validator checks
 
@@ -119,4 +110,4 @@ chassis plates) can be reached too.
 - **Rendering** is procedural and approximate: gear teeth are trapezoids, not involutes. Section cuts have no caps.
 - **Prismatic joints** are treated as fixed in the simulator. Gripper clamping force is not validated.
 - **Battery voltage** falls linearly with charge, and regenerative braking is not credited.
-- **Agents:** the loops are tested against a scripted fake model. They have not been exercised against the live API in this environment.
+- **Agents:** the automated tests use a fake model, so they don't hit the real API.
